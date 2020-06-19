@@ -1,0 +1,38 @@
+﻿@model List<DatosPersonalesDTO>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Listado de datos personales</h2>
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>Nombres</th>
+            <th>Apellido</th>
+            <th>Fecha de nacimiento</th>
+            <th>Nacionalidad</th>
+            <th>Lugar de nacimiento</th>
+            <th>Domicilio</th>
+            <th>Código Postal</th>
+            <th>Email</th>
+            <th>Teléfono</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var datos in Model)
+        {
+            <tr>
+                <td>@datos.Nombres</td>
+                <td>@datos.Apellido</td>
+                <td>@datos.FechaNacimiento</td>
+                <td>@datos.Nacionalidad</td>
+                <td>@datos.LugarNacimiento</td>
+                <td>@datos.Domicilio @datos.NroDomicilio</td>
+                <td>@datos.CodigoPostal</td>
+                <td>@datos.Email</td>
+                <td>@datos.Telefono</td>
+            </tr>
+        }
+    </tbody>
+</table>
+

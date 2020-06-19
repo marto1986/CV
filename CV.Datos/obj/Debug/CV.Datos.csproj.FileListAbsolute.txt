@@ -1,0 +1,12 @@
+C:\Desarrollos\CV\CV.Datos\bin\Debug\CV.Datos.dll.config
+C:\Desarrollos\CV\CV.Datos\bin\Debug\CV.Datos.dll
+C:\Desarrollos\CV\CV.Datos\bin\Debug\CV.Datos.pdb
+C:\Desarrollos\CV\CV.Datos\bin\Debug\CV.Entidades.dll
+C:\Desarrollos\CV\CV.Datos\bin\Debug\EntityFramework.dll
+C:\Desarrollos\CV\CV.Datos\bin\Debug\EntityFramework.SqlServer.dll
+C:\Desarrollos\CV\CV.Datos\bin\Debug\CV.Entidades.pdb
+C:\Desarrollos\CV\CV.Datos\bin\Debug\EntityFramework.xml
+C:\Desarrollos\CV\CV.Datos\bin\Debug\EntityFramework.SqlServer.xml
+C:\Desarrollos\CV\CV.Datos\obj\Debug\CV.Datos.csprojResolveAssemblyReference.cache
+C:\Desarrollos\CV\CV.Datos\obj\Debug\CV.Datos.dll
+C:\Desarrollos\CV\CV.Datos\obj\Debug\CV.Datos.pdb

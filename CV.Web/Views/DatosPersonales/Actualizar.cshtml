@@ -1,0 +1,48 @@
+﻿@model DatosPersonalesDTO
+
+
+<h2>Actualizar</h2>
+<form method="post" action="@Url.Action("Actualizar", "DatosPersonales")">
+    <div class="form-group">
+        <label for="nombres">Nombres:</label>
+        @Html.TextBoxFor(x => x.Nombres, new { @class = "form-control" })
+        @Html.HiddenFor(x => x.DatospersonalesId, new { @class = "form-control"})
+    </div>
+    <div class="form-group">
+        <label for="apellido">Apellido:</label>
+        @Html.TextBoxFor(x => x.Apellido, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        <label for="fechaNac">Fecha de Nacimiento:</label>
+        @Html.TextBoxFor(x => x.FechaNacimiento, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        <label for="nacionalidad">Nacionalidad:</label>
+        @Html.TextBoxFor(x => x.Nacionalidad, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        <label for="lugarNac">Lugar de Nacimiento:</label>
+        @Html.TextBoxFor(x => x.LugarNacimiento, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        <label for="dom">Domicilio:</label>
+        @Html.TextBoxFor(x => x.Domicilio, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        <label for="numDom">N° Domicilio:</label>
+        @Html.TextBoxFor(x => x.NroDomicilio, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        <label for="codPostal">Código Postal:</label>
+        @Html.TextBoxFor(x => x.CodigoPostal, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        <label for="email">Email:</label>
+        @Html.TextBoxFor(x => x.Email, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        <label for="tel">Teléfono:</label>
+        @Html.TextBoxFor(x => x.Telefono, new { @class = "form-control" })
+    </div>
+    <button type="submit" class="btn btn-success btn-lg">Guardar</button>
+</form>

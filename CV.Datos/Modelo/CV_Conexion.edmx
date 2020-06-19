@@ -1,0 +1,566 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="CVModelo.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Conocimiento">
+          <Key>
+            <PropertyRef Name="ConocimientoId" />
+          </Key>
+          <Property Name="ConocimientoId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DatosPersonalesId" Type="int" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Nivel" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DatosPersonales">
+          <Key>
+            <PropertyRef Name="DatospersonalesId" />
+          </Key>
+          <Property Name="DatospersonalesId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombres" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Apellido" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="FechaNacimiento" Type="date" Nullable="false" />
+          <Property Name="Nacionalidad" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="LugarNacimiento" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Domicilio" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="NroDomicilio" Type="int" />
+          <Property Name="CodigoPostal" Type="varchar" MaxLength="10" />
+          <Property Name="Email" Type="varchar" MaxLength="50" />
+          <Property Name="Telefono" Type="int" />
+        </EntityType>
+        <EntityType Name="Educacion">
+          <Key>
+            <PropertyRef Name="EducacionId" />
+          </Key>
+          <Property Name="EducacionId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DatosPersonalesId" Type="int" Nullable="false" />
+          <Property Name="Titulo" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="EstablecimientoEducativo" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="FechaDesde" Type="date" Nullable="false" />
+          <Property Name="FechaHasta" Type="date" Nullable="false" />
+          <Property Name="Estado" Type="varchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ExperienciaLaboral">
+          <Key>
+            <PropertyRef Name="ExperienciaLaboralId" />
+          </Key>
+          <Property Name="ExperienciaLaboralId" Type="int" Nullable="false" />
+          <Property Name="DatosPersonalesId" Type="int" Nullable="false" />
+          <Property Name="Puesto" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="FechaDesde" Type="date" Nullable="false" />
+          <Property Name="FechaHasta" Type="date" Nullable="false" />
+          <Property Name="ReferenciaNombre" Type="varchar" MaxLength="50" />
+          <Property Name="ReferenciaTelefono" Type="int" />
+        </EntityType>
+        <EntityType Name="Idioma">
+          <Key>
+            <PropertyRef Name="IdiomaId" />
+          </Key>
+          <Property Name="IdiomaId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DatosPersonalesId" Type="int" Nullable="false" />
+          <Property Name="NIvel" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Imagen">
+          <Key>
+            <PropertyRef Name="ImagenId" />
+          </Key>
+          <Property Name="ImagenId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DatosPersonalesId" Type="int" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Objetivo">
+          <Key>
+            <PropertyRef Name="ObjetivoId" />
+          </Key>
+          <Property Name="ObjetivoId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DatosPersonalesId" Type="int" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Registro">
+          <Key>
+            <PropertyRef Name="RegistroId" />
+          </Key>
+          <Property Name="RegistroId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DatosPersonalesId" Type="int" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Usuario" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ConfirmacionEmail" Type="bit" />
+        </EntityType>
+        <Association Name="FK_Conocimiento_DatosPersonales">
+          <End Role="DatosPersonales" Type="Self.DatosPersonales" Multiplicity="1" />
+          <End Role="Conocimiento" Type="Self.Conocimiento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DatosPersonales">
+              <PropertyRef Name="DatospersonalesId" />
+            </Principal>
+            <Dependent Role="Conocimiento">
+              <PropertyRef Name="DatosPersonalesId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Educacion_DatosPersonales">
+          <End Role="DatosPersonales" Type="Self.DatosPersonales" Multiplicity="1" />
+          <End Role="Educacion" Type="Self.Educacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DatosPersonales">
+              <PropertyRef Name="DatospersonalesId" />
+            </Principal>
+            <Dependent Role="Educacion">
+              <PropertyRef Name="DatosPersonalesId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ExperienciaLaboral_DatosPersonales">
+          <End Role="DatosPersonales" Type="Self.DatosPersonales" Multiplicity="1" />
+          <End Role="ExperienciaLaboral" Type="Self.ExperienciaLaboral" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DatosPersonales">
+              <PropertyRef Name="DatospersonalesId" />
+            </Principal>
+            <Dependent Role="ExperienciaLaboral">
+              <PropertyRef Name="DatosPersonalesId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Idioma_DatosPersonales">
+          <End Role="DatosPersonales" Type="Self.DatosPersonales" Multiplicity="1" />
+          <End Role="Idioma" Type="Self.Idioma" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DatosPersonales">
+              <PropertyRef Name="DatospersonalesId" />
+            </Principal>
+            <Dependent Role="Idioma">
+              <PropertyRef Name="DatosPersonalesId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Imagen_DatosPersonales">
+          <End Role="DatosPersonales" Type="Self.DatosPersonales" Multiplicity="1" />
+          <End Role="Imagen" Type="Self.Imagen" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DatosPersonales">
+              <PropertyRef Name="DatospersonalesId" />
+            </Principal>
+            <Dependent Role="Imagen">
+              <PropertyRef Name="DatosPersonalesId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Objetivo_DatosPersonales">
+          <End Role="DatosPersonales" Type="Self.DatosPersonales" Multiplicity="1" />
+          <End Role="Objetivo" Type="Self.Objetivo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DatosPersonales">
+              <PropertyRef Name="DatospersonalesId" />
+            </Principal>
+            <Dependent Role="Objetivo">
+              <PropertyRef Name="DatosPersonalesId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Registro_DatosPersonales">
+          <End Role="DatosPersonales" Type="Self.DatosPersonales" Multiplicity="1" />
+          <End Role="Registro" Type="Self.Registro" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DatosPersonales">
+              <PropertyRef Name="DatospersonalesId" />
+            </Principal>
+            <Dependent Role="Registro">
+              <PropertyRef Name="DatosPersonalesId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CVModeloStoreContainer">
+          <EntitySet Name="Conocimiento" EntityType="Self.Conocimiento" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DatosPersonales" EntityType="Self.DatosPersonales" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Educacion" EntityType="Self.Educacion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ExperienciaLaboral" EntityType="Self.ExperienciaLaboral" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Idioma" EntityType="Self.Idioma" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Imagen" EntityType="Self.Imagen" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Objetivo" EntityType="Self.Objetivo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Registro" EntityType="Self.Registro" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Conocimiento_DatosPersonales" Association="Self.FK_Conocimiento_DatosPersonales">
+            <End Role="DatosPersonales" EntitySet="DatosPersonales" />
+            <End Role="Conocimiento" EntitySet="Conocimiento" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Educacion_DatosPersonales" Association="Self.FK_Educacion_DatosPersonales">
+            <End Role="DatosPersonales" EntitySet="DatosPersonales" />
+            <End Role="Educacion" EntitySet="Educacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ExperienciaLaboral_DatosPersonales" Association="Self.FK_ExperienciaLaboral_DatosPersonales">
+            <End Role="DatosPersonales" EntitySet="DatosPersonales" />
+            <End Role="ExperienciaLaboral" EntitySet="ExperienciaLaboral" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Idioma_DatosPersonales" Association="Self.FK_Idioma_DatosPersonales">
+            <End Role="DatosPersonales" EntitySet="DatosPersonales" />
+            <End Role="Idioma" EntitySet="Idioma" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Imagen_DatosPersonales" Association="Self.FK_Imagen_DatosPersonales">
+            <End Role="DatosPersonales" EntitySet="DatosPersonales" />
+            <End Role="Imagen" EntitySet="Imagen" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Objetivo_DatosPersonales" Association="Self.FK_Objetivo_DatosPersonales">
+            <End Role="DatosPersonales" EntitySet="DatosPersonales" />
+            <End Role="Objetivo" EntitySet="Objetivo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Registro_DatosPersonales" Association="Self.FK_Registro_DatosPersonales">
+            <End Role="DatosPersonales" EntitySet="DatosPersonales" />
+            <End Role="Registro" EntitySet="Registro" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="CVModelo" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Conocimiento">
+          <Key>
+            <PropertyRef Name="ConocimientoId" />
+          </Key>
+          <Property Name="ConocimientoId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DatosPersonalesId" Type="Int32" Nullable="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Nivel" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="DatosPersonales" Relationship="Self.FK_Conocimiento_DatosPersonales" FromRole="Conocimiento" ToRole="DatosPersonales" />
+        </EntityType>
+        <EntityType Name="DatosPersonales">
+          <Key>
+            <PropertyRef Name="DatospersonalesId" />
+          </Key>
+          <Property Name="DatospersonalesId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombres" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Apellido" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FechaNacimiento" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Nacionalidad" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="LugarNacimiento" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Domicilio" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NroDomicilio" Type="Int32" />
+          <Property Name="CodigoPostal" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Telefono" Type="Int32" />
+          <NavigationProperty Name="Conocimiento" Relationship="Self.FK_Conocimiento_DatosPersonales" FromRole="DatosPersonales" ToRole="Conocimiento" />
+          <NavigationProperty Name="Educacion" Relationship="Self.FK_Educacion_DatosPersonales" FromRole="DatosPersonales" ToRole="Educacion" />
+          <NavigationProperty Name="ExperienciaLaboral" Relationship="Self.FK_ExperienciaLaboral_DatosPersonales" FromRole="DatosPersonales" ToRole="ExperienciaLaboral" />
+          <NavigationProperty Name="Idioma" Relationship="Self.FK_Idioma_DatosPersonales" FromRole="DatosPersonales" ToRole="Idioma" />
+          <NavigationProperty Name="Imagen" Relationship="Self.FK_Imagen_DatosPersonales" FromRole="DatosPersonales" ToRole="Imagen" />
+          <NavigationProperty Name="Objetivo" Relationship="Self.FK_Objetivo_DatosPersonales" FromRole="DatosPersonales" ToRole="Objetivo" />
+          <NavigationProperty Name="Registro" Relationship="Self.FK_Registro_DatosPersonales" FromRole="DatosPersonales" ToRole="Registro" />
+        </EntityType>
+        <EntityType Name="Educacion">
+          <Key>
+            <PropertyRef Name="EducacionId" />
+          </Key>
+          <Property Name="EducacionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DatosPersonalesId" Type="Int32" Nullable="false" />
+          <Property Name="Titulo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="EstablecimientoEducativo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FechaDesde" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="FechaHasta" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Estado" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="DatosPersonales" Relationship="Self.FK_Educacion_DatosPersonales" FromRole="Educacion" ToRole="DatosPersonales" />
+        </EntityType>
+        <EntityType Name="ExperienciaLaboral">
+          <Key>
+            <PropertyRef Name="ExperienciaLaboralId" />
+          </Key>
+          <Property Name="ExperienciaLaboralId" Type="Int32" Nullable="false" />
+          <Property Name="DatosPersonalesId" Type="Int32" Nullable="false" />
+          <Property Name="Puesto" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FechaDesde" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="FechaHasta" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="ReferenciaNombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ReferenciaTelefono" Type="Int32" />
+          <NavigationProperty Name="DatosPersonales" Relationship="Self.FK_ExperienciaLaboral_DatosPersonales" FromRole="ExperienciaLaboral" ToRole="DatosPersonales" />
+        </EntityType>
+        <EntityType Name="Idioma">
+          <Key>
+            <PropertyRef Name="IdiomaId" />
+          </Key>
+          <Property Name="IdiomaId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DatosPersonalesId" Type="Int32" Nullable="false" />
+          <Property Name="NIvel" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="DatosPersonales" Relationship="Self.FK_Idioma_DatosPersonales" FromRole="Idioma" ToRole="DatosPersonales" />
+        </EntityType>
+        <EntityType Name="Imagen">
+          <Key>
+            <PropertyRef Name="ImagenId" />
+          </Key>
+          <Property Name="ImagenId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DatosPersonalesId" Type="Int32" Nullable="false" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="DatosPersonales" Relationship="Self.FK_Imagen_DatosPersonales" FromRole="Imagen" ToRole="DatosPersonales" />
+        </EntityType>
+        <EntityType Name="Objetivo">
+          <Key>
+            <PropertyRef Name="ObjetivoId" />
+          </Key>
+          <Property Name="ObjetivoId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DatosPersonalesId" Type="Int32" Nullable="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="DatosPersonales" Relationship="Self.FK_Objetivo_DatosPersonales" FromRole="Objetivo" ToRole="DatosPersonales" />
+        </EntityType>
+        <EntityType Name="Registro">
+          <Key>
+            <PropertyRef Name="RegistroId" />
+          </Key>
+          <Property Name="RegistroId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DatosPersonalesId" Type="Int32" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Usuario" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ConfirmacionEmail" Type="Boolean" />
+          <NavigationProperty Name="DatosPersonales" Relationship="Self.FK_Registro_DatosPersonales" FromRole="Registro" ToRole="DatosPersonales" />
+        </EntityType>
+        <Association Name="FK_Conocimiento_DatosPersonales">
+          <End Role="DatosPersonales" Type="Self.DatosPersonales" Multiplicity="1" />
+          <End Role="Conocimiento" Type="Self.Conocimiento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DatosPersonales">
+              <PropertyRef Name="DatospersonalesId" />
+            </Principal>
+            <Dependent Role="Conocimiento">
+              <PropertyRef Name="DatosPersonalesId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Educacion_DatosPersonales">
+          <End Role="DatosPersonales" Type="Self.DatosPersonales" Multiplicity="1" />
+          <End Role="Educacion" Type="Self.Educacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DatosPersonales">
+              <PropertyRef Name="DatospersonalesId" />
+            </Principal>
+            <Dependent Role="Educacion">
+              <PropertyRef Name="DatosPersonalesId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ExperienciaLaboral_DatosPersonales">
+          <End Role="DatosPersonales" Type="Self.DatosPersonales" Multiplicity="1" />
+          <End Role="ExperienciaLaboral" Type="Self.ExperienciaLaboral" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DatosPersonales">
+              <PropertyRef Name="DatospersonalesId" />
+            </Principal>
+            <Dependent Role="ExperienciaLaboral">
+              <PropertyRef Name="DatosPersonalesId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Idioma_DatosPersonales">
+          <End Role="DatosPersonales" Type="Self.DatosPersonales" Multiplicity="1" />
+          <End Role="Idioma" Type="Self.Idioma" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DatosPersonales">
+              <PropertyRef Name="DatospersonalesId" />
+            </Principal>
+            <Dependent Role="Idioma">
+              <PropertyRef Name="DatosPersonalesId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Imagen_DatosPersonales">
+          <End Role="DatosPersonales" Type="Self.DatosPersonales" Multiplicity="1" />
+          <End Role="Imagen" Type="Self.Imagen" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DatosPersonales">
+              <PropertyRef Name="DatospersonalesId" />
+            </Principal>
+            <Dependent Role="Imagen">
+              <PropertyRef Name="DatosPersonalesId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Objetivo_DatosPersonales">
+          <End Role="DatosPersonales" Type="Self.DatosPersonales" Multiplicity="1" />
+          <End Role="Objetivo" Type="Self.Objetivo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DatosPersonales">
+              <PropertyRef Name="DatospersonalesId" />
+            </Principal>
+            <Dependent Role="Objetivo">
+              <PropertyRef Name="DatosPersonalesId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Registro_DatosPersonales">
+          <End Role="DatosPersonales" Type="Self.DatosPersonales" Multiplicity="1" />
+          <End Role="Registro" Type="Self.Registro" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DatosPersonales">
+              <PropertyRef Name="DatospersonalesId" />
+            </Principal>
+            <Dependent Role="Registro">
+              <PropertyRef Name="DatosPersonalesId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CVEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Conocimiento" EntityType="Self.Conocimiento" />
+          <EntitySet Name="DatosPersonales" EntityType="Self.DatosPersonales" />
+          <EntitySet Name="Educacion" EntityType="Self.Educacion" />
+          <EntitySet Name="ExperienciaLaboral" EntityType="Self.ExperienciaLaboral" />
+          <EntitySet Name="Idioma" EntityType="Self.Idioma" />
+          <EntitySet Name="Imagen" EntityType="Self.Imagen" />
+          <EntitySet Name="Objetivo" EntityType="Self.Objetivo" />
+          <EntitySet Name="Registro" EntityType="Self.Registro" />
+          <AssociationSet Name="FK_Conocimiento_DatosPersonales" Association="Self.FK_Conocimiento_DatosPersonales">
+            <End Role="DatosPersonales" EntitySet="DatosPersonales" />
+            <End Role="Conocimiento" EntitySet="Conocimiento" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Educacion_DatosPersonales" Association="Self.FK_Educacion_DatosPersonales">
+            <End Role="DatosPersonales" EntitySet="DatosPersonales" />
+            <End Role="Educacion" EntitySet="Educacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ExperienciaLaboral_DatosPersonales" Association="Self.FK_ExperienciaLaboral_DatosPersonales">
+            <End Role="DatosPersonales" EntitySet="DatosPersonales" />
+            <End Role="ExperienciaLaboral" EntitySet="ExperienciaLaboral" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Idioma_DatosPersonales" Association="Self.FK_Idioma_DatosPersonales">
+            <End Role="DatosPersonales" EntitySet="DatosPersonales" />
+            <End Role="Idioma" EntitySet="Idioma" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Imagen_DatosPersonales" Association="Self.FK_Imagen_DatosPersonales">
+            <End Role="DatosPersonales" EntitySet="DatosPersonales" />
+            <End Role="Imagen" EntitySet="Imagen" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Objetivo_DatosPersonales" Association="Self.FK_Objetivo_DatosPersonales">
+            <End Role="DatosPersonales" EntitySet="DatosPersonales" />
+            <End Role="Objetivo" EntitySet="Objetivo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Registro_DatosPersonales" Association="Self.FK_Registro_DatosPersonales">
+            <End Role="DatosPersonales" EntitySet="DatosPersonales" />
+            <End Role="Registro" EntitySet="Registro" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="CVModeloStoreContainer" CdmEntityContainer="CVEntities">
+          <EntitySetMapping Name="Conocimiento">
+            <EntityTypeMapping TypeName="CVModelo.Conocimiento">
+              <MappingFragment StoreEntitySet="Conocimiento">
+                <ScalarProperty Name="ConocimientoId" ColumnName="ConocimientoId" />
+                <ScalarProperty Name="DatosPersonalesId" ColumnName="DatosPersonalesId" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Nivel" ColumnName="Nivel" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DatosPersonales">
+            <EntityTypeMapping TypeName="CVModelo.DatosPersonales">
+              <MappingFragment StoreEntitySet="DatosPersonales">
+                <ScalarProperty Name="DatospersonalesId" ColumnName="DatospersonalesId" />
+                <ScalarProperty Name="Nombres" ColumnName="Nombres" />
+                <ScalarProperty Name="Apellido" ColumnName="Apellido" />
+                <ScalarProperty Name="FechaNacimiento" ColumnName="FechaNacimiento" />
+                <ScalarProperty Name="Nacionalidad" ColumnName="Nacionalidad" />
+                <ScalarProperty Name="LugarNacimiento" ColumnName="LugarNacimiento" />
+                <ScalarProperty Name="Domicilio" ColumnName="Domicilio" />
+                <ScalarProperty Name="NroDomicilio" ColumnName="NroDomicilio" />
+                <ScalarProperty Name="CodigoPostal" ColumnName="CodigoPostal" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Educacion">
+            <EntityTypeMapping TypeName="CVModelo.Educacion">
+              <MappingFragment StoreEntitySet="Educacion">
+                <ScalarProperty Name="EducacionId" ColumnName="EducacionId" />
+                <ScalarProperty Name="DatosPersonalesId" ColumnName="DatosPersonalesId" />
+                <ScalarProperty Name="Titulo" ColumnName="Titulo" />
+                <ScalarProperty Name="EstablecimientoEducativo" ColumnName="EstablecimientoEducativo" />
+                <ScalarProperty Name="FechaDesde" ColumnName="FechaDesde" />
+                <ScalarProperty Name="FechaHasta" ColumnName="FechaHasta" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ExperienciaLaboral">
+            <EntityTypeMapping TypeName="CVModelo.ExperienciaLaboral">
+              <MappingFragment StoreEntitySet="ExperienciaLaboral">
+                <ScalarProperty Name="ExperienciaLaboralId" ColumnName="ExperienciaLaboralId" />
+                <ScalarProperty Name="DatosPersonalesId" ColumnName="DatosPersonalesId" />
+                <ScalarProperty Name="Puesto" ColumnName="Puesto" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="FechaDesde" ColumnName="FechaDesde" />
+                <ScalarProperty Name="FechaHasta" ColumnName="FechaHasta" />
+                <ScalarProperty Name="ReferenciaNombre" ColumnName="ReferenciaNombre" />
+                <ScalarProperty Name="ReferenciaTelefono" ColumnName="ReferenciaTelefono" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Idioma">
+            <EntityTypeMapping TypeName="CVModelo.Idioma">
+              <MappingFragment StoreEntitySet="Idioma">
+                <ScalarProperty Name="IdiomaId" ColumnName="IdiomaId" />
+                <ScalarProperty Name="DatosPersonalesId" ColumnName="DatosPersonalesId" />
+                <ScalarProperty Name="NIvel" ColumnName="NIvel" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Imagen">
+            <EntityTypeMapping TypeName="CVModelo.Imagen">
+              <MappingFragment StoreEntitySet="Imagen">
+                <ScalarProperty Name="ImagenId" ColumnName="ImagenId" />
+                <ScalarProperty Name="DatosPersonalesId" ColumnName="DatosPersonalesId" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Objetivo">
+            <EntityTypeMapping TypeName="CVModelo.Objetivo">
+              <MappingFragment StoreEntitySet="Objetivo">
+                <ScalarProperty Name="ObjetivoId" ColumnName="ObjetivoId" />
+                <ScalarProperty Name="DatosPersonalesId" ColumnName="DatosPersonalesId" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Registro">
+            <EntityTypeMapping TypeName="CVModelo.Registro">
+              <MappingFragment StoreEntitySet="Registro">
+                <ScalarProperty Name="RegistroId" ColumnName="RegistroId" />
+                <ScalarProperty Name="DatosPersonalesId" ColumnName="DatosPersonalesId" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Usuario" ColumnName="Usuario" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="ConfirmacionEmail" ColumnName="ConfirmacionEmail" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
