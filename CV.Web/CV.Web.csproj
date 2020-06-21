@@ -227,12 +227,12 @@
     <Content Include="Views\DatosPersonales\Index.cshtml" />
     <Content Include="Views\DatosPersonales\Actualizar.cshtml" />
     <Content Include="Views\DatosPersonales\Detalle.cshtml" />
+    <Content Include="Views\Imagen\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\Imagenes\Upload\" />
     <Folder Include="Models\" />
-    <Folder Include="Views\Imagen\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
