@@ -1,22 +1,12 @@
-﻿<div class="jumbotron">
-    <h1>Creá tu Curriculum Vitae</h1>
-    <p class="lead"><img class="img-thumbnail" src="~/Content/Imagenes/cv-nav.png" /> La forma más sencilla.</p>
-    <p><a href="@Url.Action("Index", "DatosPersonales")" class="btn btn-success btn-lg">Empezá</a></p>
-</div>
-
-<div class="row">
-    <div class="col-md-4">
-        <h2>Consigue el trabajo que te propongas</h2>
-        <p>
-            Completa los formularios y exportalo a PDF <i class="fa fa-file-pdf-o"></i>.
+﻿<section class="home-main">
+    <div class="home-main__middle">
+        <img src="~/Content/Imagenes/cv-birome.png" alt="Creá tu curriculum Vitae" title="Creá tu curriculum Vitae" class="home-main__img" />
+    </div>
+    <div class="home-main__split home-main__split--right">
+        <h1 class="home-main__title"><a href="@Url.Action("Index", "DatosPersonales")">Creá tu CV</a></h1>
+        <p class="home-main__description">
+            Consigue el trabajo que te propongas.
         </p>
     </div>
-    <div class="col-md-4">
-        <h2>Mejorá tu perfil</h2>
-        <p>Cargá el PDF en Linkedin <i class="fa fa-linkedin-square"></i> .</p>
-    </div>
-    <div class="col-md-4">
-        <h2>Diseño Moderno</h2>
-        <p>Diseño actualizado y moderno para conseguir el trabajo que quieras</p>
-    </div>
-</div>
+</section>
+<script src="~/Scripts/Home.js"></script>
