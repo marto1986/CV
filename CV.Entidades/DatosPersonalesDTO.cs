@@ -19,6 +19,7 @@ namespace CV.Entidades
         public string CodigoPostal { get; set; }
         public string Email { get; set; }
         public Nullable<int> Telefono { get; set; }
+        public int UsuarioId { get; set; }
 
         public IEnumerable<ImagenDTO> imagenes { get; set; }
     }

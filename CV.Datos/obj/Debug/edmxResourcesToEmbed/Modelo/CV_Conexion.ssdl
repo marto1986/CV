@@ -24,6 +24,7 @@
     <Property Name="CodigoPostal" Type="varchar" MaxLength="10" />
     <Property Name="Email" Type="varchar" MaxLength="50" />
     <Property Name="Telefono" Type="int" />
+    <Property Name="UsuarioId" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Educacion">
     <Key>
@@ -86,6 +87,14 @@
     <Property Name="Password" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="ConfirmacionEmail" Type="bit" />
   </EntityType>
+  <EntityType Name="Usuario">
+    <Key>
+      <PropertyRef Name="UsuarioId" />
+    </Key>
+    <Property Name="UsuarioId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UsuarioNombre" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="UsuarioPassword" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
   <Association Name="FK_Conocimiento_DatosPersonales">
     <End Role="DatosPersonales" Type="Self.DatosPersonales" Multiplicity="1" />
     <End Role="Conocimiento" Type="Self.Conocimiento" Multiplicity="*" />
@@ -95,6 +104,18 @@
       </Principal>
       <Dependent Role="Conocimiento">
         <PropertyRef Name="DatosPersonalesId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DatosPersonales_Usuario">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+    <End Role="DatosPersonales" Type="Self.DatosPersonales" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="UsuarioId" />
+      </Principal>
+      <Dependent Role="DatosPersonales">
+        <PropertyRef Name="UsuarioId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -179,9 +200,14 @@
     <EntitySet Name="Imagen" EntityType="Self.Imagen" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Objetivo" EntityType="Self.Objetivo" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Registro" EntityType="Self.Registro" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
     <AssociationSet Name="FK_Conocimiento_DatosPersonales" Association="Self.FK_Conocimiento_DatosPersonales">
       <End Role="DatosPersonales" EntitySet="DatosPersonales" />
       <End Role="Conocimiento" EntitySet="Conocimiento" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DatosPersonales_Usuario" Association="Self.FK_DatosPersonales_Usuario">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="DatosPersonales" EntitySet="DatosPersonales" />
     </AssociationSet>
     <AssociationSet Name="FK_Educacion_DatosPersonales" Association="Self.FK_Educacion_DatosPersonales">
       <End Role="DatosPersonales" EntitySet="DatosPersonales" />
