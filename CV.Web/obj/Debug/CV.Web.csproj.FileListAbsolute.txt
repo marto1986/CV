@@ -60,3 +60,7 @@ C:\Desarrollos\CV\CV.Web\bin\System.Net.Http.Primitives.dll
 C:\Desarrollos\CV\CV.Web\bin\System.Net.Http.WebRequest.dll
 C:\Desarrollos\CV\CV.Web\bin\System.Net.Http.xml
 C:\Desarrollos\CV\CV.Web\bin\System.Net.Http.WebRequest.xml
+C:\Desarrollos\CV\CV.Web\bin\CV.Datos.dll
+C:\Desarrollos\CV\CV.Web\bin\EntityFramework.dll
+C:\Desarrollos\CV\CV.Web\bin\CV.Datos.pdb
+C:\Desarrollos\CV\CV.Web\bin\EntityFramework.xml

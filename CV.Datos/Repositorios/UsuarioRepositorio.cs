@@ -37,15 +37,15 @@ namespace CV.Datos.Repositorios
         }
 
         /// <summary>
-        /// Verifica si el usuario ya eciste
+        /// Verifica si el usuario ya existe
         /// </summary>
         /// <param name="usuario"></param>
         /// <returns></returns>
-        public bool UsuarioExiste(string usuario)
-        {
-            var resultado = BD.Usuario.FirstOrDefault(x => x.UsuarioNombre == usuario);
-            return Convert.ToBoolean(resultado);
-        }
+        //public bool UsuarioExiste(string usuario)
+        //{
+        //    var resultado = BD.Usuario.FirstOrDefault(x => x.UsuarioNombre == usuario);
+        //    return Convert.ToBoolean(resultado);
+        //}
 
         /// <summary>
         /// Registra un nuevo usuario 

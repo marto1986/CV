@@ -20,12 +20,12 @@ namespace CV.API.Controllers
             repositorio = new UsuarioRepositorio();
         }
 
-        [HttpPost]
-        public bool UsuarioExiste(string usuario)
-        {
-            var dato = repositorio.UsuarioExiste(usuario);
-            return dato;
-        }
+        //[HttpPost]
+        //public bool UsuarioExiste(string usuario)
+        //{
+        //    var dato = repositorio.UsuarioExiste(usuario);
+        //    return dato;
+        //}
 
         [HttpGet]
         public IEnumerable<UsuarioDTO> ObtenerUsuarios()
@@ -48,6 +48,7 @@ namespace CV.API.Controllers
             return dato;
         }
 
+        [HttpPut]
         public bool Actualizar(Usuario usuario)
         {
             var dato = repositorio.ActualizarUsuario(usuario);

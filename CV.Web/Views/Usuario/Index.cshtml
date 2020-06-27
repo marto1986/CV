@@ -1,0 +1,26 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+<br/><br /><br />
+<div class="container">
+    <h2>Inicio de sesión</h2>
+
+    <form action="@Url.Action("IniciarSesion", "Usuario")" method="post">
+        <div class="form-group">
+            <label>Usuario:</label>
+            <input type="text" name="UsuarioNombre" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label>Contraseña:</label>
+            <input type="password" name="UsuarioPassword" class="form-control" />
+        </div>
+        <div class="form-group">
+            <input type="submit" class="btn btn-success" value="Ingresar" />
+        </div>
+    </form>
+    <div class="form-group">
+        <a href="@Url.Action("Registrarse", "Usuario")" style="color:#459758"><p>Registrarse</p></a>
+    </div>
+</div>
+

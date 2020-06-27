@@ -1,0 +1,24 @@
+﻿@model UsuarioDTO
+@{
+    ViewBag.Title = "Registrarse";
+}
+<br /><br /><br />
+<div class="container">
+    <h2>Registrarse</h2>
+    <form action="@Url.Action("Registrarse","Usuario")" method="post">
+        <div class="form-group">
+            <label>Usuario:</label>
+            @Html.TextBoxFor(x => x.UsuarioNombre, new { @class = "form-control" })
+            </div>
+        <div class="form-group">
+            @Html.ValidationMessage("UsuarioNombre")
+        </div>
+        <div class="form-group">
+            <label>Contraseña:</label>
+            @Html.PasswordFor(x => x.UsuarioPassword, new { @class = "form-control" })
+        </div>
+        <div class="form-group">
+            <input type="submit" class="btn btn-success" value="Ingresar" />
+        </div>
+</form>
+</div>

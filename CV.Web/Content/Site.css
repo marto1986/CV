@@ -12,7 +12,6 @@
 }
 a{
     text-decoration:none;
-    color: #FFF
 }
 :root {
   --split-left: #fae9b8;
@@ -25,7 +24,7 @@ body {
   min-height: 100vh;
   font-family: Poppins, sans-serif;
   font-weight: bold;
-  font-size: 1em;
+  font-size: 14px;
   color: #459758;
 }
 
