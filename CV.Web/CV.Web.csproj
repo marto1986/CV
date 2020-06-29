@@ -165,9 +165,13 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\CerrarSesionController.cs" />
     <Compile Include="Controllers\DatosPersonalesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ImagenController.cs" />
+    <Compile Include="Controllers\UsuarioController.cs" />
+    <Compile Include="Crypto.cs" />
+    <Compile Include="Filters\VerificarSesion.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -231,11 +235,14 @@
     <Content Include="Views\DatosPersonales\Actualizar.cshtml" />
     <Content Include="Views\DatosPersonales\Detalle.cshtml" />
     <Content Include="Views\Imagen\Index.cshtml" />
+    <Content Include="Views\Usuario\Index.cshtml" />
+    <Content Include="Views\Usuario\Registrarse.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\Imagenes\Upload\" />
     <Folder Include="Models\" />
+    <Folder Include="Views\CerrarSesion\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -246,6 +253,10 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\CV.Datos\CV.Datos.csproj">
+      <Project>{663E5621-D22F-44C2-9CAC-ED15E288024D}</Project>
+      <Name>CV.Datos</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CV.Entidades\CV.Entidades.csproj">
       <Project>{21e53a04-92ea-4aa2-a6ec-a914bf3309d0}</Project>
       <Name>CV.Entidades</Name>

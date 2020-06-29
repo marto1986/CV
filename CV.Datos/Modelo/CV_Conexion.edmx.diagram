@@ -5,21 +5,23 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="eb02f27157e4490c830dd6582c62ba83" Name="Diagram1">
-        <EntityTypeShape EntityType="CVModelo.Conocimiento" Width="1.5" PointX="3" PointY="1.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="CVModelo.DatosPersonales" Width="1.5" PointX="0.75" PointY="9.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="CVModelo.Educacion" Width="1.5" PointX="3" PointY="4.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="CVModelo.ExperienciaLaboral" Width="1.5" PointX="3" PointY="7.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="CVModelo.Idioma" Width="1.5" PointX="3" PointY="11.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="CVModelo.Imagen" Width="1.5" PointX="3" PointY="14.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="CVModelo.Objetivo" Width="1.5" PointX="3" PointY="16.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="CVModelo.Registro" Width="1.5" PointX="3" PointY="19.125" IsExpanded="true" />
-        <AssociationConnector Association="CVModelo.FK_Conocimiento_DatosPersonales" ManuallyRouted="false" />
-        <AssociationConnector Association="CVModelo.FK_Educacion_DatosPersonales" ManuallyRouted="false" />
-        <AssociationConnector Association="CVModelo.FK_ExperienciaLaboral_DatosPersonales" ManuallyRouted="false" />
-        <AssociationConnector Association="CVModelo.FK_Idioma_DatosPersonales" ManuallyRouted="false" />
-        <AssociationConnector Association="CVModelo.FK_Imagen_DatosPersonales" ManuallyRouted="false" />
-        <AssociationConnector Association="CVModelo.FK_Objetivo_DatosPersonales" ManuallyRouted="false" />
-        <AssociationConnector Association="CVModelo.FK_Registro_DatosPersonales" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="CVModelo.Conocimiento" Width="1.5" PointX="5.25" PointY="16.75" />
+        <EntityTypeShape EntityType="CVModelo.DatosPersonales" Width="1.5" PointX="3" PointY="9.25" />
+        <EntityTypeShape EntityType="CVModelo.Educacion" Width="1.5" PointX="5.25" PointY="1.75" />
+        <EntityTypeShape EntityType="CVModelo.ExperienciaLaboral" Width="1.5" PointX="5.25" PointY="8.25" />
+        <EntityTypeShape EntityType="CVModelo.Idioma" Width="1.5" PointX="5.25" PointY="19.5" />
+        <EntityTypeShape EntityType="CVModelo.Imagen" Width="1.5" PointX="5.25" PointY="11.75" />
+        <EntityTypeShape EntityType="CVModelo.Objetivo" Width="1.5" PointX="5.25" PointY="14.25" />
+        <EntityTypeShape EntityType="CVModelo.Registro" Width="1.5" PointX="5.25" PointY="5.125" />
+        <EntityTypeShape EntityType="CVModelo.Usuario" Width="1.5" PointX="0.75" PointY="10.75" />
+        <AssociationConnector Association="CVModelo.FK_Conocimiento_DatosPersonales" />
+        <AssociationConnector Association="CVModelo.FK_DatosPersonales_Usuario" />
+        <AssociationConnector Association="CVModelo.FK_Educacion_DatosPersonales" />
+        <AssociationConnector Association="CVModelo.FK_ExperienciaLaboral_DatosPersonales" />
+        <AssociationConnector Association="CVModelo.FK_Idioma_DatosPersonales" />
+        <AssociationConnector Association="CVModelo.FK_Imagen_DatosPersonales" />
+        <AssociationConnector Association="CVModelo.FK_Objetivo_DatosPersonales" />
+        <AssociationConnector Association="CVModelo.FK_Registro_DatosPersonales" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -91,9 +91,13 @@
     <Compile Include="Modelo\Registro.cs">
       <DependentUpon>CV_Conexion.tt</DependentUpon>
     </Compile>
+    <Compile Include="Modelo\Usuario.cs">
+      <DependentUpon>CV_Conexion.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositorios\DatosPersonalesRepositorio.cs" />
     <Compile Include="Repositorios\ImagenRepositorio.cs" />
+    <Compile Include="Repositorios\UsuarioRepositorio.cs" />
   </ItemGroup>
   <ItemGroup>
     <EntityDeploy Include="Modelo\CV_Conexion.edmx">

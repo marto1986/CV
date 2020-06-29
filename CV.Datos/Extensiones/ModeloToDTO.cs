@@ -15,6 +15,7 @@ namespace CV.Datos.Extensiones
             return new DatosPersonalesDTO
             {
                 DatospersonalesId = model.DatospersonalesId,
+                UsuarioId = model.UsuarioId,
                 Nombres = model.Nombres,
                 Apellido = model.Apellido,
                 FechaNacimiento = model.FechaNacimiento,
@@ -36,6 +37,16 @@ namespace CV.Datos.Extensiones
                 ImagenId = model.ImagenId,
                 Nombre = model.Nombre,
                 DatosPersonalesId = model.DatosPersonalesId
+            };
+        }
+
+        public static UsuarioDTO ToDTO(this Usuario model)
+        {
+            return new UsuarioDTO
+            {
+                UsuarioId = model.UsuarioId,
+                UsuarioNombre = model.UsuarioNombre,
+                UsuarioPassword = model.UsuarioPassword
             };
         }
     }

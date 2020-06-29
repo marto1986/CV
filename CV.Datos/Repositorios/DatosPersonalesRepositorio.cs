@@ -56,6 +56,7 @@ namespace CV.Datos.Repositorios
         {
             var actualizar = BD.DatosPersonales.FirstOrDefault(x => x.DatospersonalesId == datos.DatospersonalesId);
             actualizar.Nombres = datos.Nombres;
+            actualizar.UsuarioId = datos.UsuarioId;
             actualizar.Apellido = datos.Apellido;
             actualizar.FechaNacimiento = datos.FechaNacimiento;
             actualizar.Nacionalidad = datos.Nacionalidad;
