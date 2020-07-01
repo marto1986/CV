@@ -66,7 +66,7 @@ namespace CV.Web.Controllers
                         if (user.Count() > 0)
                         {
                             Session["Usuario"] = user.First();
-                            return RedirectToAction("Nuevo", "DatosPersonales");
+                            return RedirectToAction("Index", "DatosPersonales");
                         }
                     }
 
@@ -101,7 +101,7 @@ namespace CV.Web.Controllers
                 if (user.Count() > 0)
                 {
                     Session["Usuario"] = user.First();
-                    return RedirectToAction("Nuevo", "DatosPersonales");
+                    return RedirectToAction("Index", "DatosPersonales");
                 }
             }
 

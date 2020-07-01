@@ -16,6 +16,16 @@ namespace CV.Web.Controllers
         [HttpGet]
         public ActionResult Index()
         {
+            if (Session["Usuario"] == null)
+            {
+                Session["Usuario"] = null;
+            }
+            else
+            {
+                var objUsuario = Session["Usuario"];
+                ViewBag.ObjUsuario = objUsuario;
+            }
+
             HttpClient clienteHttp = new HttpClient();
             clienteHttp.BaseAddress = new Uri("http://localhost:5476/");
 
@@ -35,6 +45,16 @@ namespace CV.Web.Controllers
         [HttpGet]
         public ActionResult Nuevo()
         {
+            if (Session["Usuario"] == null)
+            {
+                Session["Usuario"] = null;
+            }
+            else
+            {
+                var objUsuario = Session["Usuario"];
+                ViewBag.ObjUsuario = objUsuario;
+            }
+
             return View();
         }
 
