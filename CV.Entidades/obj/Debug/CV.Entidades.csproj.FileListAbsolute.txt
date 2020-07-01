@@ -1,5 +1,0 @@
-C:\Desarrollos\CV\CV.Entidades\bin\Debug\CV.Entidades.dll
-C:\Desarrollos\CV\CV.Entidades\bin\Debug\CV.Entidades.pdb
-C:\Desarrollos\CV\CV.Entidades\obj\Debug\CV.Entidades.dll
-C:\Desarrollos\CV\CV.Entidades\obj\Debug\CV.Entidades.pdb
-C:\Desarrollos\CV\CV.Entidades\obj\Debug\CV.Entidades.csprojResolveAssemblyReference.cache
