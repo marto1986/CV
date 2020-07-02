@@ -3,72 +3,87 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="~/Content/Imagenes/cv-favicon.png" type="image/x-icon" >
+    <link rel="icon" href="~/Content/Imagenes/cv-favicon.png" type="image/x-icon">
     <title>CV - Creá tu Curriculum Vitae</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-    @*@*<div class="navbar navbar-inverse navbar-fixed-top">
+    <nav id="topNav" class="navbar navbar-default navbar-fixed-top">
         <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("CV", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                </ul>
+            @if (@HttpContext.Current.Session["Usuario"] != null)
+            {
+                <a class="navbar-brand page-scroll" href="@Url.Action("LoginOff", "CerrarSesion")">Cerrar Sesión</a>
+            }
+            else
+            {
+                <a class="navbar-brand page-scroll" href="@Url.Action("Index", "Usuario")">Iniciar Sesión</a>
+            }
+            
+        </div>
+    </nav>
+    <header id="first">
+        <div class="header-content">
+            <div class="inner">
+                <h2>Creá tu Curriculum Vitae</h2>
+                <h5 class="wow fadeIn text-normal">Completalo y encontrá el trabajo que deseas</h5>
+                <hr>
+                <a href="#one" class="btn btn-primary btn-xl page-scroll wow fadeInUp">Comenzar</a>
             </div>
         </div>
-    </div>*@
-    @*<div class="container body-content">*@
-    <header class="header">
-        <a href="/" class="brand-logo">
-            <img src="~/Content/Imagenes/cv-nav.png" title="CV - Creá tu Curriculum Vitae" alt="CV - Creá tu Curriculum Vitae"
-                 class="brand-img" />
-        </a>
-
-        <div class="icon-menu" id="icon-menu">
-            <div class="icon-menu__bar icon-menu__bar--one"></div>
-            <div class="icon-menu__bar icon-menu__bar--two"></div>
-            <div class="icon-menu__bar icon-menu__bar--three"></div>
-        </div>
-
-        <nav class="main-nav" id="main-nav">
-            <ul class="main-menu">
-                <li class="main-menu__item">
-                    @if (@HttpContext.Current.Session["Usuario"] != null)
-                    {
-                        <a href="@Url.Action("LoginOff", "CerrarSesion")" class="main-menu__link">Cerrar Sesión</a>
-                    }
-                    else
-                    {
-                        <a href="@Url.Action("Index", "Usuario")" class="main-menu__link">Iniciar Sesión</a>
-                    }
-                </li>
-
-                <li class="main-menu__item">
-                    <a href="#" class="main-menu__link">contacto</a>
-                </li>
-            </ul>
-        </nav>
     </header>
-        @RenderBody()
-        @*<hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - CV</p>
-        </footer>*@
-    
+
+    @RenderBody()
+
+    <footer id="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-6 col-sm-3">
+                    <h6 class="text-uppercase">Information</h6>
+                    <ul class="list-unstyled">
+                        <li><a href="">Products</a></li>
+                        <li><a href="">Services</a></li>
+                        <li><a href="">Benefits</a></li>
+                        <li><a href="">Developers</a></li>
+                    </ul>
+                </div>
+                <div class="col-xs-6 col-sm-3 column">
+                    <h6 class="text-uppercase">About</h6>
+                    <ul class="list-unstyled">
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">Delivery Information</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms &amp; Conditions</a></li>
+                    </ul>
+                </div>
+                <div class="col-xs-12 col-sm-3 column">
+                    <h6 class="text-uppercase">Stay Posted</h6>
+                    <form>
+                        <div class="form-group">
+                            <input type="text" class="form-control" title="No spam, we promise!" placeholder="Tell us your email">
+                        </div>
+                        <div class="form-group">
+                            <button class="btn btn-primary" data-toggle="modal" data-target="#alertModal" type="button">Subscribe for updates</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-xs-12 col-sm-3 text-xs-right">
+                    <h6 class="text-uppercase">Follow</h6>
+                    <ul class="list-inline">
+                        <li class="list-inline-item"><a rel="nofollow" href="" title="Twitter"><i class="icon-lg ion-social-twitter-outline"></i></a>&nbsp;</li>
+                        <li class="list-inline-item"><a rel="nofollow" href="" title="Facebook"><i class="icon-lg ion-social-facebook-outline"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+            <br>
+            <span class="pull-right text-muted small">©CV - Curriculum Vitae @DateTime.Now.Year.ToString()</span>
+        </div>
+    </footer>
+
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
 </body>
 </html>
+                

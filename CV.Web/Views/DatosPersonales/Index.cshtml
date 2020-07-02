@@ -2,37 +2,355 @@
 @{
     ViewBag.Title = "Index";
 }
-<div class="container">
-    <br /><br /><br />
-    <br /><br /><br />
-    <div class="row">
-        @if (ViewBag.ObjUsuario != null)
-        {
-            <h2>Bienvenido @ViewBag.ObjUsuario.UsuarioNombre, Empecemos a completar el CV.</h2>
-        }
-        
-        <div class="row">
-            <span><i class="fa fa-hand-o-right fa-3x"></i></span> <a href="@Url.Action("Nuevo", "DatosPersonales")"><input type="button" class="btn btn-lg btn-default" value="Cargar" /></a>
-        </div>
 
-        <table class="table table-hover">
-            <thead>
-                <tr>
-                    <th>Nombres</th>
-                    <th>Apellido</th>
-                    <th>Email</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var datos in Model)
-                {
-                    <tr>
-                        <td>@datos.Nombres</td>
-                        <td>@datos.Apellido</td>
-                        <td>@datos.Email</td>
-                    </tr>
-                }
-            </tbody>
-        </table>
+
+    @if (ViewBag.ObjUsuario != null)
+    {
+        <h2>Bienvenido @ViewBag.ObjUsuario.UsuarioNombre, Empecemos a completar el CV.</h2>
+    }
+
+   
+<section id="one" class="wow fadeInUp">
+    <div class="container">
+        <h2>Cards</h2>
+        <p class="lead">
+            What you notice first in <a href="https://v4-alpha.getbootstrap.com/">Bootstrap 4</a> is that <code>.panel</code> and <code>.well</code> have been replaced by the <code>.card</code>. This makes a lot of sense as "cards" are one of the more well known trends in responsive design.
+            The <a href="">Bootstrap 4 Cards</a> can be singular, grouped together (as shown) or <a href="">equal height</a>. There are many different layout and content options.
+        </p>
+        <div class="card-group">
+            <!-- card -->
+            <div class="card">
+                <img class="card-img-top img-fluid" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/sample13.jpg" alt="Card image cap">
+                <div class="card-block">
+                    <h4 class="card-title">Consise</h4>
+                    <p class="card-text">Cards are a good way to display content composed of different types of objects. They’re well-suited for presenting similar objects whose size or supported actions vary, like headings and photos with captions.</p>
+                </div>
+            </div>
+            <!-- card -->
+            <div class="card">
+                <img class="card-img-top img-fluid" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/sample19.jpg" alt="Card image cap">
+                <div class="card-block">
+                    <h4 class="card-title">Grouped</h4>
+                    <p class="card-text">Use card groups to render equal height cards without gutters between the cards. Use <code>.card-deck</code> for cards that aren’t attached to each another.</p>
+                </div>
+            </div>
+            <!-- card -->
+            <div class="card">
+                <img class="card-img-top img-fluid" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/sample14.jpg" alt="Card image cap">
+                <div class="card-block">
+                    <h4 class="card-title">Same Height</h4>
+                    <p class="card-text">A frequent problem occurs when you have multiple items in a row with content of varying height. Thanks to flexbox (and display:table) we now have equal height cards!</p>
+
+                </div>
+            </div>
+        </div>
     </div>
-</div>
+</section>
+<section id="two" class="bg-alt">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-xs-center">
+                <h2 class="m-t-0 text-primary">Flexbox</h2>
+                <hr class="primary">
+            </div>
+        </div>
+    </div>
+    <div class="container wow fadeInUp">
+        <div class="row">
+            <div class="col-lg-4 col-md-4 text-xs-center">
+                <div class="feature">
+                    <i class="icon-lg ion-ios-grid-view-outline wow fadeIn" data-wow-delay=".1s"></i>
+                    <h6 class="text-uppercase">Easier</h6>
+                    <p class="text-muted m-b-0">Flexbox provides <a href="https://v4-alpha.getbootstrap.com/getting-started/flexbox">simpler, more flexible layout</a> options like vertical centering.</p>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-4 text-xs-center">
+                <div class="feature">
+                    <i class="icon-lg ion-social-sass wow fadeInUp"></i>
+                    <h6 class="text-uppercase">Sass-y</h6>
+                    <p class="text-muted m-b-0">Simply set the <code>$enable-flex</code> variable to <a target="ext" href="http://codeply.com/go/YFFFWHVoRB">enable flexbox</a> in Bootstrap 4.</p>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-4 text-xs-center">
+                <div class="feature">
+                    <i class="icon-lg ion-social-css3-outline wow fadeIn" data-wow-delay=".1s"></i>
+                    <h6 class="text-uppercase">It's Modern</h6>
+                    <p class="text-muted m-b-0">Introduced in CSS3, flexbox won't work in older browsers like <a href="http://caniuse.com/#feat=flexbox">IE9</a>.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section id="three">
+    <div class="container-fluid">
+        <h5 class="text-primary text-xs-center text-uppercase">Now there are 5 Breakpoints</h5>
+        <p class="text-xs-center"><small>To accomodate a variety of devices and screen widths</small></p>
+        <div class="row">
+            <div class="col-sm-10 col-sm-offset-1 col-xs-12 col-xs-offset-0">
+                <div class="row">
+                    <div class="col-md-2 col-md-offset-1 col-sm-offset-0">
+                        <div class="card-block text-xs-center">
+                            <h1 class="card-title">XS</h1>
+                            <h3 class="text-muted">&lt;34 em</h3>
+                            <hr class="primary hidden-sm-up" />
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="card-block text-xs-center">
+                            <h1 class="card-title">SM</h1>
+                            <h3 class="text-muted">≥34 em</h3>
+                            <hr class="primary hidden-md-up" />
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="card-block text-xs-center">
+                            <h1 class="card-title">MD</h1>
+                            <h3 class="text-muted">≥48 em</h3>
+                            <hr class="primary hidden-lg-up" />
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="card-block text-xs-center">
+                            <h1 class="card-title">LG</h1>
+                            <h3 class="text-muted">≥62 em</h3>
+                            <hr class="primary hidden-xl-up" />
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="card-block text-xs-center">
+                            <h1 class="card-title">XL</h1>
+                            <h3 class="text-muted">≥75 em</h3>
+                            <hr class="primary" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-10 col-xs-offset-1">
+                <div class="row">
+                    <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 text-xs-center">
+                        <div class="card">
+                            <img src="//s3-us-west-2.amazonaws.com/s.cdpn.io/331810/sample14.jpg" class="img-fluid">
+                            <div class="card-img-overlay">
+                                <h4 class="card-title text-xs-center">
+                                    <a class="text-light" href="#galleryModal" data-toggle="modal" data-src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/sample3.jpg">view</a>
+                                </h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 text-xs-center">
+                        <div class="card">
+                            <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/sample20.jpg" class="img-fluid">
+                            <div class="card-img-overlay">
+                                <h4 class="card-title text-xs-center">
+                                    <a class="text-light" href="#galleryModal" data-toggle="modal" data-src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/sample3.jpg">view</a>
+                                </h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 text-xs-center">
+                        <div class="card card-inverse">
+                            <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/sample22.jpg" class="img-fluid">
+                            <div class="card-img-overlay">
+                                <h4 class="card-title text-xs-center">
+                                    <a class="text-light" href="#galleryModal" data-toggle="modal" data-src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/sample3.jpg">view</a>
+                                </h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 text-xs-center">
+                        <div class="card">
+                            <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/sample15.jpg" class="img-fluid">
+                            <div class="card-img-overlay">
+                                <h4 class="card-title text-xs-center">
+                                    <a class="text-light" href="#galleryModal" data-toggle="modal" data-src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/sample3.jpg">view</a>
+                                </h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 text-xs-center">
+                        <div class="card">
+                            <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/sample35.jpg" class="img-fluid">
+                            <div class="card-img-overlay">
+                                <h4 class="card-title text-xs-center">
+                                    <a class="text-light" href="#galleryModal" data-toggle="modal" data-src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/sample35.jpg">view</a>
+                                </h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 text-xs-center">
+                        <div class="card">
+                            <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/sample16.jpg" class="img-fluid">
+                            <div class="card-img-overlay">
+                                <h4 class="card-title text-xs-center">
+                                    <a class="text-light" href="#galleryModal" data-toggle="modal" data-src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/sample16.jpg">view</a>
+                                </h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 text-xs-center">
+                        <div class="card">
+                            <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/sample13.jpg" class="card-img img-fluid">
+                            <div class="card-img-overlay">
+                                <h4 class="card-title text-xs-center">
+                                    <a class="text-light" href="#galleryModal" data-toggle="modal" data-src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/sample13.jpg">view</a>
+                                </h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 text-xs-center">
+                        <div class="card">
+                            <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/sample11.jpg" class="img-fluid">
+                            <div class="card-img-overlay">
+                                <h4 class="card-title text-xs-center">
+                                    <a class="text-light" href="#galleryModal" data-toggle="modal" data-src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/sample11.jpg">view</a>
+                                </h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 text-xs-center">
+                        <div class="card">
+                            <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/sample23.jpg" class="img-fluid">
+                            <div class="card-img-overlay">
+                                <h4 class="card-title text-xs-center">
+                                    <a class="text-light" href="#galleryModal" data-toggle="modal" data-src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/sample3.jpg">view</a>
+                                </h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 text-xs-center">
+                        <div class="card">
+                            <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/sample9.jpg" class="card-img img-fluid">
+                            <div class="card-img-overlay">
+                                <h4 class="card-title text-xs-center">
+                                    <a class="text-light" href="#galleryModal" data-toggle="modal" data-src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/sample9.jpg">view</a>
+                                </h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 text-xs-center">
+                        <div class="card">
+                            <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/sample5.jpg" class="img-fluid">
+                            <div class="card-img-overlay">
+                                <h4 class="card-title text-xs-center">
+                                    <a class="text-light" href="#galleryModal" data-toggle="modal" data-src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/sample5.jpg">view</a>
+                                </h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 text-xs-center">
+                        <div class="card">
+                            <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/sample4.jpg" class="img-fluid">
+                            <div class="card-img-overlay">
+                                <h4 class="card-title text-xs-center">
+                                    <a class="text-light" href="#galleryModal" data-toggle="modal" data-src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/sample4.jpg">view</a>
+                                </h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6 text-xs-center">
+                        <div class="card">
+                            <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/sample3.jpg" class="card-img img-fluid">
+                            <div class="card-img-overlay">
+                                <h4 class="card-title text-xs-center">
+                                    <a class="text-light" href="#galleryModal" data-toggle="modal" data-src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/sample3.jpg">view</a>
+                                </h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6 text-xs-center">
+                        <div class="card">
+                            <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/sample2.jpg" class="img-fluid">
+                            <div class="card-img-overlay">
+                                <h4 class="card-title text-xs-center">
+                                    <a class="text-light" href="#galleryModal" data-toggle="modal" data-src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/sample2.jpg">view</a>
+                                </h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6 text-xs-center">
+                        <div class="card">
+                            <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/sample7.jpg" class="img-fluid">
+                            <div class="card-img-overlay">
+                                <h4 class="card-title text-xs-center">
+                                    <a class="text-light" href="#galleryModal" data-toggle="modal" data-src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/sample7.jpg">view</a>
+                                </h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-xl-offset-0 col-lg-3 col-lg-offset-0 col-md-4 col-md-offset-4 col-sm-6 text-xs-center">
+                        <div class="card center-block">
+                            <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/sample21.jpg" class="img-fluid">
+                            <div class="card-img-overlay">
+                                <h4 class="card-title text-xs-center">
+                                    <a class="text-light" href="#galleryModal" data-toggle="modal" data-src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/sample21.jpg">view</a>
+                                </h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+</section>
+
+<section id="last">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 text-xs-center">
+                <h2 class="margin-top-0 wow fadeIn">Get in Touch</h2>
+                <hr class="primary">
+                <p>Si queres contactarte</p>
+            </div>
+            <div class="col-lg-10 col-lg-offset-1 text-xs-center">
+                <form class="contact-form row">
+                    <div class="col-md-4">
+                        <label></label>
+                        <input type="text" class="form-control" placeholder="Name">
+                    </div>
+                    <div class="col-md-4">
+                        <label></label>
+                        <input type="text" class="form-control" placeholder="Email">
+                    </div>
+                    <div class="col-md-4">
+                        <label></label>
+                        <input type="text" class="form-control" placeholder="Phone">
+                    </div>
+                    <div class="col-md-12">
+                        <label></label>
+                        <textarea class="form-control" rows="9" placeholder="Your message here.."></textarea>
+                    </div>
+                    <div class="col-md-4 col-md-offset-4">
+                        <label></label>
+                        <button type="button" data-toggle="modal" data-target="#alertModal" class="btn btn-primary btn-block btn-lg">Send <i class="ion-android-arrow-forward"></i></button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<script src="~/Scripts/Home.js"></script>
+
+    <!--<table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Nombres</th>
+                <th>Apellido</th>
+                <th>Email</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var datos in Model)
+            {
+                <tr>
+                    <td>@datos.Nombres</td>
+                    <td>@datos.Apellido</td>
+                    <td>@datos.Email</td>
+                </tr>
+            }
+        </tbody>
+    </table>-->
