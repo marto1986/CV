@@ -35,8 +35,15 @@ namespace CV.Web.Controllers
             {
                 var resultString = request.Content.ReadAsStringAsync().Result;
                 var listado = JsonConvert.DeserializeObject<List<DatosPersonalesDTO>>(resultString);
-
-                return View(listado);
+                if (ViewBag.ObjUsuario != null)
+                {
+                    var resultado = listado.FirstOrDefault(x => x.UsuarioId == ViewBag.ObjUsuario.UsuarioId);
+                    return View(resultado);
+                }
+                else
+                {
+                    return View(listado);
+                }
             }
 
             return View(new List<DatosPersonalesDTO>());
@@ -84,10 +91,20 @@ namespace CV.Web.Controllers
         [HttpGet]
         public ActionResult Actualizar(int id)
         {
+            if (Session["Usuario"] == null)
+            {
+                Session["Usuario"] = null;
+            }
+            else
+            {
+                var objUsuario = Session["Usuario"];
+                ViewBag.ObjUsuario = objUsuario;
+            }
+
             HttpClient clienteHttp = new HttpClient();
             clienteHttp.BaseAddress = new Uri("http://localhost:5476/");
 
-            var request = clienteHttp.GetAsync("api/DatosPersonales" + id).Result;
+            var request = clienteHttp.GetAsync("api/DatosPersonales/" + id).Result;
 
             if (request.IsSuccessStatusCode)
             {
@@ -106,7 +123,7 @@ namespace CV.Web.Controllers
             HttpClient clienteHttp = new HttpClient();
             clienteHttp.BaseAddress = new Uri("http://localhost:5476/");
 
-            var request = clienteHttp.PutAsync("api/DatosPersonales", datosPersonales, new JsonMediaTypeFormatter()).Result;
+            var request = clienteHttp.PutAsync("api/DatosPersonales/", datosPersonales, new JsonMediaTypeFormatter()).Result;
 
             if (request.IsSuccessStatusCode)
             {
@@ -150,7 +167,7 @@ namespace CV.Web.Controllers
             HttpClient clienteHttp = new HttpClient();
             clienteHttp.BaseAddress = new Uri("http://localhost:5476/");
 
-            var request = clienteHttp.GetAsync("api/DatosPersonales" + id).Result;
+            var request = clienteHttp.GetAsync("api/DatosPersonales/" + id).Result;
 
             if (request.IsSuccessStatusCode)
             {

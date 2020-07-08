@@ -27,7 +27,7 @@ namespace CV.Web.Controllers
         [HttpPost]
         public ActionResult Registrarse(UsuarioDTO usuario)
         {
-            #region
+            #region Verificar que el usuario no exista
                 var Existe = UsuarioExiste(usuario.UsuarioNombre);
 
                 if (Existe)

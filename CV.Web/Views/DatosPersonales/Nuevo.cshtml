@@ -1,59 +1,76 @@
 ﻿@model DatosPersonalesDTO
 @{
-    ViewBag.Title = "Nuevo";
+    ViewBag.Title = "Completar Datos Personales";
 }
-<div class="container">
+<div class="container wow fadeInUp">
     <div class="row">
-        <div class="col-sm-9">
-            <h2>Nuevo</h2>
+        
+        <div class="col-lg-9 col-sm-9 text-capitalize">
+            <div class="col-sm-12">
+                <a href="@Url.Action("Index", "DatosPersonales")"><p class="btn btn-lg btn-primary text-uppercase"><i class="fa fa-chevron-circle-left"></i> Volver</p></a>
+            </div>
+            <hr class="primary" />
+            <h2>Completar Datos Personales</h2>
+
             <form method="post" action="@Url.Action("Nuevo", "DatosPersonales")">
-                <div class="form-group">
+                @Html.ValidationSummary(true)
+                
+                <div class="col-sm-9 form-group">
                     <label for="nombres">Nombres:</label>
-                    @Html.TextBoxFor(x => x.Nombres, new { @class = "form-control" })
-                    
+                    @Html.TextBoxFor(x => x.Nombres, new { @class = "form-control", @required = "required" })
+                    @Html.ValidationMessageFor(x => x.Nombres)
+
+
                     @if (ViewBag.ObjUsuario != null)
                     {
                         <input type="hidden" value="@ViewBag.ObjUsuario.UsuarioId" name="UsuarioId" />
                     }
                 </div>
-                <div class="form-group">
+                <div class="col-sm-9 form-group">
                     <label for="apellido">Apellido:</label>
-                    @Html.TextBoxFor(x => x.Apellido, new { @class = "form-control" })
+                    @Html.TextBoxFor(x => x.Apellido, new { @class = "form-control", @required = "required" })
+                    @Html.ValidationMessageFor(x => x.Apellido)
                 </div>
-                <div class="form-group">
+               
+                <div class="col-sm-6 form-group">
                     <label for="fechaNac">Fecha de Nacimiento:</label>
-                    @Html.TextBoxFor(x => x.FechaNacimiento, new { @class = "form-control" })
+                    @Html.TextBoxFor(x => x.FechaNacimiento, new { @class = "form-control", @required = "required", @type = "date" })
+                    @Html.ValidationMessageFor(x => x.FechaNacimiento)
                 </div>
-                <div class="form-group">
+                <div class="col-sm-9 form-group">
                     <label for="nacionalidad">Nacionalidad:</label>
                     @Html.TextBoxFor(x => x.Nacionalidad, new { @class = "form-control" })
                 </div>
-                <div class="form-group">
+                <div class="col-sm-9 form-group">
                     <label for="lugarNac">Lugar de Nacimiento:</label>
                     @Html.TextBoxFor(x => x.LugarNacimiento, new { @class = "form-control" })
                 </div>
-                <div class="form-group">
+                <div class="col-sm-9 form-group">
                     <label for="dom">Domicilio:</label>
                     @Html.TextBoxFor(x => x.Domicilio, new { @class = "form-control" })
                 </div>
-                <div class="form-group">
+                <div class="col-sm-9 form-group">
                     <label for="numDom">N° Domicilio:</label>
-                    @Html.TextBoxFor(x => x.NroDomicilio, new { @class = "form-control" })
+                    @Html.TextBoxFor(x => x.NroDomicilio, new { @class = "form-control", @required = "required", @type = "number" })
                 </div>
-                <div class="form-group">
+                <div class="col-sm-9 form-group">
                     <label for="codPostal">Código Postal:</label>
                     @Html.TextBoxFor(x => x.CodigoPostal, new { @class = "form-control" })
                 </div>
-                <div class="form-group">
+                <div class="col-sm-9 form-group">
                     <label for="email">Email:</label>
-                    @Html.TextBoxFor(x => x.Email, new { @class = "form-control" })
+                    @Html.TextBoxFor(x => x.Email, new { @class = "form-control", @required = "required", @type = "email" })
+                    @Html.ValidationMessageFor(x => x.Nombres)
                 </div>
-                <div class="form-group">
+                <div class="col-sm-9 form-group">
                     <label for="tel">Teléfono:</label>
-                    @Html.TextBoxFor(x => x.Telefono, new { @class = "form-control" })
+                    @Html.TextBoxFor(x => x.Telefono, new { @class = "form-control", @required = "required", @type = "number" })
                 </div>
-                <button type="submit" class="btn btn-success btn-lg">Guardar</button>
+                <div class="col-sm-6 form-group">
+                    <button type="submit" class="btn btn-success btn-lg">Guardar</button>
+                </div>
             </form>
         </div>
     </div>
 </div>
+<hr class="primary" />

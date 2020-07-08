@@ -18,14 +18,14 @@ namespace CV.Web.Filters
             {
                 if(filterContext.Controller is UsuarioController == false)
                 {
-                    filterContext.HttpContext.Response.Redirect("~/Usuario/Index");
+                    filterContext.HttpContext.Response.Redirect("~/Usuario/");
                 }
             }
             else
             {
                 if (filterContext.Controller is UsuarioController == true)
                 {
-                    filterContext.HttpContext.Response.Redirect("~/DatosPersonales/Nuevo");
+                    filterContext.HttpContext.Response.Redirect("~/DatosPersonales/");
                 }
             }
 

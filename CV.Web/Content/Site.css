@@ -9,7 +9,6 @@ body {
 body {
     font-family: 'Montserrat','Helvetica Neue',Arial,sans-serif;
     color: #001A33;
-    webkit-tap-highlight-color: #222;
     top:0;
 }
 
@@ -107,13 +106,17 @@ aside {
 }
 
 footer {
-    padding: 45px;
+    padding: 10px;
     padding-top: 40px;
-    background-color: #e0e0e3;
 }
 
 footer h4, footer h6 {
     color:#fff;
+}
+
+footer .container span{
+    text-align:center;
+    bottom:50px;
 }
 
 .navbar-default {
@@ -179,13 +182,13 @@ footer h4, footer h6 {
     .navbar-default {
         border-color: transparent;
         background-color: #fff;
-        min-height: 60px;
+        
     }
 
     .navbar-brand {
         color: #007FFF;
         float: left;
-        padding: 9px;
+        padding: 3px;
         padding-left: 1px;
     }
 
@@ -294,7 +297,7 @@ form{
     }
     
     header {
-        min-height: 100%;
+        min-height: 250px;
     }
 
     header .header-content {
