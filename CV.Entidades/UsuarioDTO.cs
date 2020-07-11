@@ -22,5 +22,7 @@ namespace CV.Entidades
         [Required(ErrorMessage = "el {0} es obligatorio")]
         [StringLength(15, ErrorMessage = "Longitud entre 6 y 15 caracteres.", MinimumLength = 6)]
         public string UsuarioPassword { get; set; }
+
+        public IEnumerable<ImagenDTO> imagenes { get; set; }
     }
 }

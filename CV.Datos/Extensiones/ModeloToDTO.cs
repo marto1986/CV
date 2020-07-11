@@ -10,6 +10,17 @@ namespace CV.Datos.Extensiones
 {
     public static class ModeloToDTO
     {
+        public static UsuarioDTO ToDTO(this Usuario model)
+        {
+            return new UsuarioDTO
+            {
+                UsuarioId = model.UsuarioId,
+                UsuarioNombre = model.UsuarioNombre,
+                UsuarioPassword = model.UsuarioPassword,
+                imagenes = model.Imagen.Select(x => x.ToDTO())
+            };
+        }
+
         public static DatosPersonalesDTO ToDTO(this DatosPersonales model)
         {
             return new DatosPersonalesDTO
@@ -26,7 +37,7 @@ namespace CV.Datos.Extensiones
                 CodigoPostal = model.CodigoPostal,
                 Email = model.Email,
                 Telefono = model.Telefono,
-                imagenes = model.Imagen.Select(x => x.ToDTO())
+                
             };
         }
 
@@ -36,17 +47,23 @@ namespace CV.Datos.Extensiones
             {
                 ImagenId = model.ImagenId,
                 Nombre = model.Nombre,
-                DatosPersonalesId = model.DatosPersonalesId
+                UsuarioId = model.UsuarioId
             };
         }
 
-        public static UsuarioDTO ToDTO(this Usuario model)
+        
+
+        public static EducacionDTO ToDTO(this Educacion model)
         {
-            return new UsuarioDTO
+            return new EducacionDTO
             {
+                EducacionId = model.EducacionId,
                 UsuarioId = model.UsuarioId,
-                UsuarioNombre = model.UsuarioNombre,
-                UsuarioPassword = model.UsuarioPassword
+                Titulo = model.Titulo,
+                EstablecimientoEducativo = model.EstablecimientoEducativo,
+                FechaDesde = model.FechaDesde,
+                FechaHasta = model.FechaHasta,
+                Estado = model.Estado
             };
         }
     }

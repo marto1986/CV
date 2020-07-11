@@ -9,7 +9,7 @@ namespace CV.Entidades
     public class ObjetivoDTO
     {
         public int ObjetivoId { get; set; }
-        public int DatosPersonalesId { get; set; }
+        public int UsuarioId { get; set; }
         public string Descripcion { get; set; }
     }
 }

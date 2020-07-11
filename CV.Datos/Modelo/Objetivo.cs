@@ -15,9 +15,9 @@ namespace CV.Datos.Modelo
     public partial class Objetivo
     {
         public int ObjetivoId { get; set; }
-        public int DatosPersonalesId { get; set; }
+        public int UsuarioId { get; set; }
         public string Descripcion { get; set; }
     
-        public virtual DatosPersonales DatosPersonales { get; set; }
+        public virtual Usuario Usuario { get; set; }
     }
 }

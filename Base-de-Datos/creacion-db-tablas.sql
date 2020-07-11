@@ -1,6 +1,6 @@
 USE [master]
 GO
-/****** Object:  Database [CV]    Script Date: 23/6/2020 11:47:40 ******/
+/****** Object:  Database [CV]    Script Date: 10/7/2020 14:17:37 ******/
 CREATE DATABASE [CV]
  CONTAINMENT = NONE
  ON  PRIMARY 
@@ -89,14 +89,14 @@ ALTER DATABASE SCOPED CONFIGURATION SET QUERY_OPTIMIZER_HOTFIXES = OFF;
 GO
 USE [CV]
 GO
-/****** Object:  Table [dbo].[Conocimiento]    Script Date: 23/6/2020 11:47:40 ******/
+/****** Object:  Table [dbo].[Conocimiento]    Script Date: 10/7/2020 14:17:37 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[Conocimiento](
 	[ConocimientoId] [int] IDENTITY(1,1) NOT NULL,
-	[DatosPersonalesId] [int] NOT NULL,
+	[UsuarioId] [int] NOT NULL,
 	[Descripcion] [varchar](50) NOT NULL,
 	[Nivel] [varchar](20) NOT NULL,
  CONSTRAINT [PK_Conocimiento] PRIMARY KEY CLUSTERED 
@@ -105,7 +105,7 @@ CREATE TABLE [dbo].[Conocimiento](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[DatosPersonales]    Script Date: 23/6/2020 11:47:40 ******/
+/****** Object:  Table [dbo].[DatosPersonales]    Script Date: 10/7/2020 14:17:37 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -129,14 +129,14 @@ CREATE TABLE [dbo].[DatosPersonales](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Educacion]    Script Date: 23/6/2020 11:47:40 ******/
+/****** Object:  Table [dbo].[Educacion]    Script Date: 10/7/2020 14:17:37 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[Educacion](
 	[EducacionId] [int] IDENTITY(1,1) NOT NULL,
-	[DatosPersonalesId] [int] NOT NULL,
+	[UsuarioId] [int] NOT NULL,
 	[Titulo] [varchar](50) NOT NULL,
 	[EstablecimientoEducativo] [varchar](50) NOT NULL,
 	[FechaDesde] [date] NOT NULL,
@@ -148,14 +148,14 @@ CREATE TABLE [dbo].[Educacion](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[ExperienciaLaboral]    Script Date: 23/6/2020 11:47:40 ******/
+/****** Object:  Table [dbo].[ExperienciaLaboral]    Script Date: 10/7/2020 14:17:37 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[ExperienciaLaboral](
 	[ExperienciaLaboralId] [int] NOT NULL,
-	[DatosPersonalesId] [int] NOT NULL,
+	[UsuarioId] [int] NOT NULL,
 	[Puesto] [varchar](10) NOT NULL,
 	[Descripcion] [varchar](50) NOT NULL,
 	[FechaDesde] [date] NOT NULL,
@@ -168,14 +168,14 @@ CREATE TABLE [dbo].[ExperienciaLaboral](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Idioma]    Script Date: 23/6/2020 11:47:40 ******/
+/****** Object:  Table [dbo].[Idioma]    Script Date: 10/7/2020 14:17:37 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[Idioma](
 	[IdiomaId] [int] IDENTITY(1,1) NOT NULL,
-	[DatosPersonalesId] [int] NOT NULL,
+	[UsuarioId] [int] NOT NULL,
 	[NIvel] [varchar](10) NOT NULL,
 	[Descripcion] [varchar](30) NOT NULL,
  CONSTRAINT [PK_Idioma] PRIMARY KEY CLUSTERED 
@@ -184,14 +184,14 @@ CREATE TABLE [dbo].[Idioma](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Imagen]    Script Date: 23/6/2020 11:47:40 ******/
+/****** Object:  Table [dbo].[Imagen]    Script Date: 10/7/2020 14:17:37 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[Imagen](
 	[ImagenId] [int] IDENTITY(1,1) NOT NULL,
-	[DatosPersonalesId] [int] NOT NULL,
+	[UsuarioId] [int] NOT NULL,
 	[Nombre] [varchar](50) NOT NULL,
  CONSTRAINT [PK_Imagen] PRIMARY KEY CLUSTERED 
 (
@@ -199,14 +199,14 @@ CREATE TABLE [dbo].[Imagen](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Objetivo]    Script Date: 23/6/2020 11:47:40 ******/
+/****** Object:  Table [dbo].[Objetivo]    Script Date: 10/7/2020 14:17:37 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[Objetivo](
 	[ObjetivoId] [int] IDENTITY(1,1) NOT NULL,
-	[DatosPersonalesId] [int] NOT NULL,
+	[UsuarioId] [int] NOT NULL,
 	[Descripcion] [varchar](50) NOT NULL,
  CONSTRAINT [PK_Objetivo] PRIMARY KEY CLUSTERED 
 (
@@ -214,14 +214,14 @@ CREATE TABLE [dbo].[Objetivo](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Registro]    Script Date: 23/6/2020 11:47:40 ******/
+/****** Object:  Table [dbo].[Registro]    Script Date: 10/7/2020 14:17:37 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[Registro](
 	[RegistroId] [int] IDENTITY(1,1) NOT NULL,
-	[DatosPersonalesId] [int] NOT NULL,
+	[UsuarioId] [int] NOT NULL,
 	[Email] [varchar](50) NOT NULL,
 	[Usuario] [varchar](50) NOT NULL,
 	[Password] [varchar](50) NOT NULL,
@@ -232,7 +232,7 @@ CREATE TABLE [dbo].[Registro](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Usuario]    Script Date: 23/6/2020 11:47:40 ******/
+/****** Object:  Table [dbo].[Usuario]    Script Date: 10/7/2020 14:17:37 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -247,45 +247,57 @@ CREATE TABLE [dbo].[Usuario](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-ALTER TABLE [dbo].[Conocimiento]  WITH CHECK ADD  CONSTRAINT [FK_Conocimiento_DatosPersonales] FOREIGN KEY([DatosPersonalesId])
-REFERENCES [dbo].[DatosPersonales] ([DatospersonalesId])
+SET IDENTITY_INSERT [dbo].[DatosPersonales] ON 
 GO
-ALTER TABLE [dbo].[Conocimiento] CHECK CONSTRAINT [FK_Conocimiento_DatosPersonales]
+INSERT [dbo].[DatosPersonales] ([DatospersonalesId], [Nombres], [Apellido], [FechaNacimiento], [Nacionalidad], [LugarNacimiento], [Domicilio], [NroDomicilio], [CodigoPostal], [Email], [Telefono], [UsuarioId]) VALUES (2012, N'Martín', N'Matias', CAST(N'2020-06-28' AS Date), N'Argentino', N'Caba', N'Ayala', 100, N'1752', N'martinmatias@outlook.com', 1162317237, 5008)
+GO
+SET IDENTITY_INSERT [dbo].[DatosPersonales] OFF
+GO
+SET IDENTITY_INSERT [dbo].[Usuario] ON 
+GO
+INSERT [dbo].[Usuario] ([UsuarioId], [UsuarioNombre], [UsuarioPassword]) VALUES (5008, N'prueba', N'pmWkWSBCL51Bfkhn79xPuKBKHz//H6B+mY6G9/eieuM=')
+GO
+SET IDENTITY_INSERT [dbo].[Usuario] OFF
+GO
+ALTER TABLE [dbo].[Conocimiento]  WITH CHECK ADD  CONSTRAINT [FK_Conocimiento_Usuario] FOREIGN KEY([UsuarioId])
+REFERENCES [dbo].[Usuario] ([UsuarioId])
+GO
+ALTER TABLE [dbo].[Conocimiento] CHECK CONSTRAINT [FK_Conocimiento_Usuario]
 GO
 ALTER TABLE [dbo].[DatosPersonales]  WITH CHECK ADD  CONSTRAINT [FK_DatosPersonales_Usuario] FOREIGN KEY([UsuarioId])
 REFERENCES [dbo].[Usuario] ([UsuarioId])
 GO
 ALTER TABLE [dbo].[DatosPersonales] CHECK CONSTRAINT [FK_DatosPersonales_Usuario]
 GO
-ALTER TABLE [dbo].[Educacion]  WITH CHECK ADD  CONSTRAINT [FK_Educacion_DatosPersonales] FOREIGN KEY([DatosPersonalesId])
-REFERENCES [dbo].[DatosPersonales] ([DatospersonalesId])
+ALTER TABLE [dbo].[Educacion]  WITH CHECK ADD  CONSTRAINT [FK_Educacion_Usuario] FOREIGN KEY([UsuarioId])
+REFERENCES [dbo].[Usuario] ([UsuarioId])
 GO
-ALTER TABLE [dbo].[Educacion] CHECK CONSTRAINT [FK_Educacion_DatosPersonales]
+ALTER TABLE [dbo].[Educacion] CHECK CONSTRAINT [FK_Educacion_Usuario]
 GO
-ALTER TABLE [dbo].[ExperienciaLaboral]  WITH CHECK ADD  CONSTRAINT [FK_ExperienciaLaboral_DatosPersonales] FOREIGN KEY([DatosPersonalesId])
-REFERENCES [dbo].[DatosPersonales] ([DatospersonalesId])
+ALTER TABLE [dbo].[ExperienciaLaboral]  WITH CHECK ADD  CONSTRAINT [FK_ExperienciaLaboral_Usuario] FOREIGN KEY([UsuarioId])
+REFERENCES [dbo].[Usuario] ([UsuarioId])
 GO
-ALTER TABLE [dbo].[ExperienciaLaboral] CHECK CONSTRAINT [FK_ExperienciaLaboral_DatosPersonales]
+ALTER TABLE [dbo].[ExperienciaLaboral] CHECK CONSTRAINT [FK_ExperienciaLaboral_Usuario]
 GO
-ALTER TABLE [dbo].[Idioma]  WITH CHECK ADD  CONSTRAINT [FK_Idioma_DatosPersonales] FOREIGN KEY([DatosPersonalesId])
-REFERENCES [dbo].[DatosPersonales] ([DatospersonalesId])
+ALTER TABLE [dbo].[Idioma]  WITH CHECK ADD  CONSTRAINT [FK_Idioma_Usuario] FOREIGN KEY([UsuarioId])
+REFERENCES [dbo].[Usuario] ([UsuarioId])
 GO
-ALTER TABLE [dbo].[Idioma] CHECK CONSTRAINT [FK_Idioma_DatosPersonales]
+ALTER TABLE [dbo].[Idioma] CHECK CONSTRAINT [FK_Idioma_Usuario]
 GO
-ALTER TABLE [dbo].[Imagen]  WITH CHECK ADD  CONSTRAINT [FK_Imagen_DatosPersonales] FOREIGN KEY([DatosPersonalesId])
-REFERENCES [dbo].[DatosPersonales] ([DatospersonalesId])
+ALTER TABLE [dbo].[Imagen]  WITH CHECK ADD  CONSTRAINT [FK_Imagen_Usuario] FOREIGN KEY([UsuarioId])
+REFERENCES [dbo].[Usuario] ([UsuarioId])
 GO
-ALTER TABLE [dbo].[Imagen] CHECK CONSTRAINT [FK_Imagen_DatosPersonales]
+ALTER TABLE [dbo].[Imagen] CHECK CONSTRAINT [FK_Imagen_Usuario]
 GO
-ALTER TABLE [dbo].[Objetivo]  WITH CHECK ADD  CONSTRAINT [FK_Objetivo_DatosPersonales] FOREIGN KEY([DatosPersonalesId])
-REFERENCES [dbo].[DatosPersonales] ([DatospersonalesId])
+ALTER TABLE [dbo].[Objetivo]  WITH CHECK ADD  CONSTRAINT [FK_Objetivo_Usuario] FOREIGN KEY([UsuarioId])
+REFERENCES [dbo].[Usuario] ([UsuarioId])
 GO
-ALTER TABLE [dbo].[Objetivo] CHECK CONSTRAINT [FK_Objetivo_DatosPersonales]
+ALTER TABLE [dbo].[Objetivo] CHECK CONSTRAINT [FK_Objetivo_Usuario]
 GO
-ALTER TABLE [dbo].[Registro]  WITH CHECK ADD  CONSTRAINT [FK_Registro_DatosPersonales] FOREIGN KEY([DatosPersonalesId])
-REFERENCES [dbo].[DatosPersonales] ([DatospersonalesId])
+ALTER TABLE [dbo].[Registro]  WITH CHECK ADD  CONSTRAINT [FK_Registro_Usuario] FOREIGN KEY([UsuarioId])
+REFERENCES [dbo].[Usuario] ([UsuarioId])
 GO
-ALTER TABLE [dbo].[Registro] CHECK CONSTRAINT [FK_Registro_DatosPersonales]
+ALTER TABLE [dbo].[Registro] CHECK CONSTRAINT [FK_Registro_Usuario]
 GO
 USE [master]
 GO

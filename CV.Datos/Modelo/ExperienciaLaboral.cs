@@ -15,7 +15,7 @@ namespace CV.Datos.Modelo
     public partial class ExperienciaLaboral
     {
         public int ExperienciaLaboralId { get; set; }
-        public int DatosPersonalesId { get; set; }
+        public int UsuarioId { get; set; }
         public string Puesto { get; set; }
         public string Descripcion { get; set; }
         public System.DateTime FechaDesde { get; set; }
@@ -23,6 +23,6 @@ namespace CV.Datos.Modelo
         public string ReferenciaNombre { get; set; }
         public Nullable<int> ReferenciaTelefono { get; set; }
     
-        public virtual DatosPersonales DatosPersonales { get; set; }
+        public virtual Usuario Usuario { get; set; }
     }
 }

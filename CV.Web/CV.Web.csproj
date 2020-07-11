@@ -169,6 +169,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\CerrarSesionController.cs" />
     <Compile Include="Controllers\DatosPersonalesController.cs" />
+    <Compile Include="Controllers\EducacionController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ImagenController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
@@ -347,6 +348,10 @@
     <Content Include="Scripts\popper.js.map" />
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
+    <Content Include="Views\Educacion\Index.cshtml" />
+    <Content Include="Views\Educacion\Nuevo.cshtml" />
+    <Content Include="Views\Educacion\Actualizar.cshtml" />
+    <Content Include="Views\Educacion\Detalle.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

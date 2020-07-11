@@ -9,7 +9,7 @@ namespace CV.Entidades
     public class ImagenDTO
     {
         public int ImagenId { get; set; }
-        public int DatosPersonalesId { get; set; }
+        public int UsuarioId { get; set; }
         public string Nombre { get; set; }
     }
 }

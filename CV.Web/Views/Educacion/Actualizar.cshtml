@@ -1,0 +1,56 @@
+﻿@model EducacionDTO
+
+<div class="container wow fadeInUp">
+    <div class="row">
+
+        <div class="col-lg-9 col-sm-9 text-capitalize">
+            <div class="col-sm-12">
+                <a href="@Url.Action("Index", "Educacion")"><p class="btn btn-lg btn-primary text-uppercase"><i class="fa fa-chevron-circle-left"></i> Volver</p></a>
+            </div>
+
+            <h2>Editar Educación</h2>
+
+            <form method="post" action="@Url.Action("Actualizar", "Educacion")">
+                @Html.ValidationSummary(true)
+                @if (ViewBag.ObjUsuario != null)
+                {
+                    <input type="hidden" value="@ViewBag.ObjUsuario.UsuarioId" name="UsuarioId" />
+                }
+                @Html.HiddenFor(x => x.EducacionId)
+                <div class="col-sm-9 form-group">
+                    <label for="titulo">Titulo: </label>
+                    @Html.TextBoxFor(x => x.Titulo, new { @class = "form-control", @required = "required" })
+                    @Html.ValidationMessageFor(x => x.Titulo)
+
+                </div>
+                <div class="col-sm-9 form-group">
+                    <label for="EstablecimientoEducativo">Establecimiento Educativo:</label>
+                    @Html.TextBoxFor(x => x.EstablecimientoEducativo, new { @class = "form-control", @required = "required" })
+                    @Html.ValidationMessageFor(x => x.EstablecimientoEducativo)
+                </div>
+
+                <div class="col-sm-6 form-group">
+                    <label for="FechaDesde">Fecha de Comienzo:</label>
+                    @Html.TextBoxFor(x => x.FechaDesde, "{0:yyyy-MM-dd}", new { @class = "form-control", @required = "required", @type = "date" })
+                    @Html.ValidationMessageFor(x => x.FechaDesde)
+                </div>
+
+                <div class="col-sm-6 form-group">
+                    <label for="FechaHasta">Fecha Final:</label>
+                    @Html.TextBoxFor(x => x.FechaHasta, "{0:yyyy-MM-dd}", new { @class = "form-control", @required = "required", @type = "date" })
+                    @Html.ValidationMessageFor(x => x.FechaHasta)
+                </div>
+                
+                <div class="col-sm-9 form-group">
+                    <label for="Estado">Estado:</label>
+                    @Html.DropDownListFor(x => x.Estado, new SelectList(new string[] { "--- Selecionar Estado ---", "En Curso", "Incompleto", "Completo" }), new { @class = "form-control" })
+                </div>
+
+                <div class="col-sm-6 form-group">
+                    <button type="submit" class="btn btn-success btn-lg">Editar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<hr class="primary" />

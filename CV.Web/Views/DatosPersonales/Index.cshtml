@@ -14,6 +14,7 @@
                 }
 
                 <h3 class="m-t-0 text-primary">Impulsá tu carrera profesional</h3>
+                <h4>Datos Personales</h4>
                 @if (Model != null)
                 {
                     <table class="table table-hover">
@@ -32,15 +33,15 @@
                               <td>@Model.Apellido</td>
                               <td>@Model.Email</td>
                               <td><a href="@Url.Action("Detalle", "DatosPersonales", new { id = Model.DatospersonalesId})"><i class="fa fa-eye fa-2x"></i></a></td>
-                              <td><a href="@Url.Action("Actualizar", "DatosPersonales", new { id = Model.DatospersonalesId})"><i class="fa fa-edit fa-2x"></i></a></td>
+                              <td><a href="@Url.Action("Actualizar", "DatosPersonales", new { id = Model.DatospersonalesId})"><i class="fa fa-edit fa-2x text-success"></i></a></td>
                            </tr>
                         </tbody>
                     </table>
-                    <a href="@Url.Action("Index", "Educacion")" class="btn btn-primary btn-xl page-scroll wow fadeInUp">Completar CV</a>
+                    <a href="@Url.Action("Index", "Educacion")" class="btn btn-primary btn-xl page-scroll wow fadeInUp">Completar Educación <i class="fa fa-graduation-cap"></i></a>
                 }
                 else
                 {
-                    <a href="@Url.Action("Nuevo", "DatosPersonales")" class="btn btn-primary btn-xl page-scroll wow fadeInUp">Completar CV</a>
+                    <a href="@Url.Action("Nuevo", "DatosPersonales")" class="btn btn-primary btn-xl page-scroll wow fadeInUp">Completar Datos Personales <i class="fa fa-user-circle"></i></a>
                 }
                 <hr class="primary">
             </div>

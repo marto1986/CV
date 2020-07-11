@@ -15,10 +15,10 @@ namespace CV.Datos.Modelo
     public partial class Conocimiento
     {
         public int ConocimientoId { get; set; }
-        public int DatosPersonalesId { get; set; }
+        public int UsuarioId { get; set; }
         public string Descripcion { get; set; }
         public string Nivel { get; set; }
     
-        public virtual DatosPersonales DatosPersonales { get; set; }
+        public virtual Usuario Usuario { get; set; }
     }
 }

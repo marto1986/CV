@@ -15,9 +15,9 @@ namespace CV.Datos.Modelo
     public partial class Imagen
     {
         public int ImagenId { get; set; }
-        public int DatosPersonalesId { get; set; }
+        public int UsuarioId { get; set; }
         public string Nombre { get; set; }
     
-        public virtual DatosPersonales DatosPersonales { get; set; }
+        public virtual Usuario Usuario { get; set; }
     }
 }

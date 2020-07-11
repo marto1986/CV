@@ -14,18 +14,6 @@ namespace CV.Datos.Modelo
     
     public partial class DatosPersonales
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public DatosPersonales()
-        {
-            this.Conocimiento = new HashSet<Conocimiento>();
-            this.Educacion = new HashSet<Educacion>();
-            this.ExperienciaLaboral = new HashSet<ExperienciaLaboral>();
-            this.Idioma = new HashSet<Idioma>();
-            this.Imagen = new HashSet<Imagen>();
-            this.Objetivo = new HashSet<Objetivo>();
-            this.Registro = new HashSet<Registro>();
-        }
-    
         public int DatospersonalesId { get; set; }
         public string Nombres { get; set; }
         public string Apellido { get; set; }
@@ -38,24 +26,7 @@ namespace CV.Datos.Modelo
         public string Email { get; set; }
         public Nullable<int> Telefono { get; set; }
         public int UsuarioId { get; set; }
-
-
+    
         public virtual Usuario Usuario { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Conocimiento> Conocimiento { get; set; }
-        
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Educacion> Educacion { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ExperienciaLaboral> ExperienciaLaboral { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Idioma> Idioma { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Imagen> Imagen { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Objetivo> Objetivo { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Registro> Registro { get; set; }
     }
 }

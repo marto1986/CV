@@ -10,9 +10,9 @@ using System.Net.Http.Formatting;
 
 namespace CV.Web.Controllers
 {
-    public class DatosPersonalesController : Controller
+    public class EducacionController : Controller
     {
-        // GET: DatosPersonales
+        // GET: Educacion
         [HttpGet]
         public ActionResult Index()
         {
@@ -29,15 +29,15 @@ namespace CV.Web.Controllers
             HttpClient clienteHttp = new HttpClient();
             clienteHttp.BaseAddress = new Uri("http://localhost:5476/");
 
-            var request = clienteHttp.GetAsync("api/DatosPersonales").Result;
+            var request = clienteHttp.GetAsync("api/Educacion").Result;
 
-            if(request.IsSuccessStatusCode)
+            if (request.IsSuccessStatusCode)
             {
                 var resultString = request.Content.ReadAsStringAsync().Result;
-                var listado = JsonConvert.DeserializeObject<List<DatosPersonalesDTO>>(resultString);
+                var listado = JsonConvert.DeserializeObject<List<EducacionDTO>>(resultString);
                 if (ViewBag.ObjUsuario != null)
                 {
-                    var resultado = listado.FirstOrDefault(x => x.UsuarioId == ViewBag.ObjUsuario.UsuarioId);
+                    var resultado = listado.Where(x => x.UsuarioId == ViewBag.ObjUsuario.UsuarioId);
                     return View(resultado);
                 }
                 else
@@ -66,26 +66,26 @@ namespace CV.Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult Nuevo(DatosPersonalesDTO datosPersonales)
+        public ActionResult Nuevo(EducacionDTO educacion)
         {
             HttpClient clienteHttp = new HttpClient();
             clienteHttp.BaseAddress = new Uri("http://localhost:5476/");
 
-            var request = clienteHttp.PostAsync("api/DatosPersonales", datosPersonales, new JsonMediaTypeFormatter()).Result;
+            var request = clienteHttp.PostAsync("api/Educacion", educacion, new JsonMediaTypeFormatter()).Result;
 
             if (request.IsSuccessStatusCode)
             {
                 var resultString = request.Content.ReadAsStringAsync().Result;
                 var correcto = JsonConvert.DeserializeObject<bool>(resultString);
 
-                if(correcto)
+                if (correcto)
                 {
                     return RedirectToAction("index");
                 }
-                return View(datosPersonales);
+                return View(educacion);
             }
 
-            return View(datosPersonales);
+            return View(educacion);
         }
 
         [HttpGet]
@@ -104,12 +104,12 @@ namespace CV.Web.Controllers
             HttpClient clienteHttp = new HttpClient();
             clienteHttp.BaseAddress = new Uri("http://localhost:5476/");
 
-            var request = clienteHttp.GetAsync("api/DatosPersonales/" + id).Result;
+            var request = clienteHttp.GetAsync("api/Educacion/" + id).Result;
 
             if (request.IsSuccessStatusCode)
             {
                 var resultString = request.Content.ReadAsStringAsync().Result;
-                var informacion = JsonConvert.DeserializeObject<DatosPersonalesDTO>(resultString);
+                var informacion = JsonConvert.DeserializeObject<EducacionDTO>(resultString);
 
                 return View(informacion);
             }
@@ -118,12 +118,12 @@ namespace CV.Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult Actualizar(DatosPersonalesDTO datosPersonales)
+        public ActionResult Actualizar(EducacionDTO educacion)
         {
             HttpClient clienteHttp = new HttpClient();
             clienteHttp.BaseAddress = new Uri("http://localhost:5476/");
 
-            var request = clienteHttp.PutAsync("api/DatosPersonales/", datosPersonales, new JsonMediaTypeFormatter()).Result;
+            var request = clienteHttp.PutAsync("api/Educacion/", educacion, new JsonMediaTypeFormatter()).Result;
 
             if (request.IsSuccessStatusCode)
             {
@@ -133,7 +133,7 @@ namespace CV.Web.Controllers
                 if (correcto)
                 {
                     return RedirectToAction("index");
-                } 
+                }
             }
 
             return View();
@@ -145,9 +145,9 @@ namespace CV.Web.Controllers
             HttpClient clienteHttp = new HttpClient();
             clienteHttp.BaseAddress = new Uri("http://localhost:5476/");
 
-            var request = clienteHttp.DeleteAsync("api/DatosPersonales/" + id).Result;
+            var request = clienteHttp.DeleteAsync("api/Educacion/" + id).Result;
 
-            if(request.IsSuccessStatusCode)
+            if (request.IsSuccessStatusCode)
             {
                 var resultString = request.Content.ReadAsStringAsync().Result;
                 var correcto = JsonConvert.DeserializeObject<bool>(resultString);
@@ -167,12 +167,12 @@ namespace CV.Web.Controllers
             HttpClient clienteHttp = new HttpClient();
             clienteHttp.BaseAddress = new Uri("http://localhost:5476/");
 
-            var request = clienteHttp.GetAsync("api/DatosPersonales/" + id).Result;
+            var request = clienteHttp.GetAsync("api/Educacion/" + id).Result;
 
             if (request.IsSuccessStatusCode)
             {
                 var resultString = request.Content.ReadAsStringAsync().Result;
-                var informacion = JsonConvert.DeserializeObject<DatosPersonalesDTO>(resultString);
+                var informacion = JsonConvert.DeserializeObject<EducacionDTO>(resultString);
 
                 return View(informacion);
             }

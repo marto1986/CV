@@ -9,7 +9,7 @@ namespace CV.Entidades
     public class ExperienciaLaboralDTO
     {
         public int ExperienciaLaboralId { get; set; }
-        public int DatosPersonalesId { get; set; }
+        public int UsuarioId { get; set; }
         public string Puesto { get; set; }
         public string Descripcion { get; set; }
         public System.DateTime FechaDesde { get; set; }

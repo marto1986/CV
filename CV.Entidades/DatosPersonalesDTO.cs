@@ -51,7 +51,6 @@ namespace CV.Entidades
 
         [Required]
         public int UsuarioId { get; set; }
-
-        public IEnumerable<ImagenDTO> imagenes { get; set; }
+        
     }
 }

@@ -12,10 +12,7 @@
 
             <form method="post" action="@Url.Action("Actualizar", "DatosPersonales")">
                 @Html.ValidationSummary(true)
-                @if (ViewBag.ObjUsuario != null)
-                {
-                    <input type="hidden" value="@ViewBag.ObjUsuario.UsuarioId" name="UsuarioId" />
-                }
+                
                 @Html.HiddenFor(x => x.DatospersonalesId)
                 <div class="col-sm-9 form-group">
                     <label for="nombres">Nombres: </label>
@@ -62,7 +59,7 @@
                 <div class="col-sm-9 form-group">
                     <label for="email">Email:</label>
                     @Html.TextBoxFor(x => x.Email, new { @class = "form-control", @required = "required", @type = "email" })
-                    @Html.ValidationMessageFor(x => x.Nombres)
+                    @Html.ValidationMessageFor(x => x.Email)
                 </div>
                 <div class="col-sm-9 form-group">
                     <label for="tel">Teléfono:</label>

@@ -15,13 +15,13 @@ namespace CV.Datos.Modelo
     public partial class Educacion
     {
         public int EducacionId { get; set; }
-        public int DatosPersonalesId { get; set; }
+        public int UsuarioId { get; set; }
         public string Titulo { get; set; }
         public string EstablecimientoEducativo { get; set; }
         public System.DateTime FechaDesde { get; set; }
         public System.DateTime FechaHasta { get; set; }
         public string Estado { get; set; }
     
-        public virtual DatosPersonales DatosPersonales { get; set; }
+        public virtual Usuario Usuario { get; set; }
     }
 }
