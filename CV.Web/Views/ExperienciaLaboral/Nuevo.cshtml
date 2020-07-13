@@ -1,0 +1,60 @@
+﻿@model ExperienciaLaboralDTO
+@{
+    ViewBag.Title = "Completar Datos Personales";
+}
+<div class="container wow fadeInUp">
+    <div class="row">
+
+        <div class="col-lg-9 col-sm-9 text-capitalize">
+            <div class="col-sm-12">
+                <a href="@Url.Action("Index", "DatosPersonales")"><p class="btn btn-lg btn-primary text-uppercase"><i class="fa fa-chevron-circle-left"></i> Volver</p></a>
+            </div>
+            <hr class="primary" />
+            <h2>Completar Experiencia Laboral</h2>
+
+            <form method="post" action="@Url.Action("Nuevo", "DatosPersonales")">
+                @Html.ValidationSummary(true)
+
+                <div class="col-sm-9 form-group">
+                    <label for="Puesto">Puesto:</label>
+                    @Html.TextBoxFor(x => x.Puesto, new { @class = "form-control", @required = "required" })
+                    @Html.ValidationMessageFor(x => x.Puesto)
+
+
+                    @if (ViewBag.ObjUsuario != null)
+                    {
+                        <input type="hidden" value="@ViewBag.ObjUsuario.UsuarioId" name="UsuarioId" />
+                    }
+                </div>
+                <div class="col-sm-9 form-group">
+                    <label for="apellido">Descrición:</label>
+                    @Html.TextAreaFor(x => x.Descripcion, new { @class = "form-control", @required = "required" })
+                    @Html.ValidationMessageFor(x => x.Descripcion)
+                </div>
+
+                <div class="col-sm-6 form-group">
+                    <label for="fechaNac">Fecha Desde:</label>
+                    @Html.TextBoxFor(x => x.FechaDesde, new { @class = "form-control", @required = "required", @type = "date" })
+                    @Html.ValidationMessageFor(x => x.FechaDesde)
+                </div>
+                <div class="col-sm-9 form-group">
+                    <label for="FechaHasta">Fecha Hasta:</label>
+                    @Html.TextBoxFor(x => x.FechaHasta, new { @class = "form-control", @required = "required", @type = "date" })
+                </div>
+                <div class="col-sm-9 form-group">
+                    <label for="lugarNac">Referencia:</label>
+                    @Html.TextBoxFor(x => x.ReferenciaNombre, new { @class = "form-control" })
+                </div>
+                <div class="col-sm-9 form-group">
+                    <label for="dom">Referencia Teléfono:</label>
+                    @Html.TextBoxFor(x => x.ReferenciaTelefono, new { @class = "form-control" })
+                </div>
+
+                <div class="col-sm-6 form-group">
+                    <button type="submit" class="btn btn-success btn-lg">Guardar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<hr class="primary" />

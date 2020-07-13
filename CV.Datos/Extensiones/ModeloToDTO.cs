@@ -66,5 +66,20 @@ namespace CV.Datos.Extensiones
                 Estado = model.Estado
             };
         }
+
+        public static ExperienciaLaboralDTO ToDTO(this ExperienciaLaboral model)
+        {
+            return new ExperienciaLaboralDTO
+            {
+                ExperienciaLaboralId = model.ExperienciaLaboralId,
+                UsuarioId = model.UsuarioId,
+                Puesto = model.Puesto,
+                Descripcion = model.Descripcion,
+                FechaDesde = model.FechaDesde,
+                FechaHasta = model.FechaHasta,
+                ReferenciaNombre = model.ReferenciaNombre,
+                ReferenciaTelefono = model.ReferenciaTelefono
+            };
+        }
     }
 }

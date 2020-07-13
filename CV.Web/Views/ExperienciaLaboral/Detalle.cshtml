@@ -1,0 +1,31 @@
+﻿@model ExperienciaLaboralDTO
+
+<div class="container wow fadeInUp">
+    <div class="row">
+
+        <div class="col-lg-12 col-sm-12 text-capitalize">
+            <div class="col-sm-12">
+                <a href="@Url.Action("Index", "ExperienciaLaboral")"><p class="btn btn-lg btn-primary text-uppercase"><i class="fa fa-chevron-circle-left"></i> Volver</p></a>
+                <a href="@Url.Action("Actualizar", "ExperienciaLaboral", new { id = Model.ExperienciaLaboralId})"><p class="btn btn-outline-dark btn-lg text-uppercase"><i class="fa fa-edit"></i> Editar</p></a>
+            </div>
+
+            @if (ViewBag.ObjUsuario != null)
+            {
+                <input type="hidden" value="@ViewBag.ObjUsuario.UsuarioId" name="UsuarioId" />
+            }
+            @Html.HiddenFor(x => x.ExperienciaLaboralId)
+
+            <div class="card col-lg-12 col-sm-12">
+                <div class="card-header text-center">
+                    @Model.Puesto
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item"><i class="fa fa-building fa-2x"></i> Descripción: @Model.Descripcion</li>
+                    <li class="list-group-item"><i class="fa fa-calendar-o fa-2x"></i> Fecha Desde: @Model.FechaDesde.ToShortDateString()</li>
+                    <li class="list-group-item"><i class="fa fa-calendar-o fa-2x"></i> Fecha Hasta: @Model.FechaHasta.ToShortDateString()</li>
+                    <li class="list-group-item"><i class="fa fa-user-circle fa-2x"></i> Referencia: @Model.ReferenciaNombre</li>
+                    <li class="list-group-item"><i class="fa fa-phone fa-2x"></i> Referencia Teléfono: @Model.ReferenciaTelefono</li></ul>
+            </div>
+        </div>
+    </div>
+</div>
