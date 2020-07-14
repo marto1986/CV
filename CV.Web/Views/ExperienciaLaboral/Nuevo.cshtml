@@ -7,12 +7,12 @@
 
         <div class="col-lg-9 col-sm-9 text-capitalize">
             <div class="col-sm-12">
-                <a href="@Url.Action("Index", "DatosPersonales")"><p class="btn btn-lg btn-primary text-uppercase"><i class="fa fa-chevron-circle-left"></i> Volver</p></a>
+                <a href="@Url.Action("Index", "ExperienciaLaboral")"><p class="btn btn-lg btn-primary text-uppercase"><i class="fa fa-chevron-circle-left"></i> Volver</p></a>
             </div>
             <hr class="primary" />
             <h2>Completar Experiencia Laboral</h2>
 
-            <form method="post" action="@Url.Action("Nuevo", "DatosPersonales")">
+            <form method="post" action="@Url.Action("Nuevo", "ExperienciaLaboral")">
                 @Html.ValidationSummary(true)
 
                 <div class="col-sm-9 form-group">
@@ -28,7 +28,7 @@
                 </div>
                 <div class="col-sm-9 form-group">
                     <label for="apellido">Descrición:</label>
-                    @Html.TextAreaFor(x => x.Descripcion, new { @class = "form-control", @required = "required" })
+                    @Html.TextAreaFor(x => x.Descripcion, new { @class = "form-control", @required = "required", rows = "6", cols = "10" })
                     @Html.ValidationMessageFor(x => x.Descripcion)
                 </div>
 
@@ -37,9 +37,10 @@
                     @Html.TextBoxFor(x => x.FechaDesde, new { @class = "form-control", @required = "required", @type = "date" })
                     @Html.ValidationMessageFor(x => x.FechaDesde)
                 </div>
-                <div class="col-sm-9 form-group">
+                <div class="col-sm-6 form-group">
                     <label for="FechaHasta">Fecha Hasta:</label>
                     @Html.TextBoxFor(x => x.FechaHasta, new { @class = "form-control", @required = "required", @type = "date" })
+                    @Html.ValidationMessageFor(x => x.FechaHasta)
                 </div>
                 <div class="col-sm-9 form-group">
                     <label for="lugarNac">Referencia:</label>

@@ -88,9 +88,6 @@
     <Compile Include="Modelo\Objetivo.cs">
       <DependentUpon>CV_Conexion.tt</DependentUpon>
     </Compile>
-    <Compile Include="Modelo\Registro.cs">
-      <DependentUpon>CV_Conexion.tt</DependentUpon>
-    </Compile>
     <Compile Include="Modelo\Usuario.cs">
       <DependentUpon>CV_Conexion.tt</DependentUpon>
     </Compile>

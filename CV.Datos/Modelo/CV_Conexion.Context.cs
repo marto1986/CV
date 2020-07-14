@@ -32,7 +32,6 @@ namespace CV.Datos.Modelo
         public virtual DbSet<Idioma> Idioma { get; set; }
         public virtual DbSet<Imagen> Imagen { get; set; }
         public virtual DbSet<Objetivo> Objetivo { get; set; }
-        public virtual DbSet<Registro> Registro { get; set; }
         public virtual DbSet<Usuario> Usuario { get; set; }
     }
 }

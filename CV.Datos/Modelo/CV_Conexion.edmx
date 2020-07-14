@@ -47,9 +47,9 @@
           <Key>
             <PropertyRef Name="ExperienciaLaboralId" />
           </Key>
-          <Property Name="ExperienciaLaboralId" Type="int" Nullable="false" />
+          <Property Name="ExperienciaLaboralId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="UsuarioId" Type="int" Nullable="false" />
-          <Property Name="Puesto" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Puesto" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Descripcion" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="FechaDesde" Type="date" Nullable="false" />
           <Property Name="FechaHasta" Type="date" Nullable="false" />
@@ -80,17 +80,6 @@
           <Property Name="ObjetivoId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="UsuarioId" Type="int" Nullable="false" />
           <Property Name="Descripcion" Type="varchar" MaxLength="50" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Registro">
-          <Key>
-            <PropertyRef Name="RegistroId" />
-          </Key>
-          <Property Name="RegistroId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="UsuarioId" Type="int" Nullable="false" />
-          <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="Usuario" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="Password" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="ConfirmacionEmail" Type="bit" />
         </EntityType>
         <EntityType Name="Usuario">
           <Key>
@@ -184,18 +173,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Registro_Usuario">
-          <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
-          <End Role="Registro" Type="Self.Registro" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Usuario">
-              <PropertyRef Name="UsuarioId" />
-            </Principal>
-            <Dependent Role="Registro">
-              <PropertyRef Name="UsuarioId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="CVModeloStoreContainer">
           <EntitySet Name="Conocimiento" EntityType="Self.Conocimiento" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DatosPersonales" EntityType="Self.DatosPersonales" Schema="dbo" store:Type="Tables" />
@@ -204,7 +181,6 @@
           <EntitySet Name="Idioma" EntityType="Self.Idioma" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Imagen" EntityType="Self.Imagen" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Objetivo" EntityType="Self.Objetivo" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Registro" EntityType="Self.Registro" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Conocimiento_Usuario" Association="Self.FK_Conocimiento_Usuario">
             <End Role="Usuario" EntitySet="Usuario" />
@@ -234,10 +210,6 @@
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="Objetivo" EntitySet="Objetivo" />
           </AssociationSet>
-          <AssociationSet Name="FK_Registro_Usuario" Association="Self.FK_Registro_Usuario">
-            <End Role="Usuario" EntitySet="Usuario" />
-            <End Role="Registro" EntitySet="Registro" />
-          </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -251,7 +223,6 @@
           <EntitySet Name="Idioma" EntityType="CVModelo.Idioma" />
           <EntitySet Name="Imagen" EntityType="CVModelo.Imagen" />
           <EntitySet Name="Objetivo" EntityType="CVModelo.Objetivo" />
-          <EntitySet Name="Registro" EntityType="CVModelo.Registro" />
           <EntitySet Name="Usuario" EntityType="CVModelo.Usuario" />
           <AssociationSet Name="FK_Conocimiento_Usuario" Association="CVModelo.FK_Conocimiento_Usuario">
             <End Role="Usuario" EntitySet="Usuario" />
@@ -280,10 +251,6 @@
           <AssociationSet Name="FK_Objetivo_Usuario" Association="CVModelo.FK_Objetivo_Usuario">
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="Objetivo" EntitySet="Objetivo" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Registro_Usuario" Association="CVModelo.FK_Registro_Usuario">
-            <End Role="Usuario" EntitySet="Usuario" />
-            <End Role="Registro" EntitySet="Registro" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Conocimiento">
@@ -331,9 +298,9 @@
           <Key>
             <PropertyRef Name="ExperienciaLaboralId" />
           </Key>
-          <Property Name="ExperienciaLaboralId" Type="Int32" Nullable="false" />
+          <Property Name="ExperienciaLaboralId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="UsuarioId" Type="Int32" Nullable="false" />
-          <Property Name="Puesto" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Puesto" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="FechaDesde" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="FechaHasta" Type="DateTime" Nullable="false" Precision="0" />
@@ -369,18 +336,6 @@
           <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Usuario" Relationship="CVModelo.FK_Objetivo_Usuario" FromRole="Objetivo" ToRole="Usuario" />
         </EntityType>
-        <EntityType Name="Registro">
-          <Key>
-            <PropertyRef Name="RegistroId" />
-          </Key>
-          <Property Name="RegistroId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UsuarioId" Type="Int32" Nullable="false" />
-          <Property Name="Email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Usuario" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="ConfirmacionEmail" Type="Boolean" />
-          <NavigationProperty Name="Usuario1" Relationship="CVModelo.FK_Registro_Usuario" FromRole="Registro" ToRole="Usuario" />
-        </EntityType>
         <EntityType Name="Usuario">
           <Key>
             <PropertyRef Name="UsuarioId" />
@@ -395,7 +350,6 @@
           <NavigationProperty Name="Idioma" Relationship="CVModelo.FK_Idioma_Usuario" FromRole="Usuario" ToRole="Idioma" />
           <NavigationProperty Name="Imagen" Relationship="CVModelo.FK_Imagen_Usuario" FromRole="Usuario" ToRole="Imagen" />
           <NavigationProperty Name="Objetivo" Relationship="CVModelo.FK_Objetivo_Usuario" FromRole="Usuario" ToRole="Objetivo" />
-          <NavigationProperty Name="Registro" Relationship="CVModelo.FK_Registro_Usuario" FromRole="Usuario" ToRole="Registro" />
         </EntityType>
         <Association Name="FK_Conocimiento_Usuario">
           <End Type="CVModelo.Usuario" Role="Usuario" Multiplicity="1" />
@@ -477,18 +431,6 @@
               <PropertyRef Name="UsuarioId" />
             </Principal>
             <Dependent Role="Objetivo">
-              <PropertyRef Name="UsuarioId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Registro_Usuario">
-          <End Type="CVModelo.Usuario" Role="Usuario" Multiplicity="1" />
-          <End Type="CVModelo.Registro" Role="Registro" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Usuario">
-              <PropertyRef Name="UsuarioId" />
-            </Principal>
-            <Dependent Role="Registro">
               <PropertyRef Name="UsuarioId" />
             </Dependent>
           </ReferentialConstraint>
@@ -579,18 +521,6 @@
                 <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
                 <ScalarProperty Name="UsuarioId" ColumnName="UsuarioId" />
                 <ScalarProperty Name="ObjetivoId" ColumnName="ObjetivoId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Registro">
-            <EntityTypeMapping TypeName="CVModelo.Registro">
-              <MappingFragment StoreEntitySet="Registro">
-                <ScalarProperty Name="ConfirmacionEmail" ColumnName="ConfirmacionEmail" />
-                <ScalarProperty Name="Password" ColumnName="Password" />
-                <ScalarProperty Name="Usuario" ColumnName="Usuario" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="UsuarioId" ColumnName="UsuarioId" />
-                <ScalarProperty Name="RegistroId" ColumnName="RegistroId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

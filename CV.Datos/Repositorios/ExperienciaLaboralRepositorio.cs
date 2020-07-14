@@ -39,7 +39,7 @@ namespace CV.Datos.Repositorios
         /// <summary>
         /// Agrega nueva información de la experiencia laboral de un usuario registrado
         /// </summary>
-        /// <param name="datoPersonal"></param>
+        /// <param name="experienciaLaboral"></param>
         /// <returns></returns>
         public bool Agregar(ExperienciaLaboral experienciaLaboral)
         {

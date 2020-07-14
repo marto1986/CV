@@ -1,4 +1,4 @@
-﻿@model ExperienciaLaboralDTO
+﻿@model IEnumerable<ExperienciaLaboralDTO>
 @{
     ViewBag.Title = "Index";
 }
@@ -10,11 +10,14 @@
             <div class="col-lg-12 text-xs-center">
                 @if (ViewBag.ObjUsuario != null)
                 {
-                    <h2>Bienvenido <span class="text-success">@ViewBag.ObjUsuario.UsuarioNombre</span>, Empecemos a completar el CV.</h2>
+                    <h2>Bienvenido <span class="text-success">@ViewBag.ObjUsuario.UsuarioNombre</span>, Continuemos completando el CV.</h2>
                 }
 
                 <h3 class="m-t-0 text-primary">Impulsá tu carrera profesional</h3>
-                <h4>Datos Personales</h4>
+                <div class="col-sm-12">
+                    <a href="@Url.Action("Index", "Educacion")"><p class="btn btn-lg btn-primary text-uppercase"><i class="fa fa-chevron-circle-left"></i> Volver</p></a>
+                </div>
+                <h4>Experiencia Laboral</h4>
                 @if (Model != null)
                 {
                     <table class="table table-hover">
@@ -24,25 +27,64 @@
                                 <th>Descripción</th>
                                 <th>Ver</th>
                                 <th>Editar</th>
+                                <th>Eliminar</th>
                             </tr>
                         </thead>
                         <tbody>
+                        @foreach (var datos in Model)
+                        {
                             <tr>
-                                <td>@Model.Puesto</td>
-                                <td>@Model.Descripcion</td>
-                                <td><a href="@Url.Action("Detalle", "ExperienciaLabotal", new { id = Model.ExperienciaLaboralId })"><i class="fa fa-eye fa-2x"></i></a></td>
-                                <td><a href="@Url.Action("Actualizar", "ExperienciaLabotal", new { id = Model.ExperienciaLaboralId})"><i class="fa fa-edit fa-2x text-success"></i></a></td>
+                                <td>@datos.Puesto</td>
+                                <td>@datos.Descripcion</td>
+                                <td><a href="@Url.Action("Detalle", "ExperienciaLaboral", new { id = @datos.ExperienciaLaboralId })"><i class="fa fa-eye fa-2x"></i></a></td>
+                                <td><a href="@Url.Action("Actualizar", "ExperienciaLaboral", new { id = @datos.ExperienciaLaboralId })"><i class="fa fa-edit fa-2x text-success"></i></a></td>
+                                <td style="cursor:pointer" id="eliminar" data-descripcion="@datos.Descripcion" data-id="@datos.ExperienciaLaboralId" data-puesto="@datos.Puesto" data-toggle="modal" data-target="#eliminarExperiencia"><i class="fa fa-trash fa-2x text-danger"></i></td>
                             </tr>
+                        }
                         </tbody>
                     </table>
-                    <a href="@Url.Action("Nuevo", "ExperienciaLabotal")" class="btn btn-primary btn-xl page-scroll wow fadeInUp">Completar Experiencia Laboral <i class="fa fa-user-plus"></i></a>
+                    <a href="@Url.Action("Nuevo", "ExperienciaLaboral")" class="btn btn-primary btn-xl page-scroll wow fadeInUp">Completar Experiencia Laboral <i class="fa fa-user-plus"></i></a>
+                    <a href="@Url.Action("Index", "Idioma")" class="btn btn-primary btn-xl page-scroll wow fadeInUp">Completar Idioma <i class="fa fa-user-md"></i></a>
                 }
                 else
                 {
-                    <a href="@Url.Action("Nuevo", "ExperienciaLabotal")" class="btn btn-primary btn-xl page-scroll wow fadeInUp">Completar Idioma <i class="fa fa-user-md"></i></a>
+                    <p class="text-capitalize">No hay Item cargados en Experiencia Laboral</p>
+                    <a href="@Url.Action("Nuevo", "ExperienciaLaboral")" class="btn btn-primary btn-xl page-scroll wow fadeInUp">Completar Experiencia Laboral <i class="fa fa-user-plus"></i></a>
                 }
                 <hr class="primary">
             </div>
         </div>
+        <!-- Modal -->
+        <div class="modal fade" id="eliminarExperiencia" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header bg-danger">
+                        <h5 class="modal-title" id="eliminarpuesto"></h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <h6 id="eliminarDescripcion"></h6>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                        <p class="btn btn-lg btn-danger"><a href="" style="color:white; font-weight:bold" id="formularioEliminar">Eliminar</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+    <script>
+        $("td#eliminar").click(function () {
+            var id = $(this).attr("data-id");
+            var puesto = $(this).attr("data-puesto");
+            var descripcion = $(this).attr("data-descripcion");
+
+            $("#id").val(id);
+            $("#formularioEliminar").attr('href', '@Url.Action("Eliminar", "ExperienciaLaboral")' + '/' + id);
+            $("#eliminarpuesto").html("Puesto: " + puesto);
+            $("#eliminarDescripcion").html("Descripcion: " + descripcion);
+        });
+    </script>
 </section>

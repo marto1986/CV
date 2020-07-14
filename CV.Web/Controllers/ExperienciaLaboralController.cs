@@ -37,7 +37,7 @@ namespace CV.Web.Controllers
                 var listado = JsonConvert.DeserializeObject<List<ExperienciaLaboralDTO>>(resultString);
                 if (ViewBag.ObjUsuario != null)
                 {
-                    var resultado = listado.FirstOrDefault(x => x.UsuarioId == ViewBag.ObjUsuario.UsuarioId);
+                    var resultado = listado.Where(x => x.UsuarioId == ViewBag.ObjUsuario.UsuarioId);
                     return View(resultado);
                 }
                 else

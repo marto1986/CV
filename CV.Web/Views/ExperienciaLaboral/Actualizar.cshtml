@@ -5,12 +5,12 @@
 
         <div class="col-lg-9 col-sm-9 text-capitalize">
             <div class="col-sm-12">
-                <a href="@Url.Action("Index", "DatosPersonales")"><p class="btn btn-lg btn-primary text-uppercase"><i class="fa fa-chevron-circle-left"></i> Volver</p></a>
+                <a href="@Url.Action("Index", "ExperienciaLaboral")"><p class="btn btn-lg btn-primary text-uppercase"><i class="fa fa-chevron-circle-left"></i> Volver</p></a>
             </div>
 
             <h2>Editar Experiencia Laboral</h2>
 
-            <form method="post" action="@Url.Action("Actualizar", "DatosPersonales")">
+            <form method="post" action="@Url.Action("Actualizar", "ExperienciaLaboral")">
                 @Html.ValidationSummary(true)
 
                 @Html.HiddenFor(x => x.ExperienciaLaboralId)

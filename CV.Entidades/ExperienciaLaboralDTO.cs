@@ -11,14 +11,13 @@ namespace CV.Entidades
     public class ExperienciaLaboralDTO
     {
         [Key]
-        [Required()]
         public int ExperienciaLaboralId { get; set; }
 
         [Required()]
         public int UsuarioId { get; set; }
 
         [Required(ErrorMessage = "el {0} es obligatorio")]
-        [StringLength(10, ErrorMessage = "Solo 10 caracteres")]
+        [StringLength(50, ErrorMessage = "Solo 10 caracteres")]
         public string Puesto { get; set; }
 
         [Required(ErrorMessage = "el {0} es obligatorio")]
