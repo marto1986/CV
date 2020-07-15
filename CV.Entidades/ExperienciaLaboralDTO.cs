@@ -17,7 +17,7 @@ namespace CV.Entidades
         public int UsuarioId { get; set; }
 
         [Required(ErrorMessage = "el {0} es obligatorio")]
-        [StringLength(50, ErrorMessage = "Solo 10 caracteres")]
+        [StringLength(50, ErrorMessage = "Solo 50 caracteres")]
         public string Puesto { get; set; }
 
         [Required(ErrorMessage = "el {0} es obligatorio")]

@@ -44,7 +44,7 @@
                         </tbody>
                     </table>
                     <a href="@Url.Action("Nuevo", "ExperienciaLaboral")" class="btn btn-primary btn-xl page-scroll wow fadeInUp">Completar Experiencia Laboral <i class="fa fa-user-plus"></i></a>
-                    <a href="@Url.Action("Index", "Idioma")" class="btn btn-primary btn-xl page-scroll wow fadeInUp">Completar Idioma <i class="fa fa-user-md"></i></a>
+                    <a href="@Url.Action("Index", "Idioma")" class="btn btn-primary btn-xl page-scroll wow fadeInUp">Completar Idioma <i class="fa fa-globe"></i></a>
                 }
                 else
                 {
@@ -83,8 +83,8 @@
 
             $("#id").val(id);
             $("#formularioEliminar").attr('href', '@Url.Action("Eliminar", "ExperienciaLaboral")' + '/' + id);
-            $("#eliminarpuesto").html("Puesto: " + puesto);
-            $("#eliminarDescripcion").html("Descripcion: " + descripcion);
+            $("#eliminarpuesto").html("Descripción: " + descripcion);
+            $("#eliminarDescripcion").html("¿Está Seguro En Eliminar " + "<span class='text-danger text-center'>" + puesto + "</span> ?");
         });
     </script>
 </section>

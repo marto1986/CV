@@ -177,11 +177,14 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\CerrarSesionController.cs" />
+    <Compile Include="Controllers\ConocimientoController.cs" />
     <Compile Include="Controllers\DatosPersonalesController.cs" />
     <Compile Include="Controllers\EducacionController.cs" />
     <Compile Include="Controllers\ExperienciaLaboralController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\IdiomaController.cs" />
     <Compile Include="Controllers\ImagenController.cs" />
+    <Compile Include="Controllers\ObjetivoController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="Crypto.cs" />
     <Compile Include="Filters\VerificarSesion.cs" />
@@ -366,6 +369,18 @@
     <Content Include="Views\ExperienciaLaboral\Nuevo.cshtml" />
     <Content Include="Views\ExperienciaLaboral\Actualizar.cshtml" />
     <Content Include="Views\ExperienciaLaboral\Detalle.cshtml" />
+    <Content Include="Views\Idioma\Index.cshtml" />
+    <Content Include="Views\Idioma\Nuevo.cshtml" />
+    <Content Include="Views\Idioma\Actualizar.cshtml" />
+    <Content Include="Views\Idioma\Detalle.cshtml" />
+    <Content Include="Views\Conocimiento\Index.cshtml" />
+    <Content Include="Views\Conocimiento\Nuevo.cshtml" />
+    <Content Include="Views\Conocimiento\Actualizar.cshtml" />
+    <Content Include="Views\Conocimiento\Detalle.cshtml" />
+    <Content Include="Views\Objetivo\Index.cshtml" />
+    <Content Include="Views\Objetivo\Nuevo.cshtml" />
+    <Content Include="Views\Objetivo\Actualizar.cshtml" />
+    <Content Include="Views\Objetivo\Detalle.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

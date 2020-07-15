@@ -1,6 +1,6 @@
 USE [master]
 GO
-/****** Object:  Database [CV]    Script Date: 10/7/2020 14:17:37 ******/
+/****** Object:  Database [CV]    Script Date: 15/7/2020 12:24:38 ******/
 CREATE DATABASE [CV]
  CONTAINMENT = NONE
  ON  PRIMARY 
@@ -89,7 +89,7 @@ ALTER DATABASE SCOPED CONFIGURATION SET QUERY_OPTIMIZER_HOTFIXES = OFF;
 GO
 USE [CV]
 GO
-/****** Object:  Table [dbo].[Conocimiento]    Script Date: 10/7/2020 14:17:37 ******/
+/****** Object:  Table [dbo].[Conocimiento]    Script Date: 15/7/2020 12:24:40 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -105,7 +105,7 @@ CREATE TABLE [dbo].[Conocimiento](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[DatosPersonales]    Script Date: 10/7/2020 14:17:37 ******/
+/****** Object:  Table [dbo].[DatosPersonales]    Script Date: 15/7/2020 12:24:41 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -129,7 +129,7 @@ CREATE TABLE [dbo].[DatosPersonales](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Educacion]    Script Date: 10/7/2020 14:17:37 ******/
+/****** Object:  Table [dbo].[Educacion]    Script Date: 15/7/2020 12:24:41 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -148,15 +148,15 @@ CREATE TABLE [dbo].[Educacion](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[ExperienciaLaboral]    Script Date: 10/7/2020 14:17:37 ******/
+/****** Object:  Table [dbo].[ExperienciaLaboral]    Script Date: 15/7/2020 12:24:41 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[ExperienciaLaboral](
-	[ExperienciaLaboralId] [int] NOT NULL,
+	[ExperienciaLaboralId] [int] IDENTITY(1,1) NOT NULL,
 	[UsuarioId] [int] NOT NULL,
-	[Puesto] [varchar](10) NOT NULL,
+	[Puesto] [varchar](50) NOT NULL,
 	[Descripcion] [varchar](50) NOT NULL,
 	[FechaDesde] [date] NOT NULL,
 	[FechaHasta] [date] NOT NULL,
@@ -168,7 +168,7 @@ CREATE TABLE [dbo].[ExperienciaLaboral](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Idioma]    Script Date: 10/7/2020 14:17:37 ******/
+/****** Object:  Table [dbo].[Idioma]    Script Date: 15/7/2020 12:24:41 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -176,15 +176,16 @@ GO
 CREATE TABLE [dbo].[Idioma](
 	[IdiomaId] [int] IDENTITY(1,1) NOT NULL,
 	[UsuarioId] [int] NOT NULL,
-	[NIvel] [varchar](10) NOT NULL,
-	[Descripcion] [varchar](30) NOT NULL,
+	[NivelEscrito] [varchar](30) NOT NULL,
+	[NivelOral] [varchar](30) NOT NULL,
+	[Descripcion] [varchar](50) NOT NULL,
  CONSTRAINT [PK_Idioma] PRIMARY KEY CLUSTERED 
 (
 	[IdiomaId] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Imagen]    Script Date: 10/7/2020 14:17:37 ******/
+/****** Object:  Table [dbo].[Imagen]    Script Date: 15/7/2020 12:24:41 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -199,7 +200,7 @@ CREATE TABLE [dbo].[Imagen](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Objetivo]    Script Date: 10/7/2020 14:17:37 ******/
+/****** Object:  Table [dbo].[Objetivo]    Script Date: 15/7/2020 12:24:41 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -214,25 +215,7 @@ CREATE TABLE [dbo].[Objetivo](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Registro]    Script Date: 10/7/2020 14:17:37 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE TABLE [dbo].[Registro](
-	[RegistroId] [int] IDENTITY(1,1) NOT NULL,
-	[UsuarioId] [int] NOT NULL,
-	[Email] [varchar](50) NOT NULL,
-	[Usuario] [varchar](50) NOT NULL,
-	[Password] [varchar](50) NOT NULL,
-	[ConfirmacionEmail] [bit] NULL,
- CONSTRAINT [PK_Registro] PRIMARY KEY CLUSTERED 
-(
-	[RegistroId] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-) ON [PRIMARY]
-GO
-/****** Object:  Table [dbo].[Usuario]    Script Date: 10/7/2020 14:17:37 ******/
+/****** Object:  Table [dbo].[Usuario]    Script Date: 15/7/2020 12:24:41 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -252,6 +235,26 @@ GO
 INSERT [dbo].[DatosPersonales] ([DatospersonalesId], [Nombres], [Apellido], [FechaNacimiento], [Nacionalidad], [LugarNacimiento], [Domicilio], [NroDomicilio], [CodigoPostal], [Email], [Telefono], [UsuarioId]) VALUES (2012, N'Martín', N'Matias', CAST(N'2020-06-28' AS Date), N'Argentino', N'Caba', N'Ayala', 100, N'1752', N'martinmatias@outlook.com', 1162317237, 5008)
 GO
 SET IDENTITY_INSERT [dbo].[DatosPersonales] OFF
+GO
+SET IDENTITY_INSERT [dbo].[Educacion] ON 
+GO
+INSERT [dbo].[Educacion] ([EducacionId], [UsuarioId], [Titulo], [EstablecimientoEducativo], [FechaDesde], [FechaHasta], [Estado]) VALUES (1, 5008, N'Primaria', N'Escuela N° 86', CAST(N'2020-06-28' AS Date), CAST(N'2020-07-17' AS Date), N'Completo')
+GO
+INSERT [dbo].[Educacion] ([EducacionId], [UsuarioId], [Titulo], [EstablecimientoEducativo], [FechaDesde], [FechaHasta], [Estado]) VALUES (4, 5008, N'Secundaria', N'San Martin N°2', CAST(N'2020-04-26' AS Date), CAST(N'2020-07-31' AS Date), N'Completo')
+GO
+SET IDENTITY_INSERT [dbo].[Educacion] OFF
+GO
+SET IDENTITY_INSERT [dbo].[ExperienciaLaboral] ON 
+GO
+INSERT [dbo].[ExperienciaLaboral] ([ExperienciaLaboralId], [UsuarioId], [Puesto], [Descripcion], [FechaDesde], [FechaHasta], [ReferenciaNombre], [ReferenciaTelefono]) VALUES (11, 5008, N'Atención al Cliente', N'dsdasdasdsa', CAST(N'2020-06-28' AS Date), CAST(N'2020-08-07' AS Date), N'Pepe', 1598784512)
+GO
+SET IDENTITY_INSERT [dbo].[ExperienciaLaboral] OFF
+GO
+SET IDENTITY_INSERT [dbo].[Idioma] ON 
+GO
+INSERT [dbo].[Idioma] ([IdiomaId], [UsuarioId], [NivelEscrito], [NivelOral], [Descripcion]) VALUES (1, 5008, N'Intermedio', N'Bajo', N'Inglés')
+GO
+SET IDENTITY_INSERT [dbo].[Idioma] OFF
 GO
 SET IDENTITY_INSERT [dbo].[Usuario] ON 
 GO
@@ -293,11 +296,6 @@ ALTER TABLE [dbo].[Objetivo]  WITH CHECK ADD  CONSTRAINT [FK_Objetivo_Usuario] F
 REFERENCES [dbo].[Usuario] ([UsuarioId])
 GO
 ALTER TABLE [dbo].[Objetivo] CHECK CONSTRAINT [FK_Objetivo_Usuario]
-GO
-ALTER TABLE [dbo].[Registro]  WITH CHECK ADD  CONSTRAINT [FK_Registro_Usuario] FOREIGN KEY([UsuarioId])
-REFERENCES [dbo].[Usuario] ([UsuarioId])
-GO
-ALTER TABLE [dbo].[Registro] CHECK CONSTRAINT [FK_Registro_Usuario]
 GO
 USE [master]
 GO

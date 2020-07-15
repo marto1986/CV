@@ -81,5 +81,38 @@ namespace CV.Datos.Extensiones
                 ReferenciaTelefono = model.ReferenciaTelefono
             };
         }
+
+        public static IdiomaDTO ToDTO(this Idioma model)
+        {
+            return new IdiomaDTO
+            {
+                IdiomaId = model.IdiomaId,
+                UsuarioId = model.UsuarioId,
+                NivelEscrito = model.NivelEscrito,
+                NivelOral = model.NivelOral,
+                Descripcion = model.Descripcion
+            };
+        }
+
+        public static ConocimientoDTO ToDTO(this Conocimiento model)
+        {
+            return new ConocimientoDTO
+            {
+                ConocimientoId = model.ConocimientoId,
+                UsuarioId = model.UsuarioId,
+                Nivel = model.Nivel,
+                Descripcion = model.Descripcion
+            };
+        }
+
+        public static ObjetivoDTO ToDTO(this Objetivo model)
+        {
+            return new ObjetivoDTO
+            {
+                ObjetivoId = model.ObjetivoId,
+                UsuarioId = model.UsuarioId,
+                Descripcion = model.Descripcion
+            };
+        }
     }
 }

@@ -39,7 +39,7 @@ namespace CV.Datos.Repositorios
         /// <summary>
         /// Agrega nueva información educactiva
         /// </summary>
-        /// <param name="datoPersonal"></param>
+        /// <param name="educacion"></param>
         /// <returns></returns>
         public bool Agregar(Educacion educacion)
         {

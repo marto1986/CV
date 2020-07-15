@@ -16,7 +16,8 @@ namespace CV.Datos.Modelo
     {
         public int IdiomaId { get; set; }
         public int UsuarioId { get; set; }
-        public string NIvel { get; set; }
+        public string NivelEscrito { get; set; }
+        public string NivelOral { get; set; }
         public string Descripcion { get; set; }
     
         public virtual Usuario Usuario { get; set; }

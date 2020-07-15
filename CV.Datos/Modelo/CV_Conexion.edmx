@@ -62,8 +62,9 @@
           </Key>
           <Property Name="IdiomaId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="UsuarioId" Type="int" Nullable="false" />
-          <Property Name="NIvel" Type="varchar" MaxLength="10" Nullable="false" />
-          <Property Name="Descripcion" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="NivelEscrito" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="NivelOral" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="Imagen">
           <Key>
@@ -314,8 +315,9 @@
           </Key>
           <Property Name="IdiomaId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="UsuarioId" Type="Int32" Nullable="false" />
-          <Property Name="NIvel" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="NivelEscrito" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="NivelOral" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Usuario" Relationship="CVModelo.FK_Idioma_Usuario" FromRole="Idioma" ToRole="Usuario" />
         </EntityType>
         <EntityType Name="Imagen">
@@ -500,7 +502,8 @@
             <EntityTypeMapping TypeName="CVModelo.Idioma">
               <MappingFragment StoreEntitySet="Idioma">
                 <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
-                <ScalarProperty Name="NIvel" ColumnName="NIvel" />
+                <ScalarProperty Name="NivelOral" ColumnName="NivelOral" />
+                <ScalarProperty Name="NivelEscrito" ColumnName="NivelEscrito" />
                 <ScalarProperty Name="UsuarioId" ColumnName="UsuarioId" />
                 <ScalarProperty Name="IdiomaId" ColumnName="IdiomaId" />
               </MappingFragment>

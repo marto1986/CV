@@ -1,0 +1,22 @@
+﻿@model ConocimientoDTO
+
+<div class="container wow fadeInUp">
+    <div class="row">
+
+        <div class="col-lg-12 col-sm-12 text-capitalize">
+            <div class="col-sm-12">
+                <a href="@Url.Action("Index", "Conocimiento")"><p class="btn btn-lg btn-primary text-uppercase"><i class="fa fa-chevron-circle-left"></i> Volver</p></a>
+                <a href="@Url.Action("Actualizar", "Conocimiento", new { id = Model.ConocimientoId})"><p class="btn btn-outline-dark btn-lg text-uppercase"><i class="fa fa-edit"></i> Editar</p></a>
+            </div>
+
+            <div class="card col-lg-12 col-sm-12">
+                <div class="card-header text-center">
+                    <i class="fa fa-graduation-cap fa-2x"></i> Conocimiento: @Model.Descripcion
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item"><i class="fa fa-certificate fa-2x"></i> Nivel: @Model.Nivel</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
