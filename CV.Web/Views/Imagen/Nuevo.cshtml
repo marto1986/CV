@@ -1,0 +1,42 @@
+﻿@{
+    @model ImagenDTO
+}
+<div class="container wow fadeInUp">
+    <div class="row">
+
+        <div class="col-lg-9 col-sm-9 text-capitalize">
+            <div class="col-sm-12">
+                <a href="@Url.Action("Index", "Imagen")"><p class="btn btn-lg btn-primary text-uppercase"><i class="fa fa-chevron-circle-left"></i> Volver</p></a>
+            </div>
+            <hr class="primary" />
+            <h2>Cargar Imagen</h2>
+
+            <form method="post" action="@Url.Action("Nuevo", "Imagen")" enctype="multipart/form-data">
+                @Html.ValidationSummary(true)
+
+                <div class="col-sm-9 form-group">
+                    @Html.HiddenFor(x => x.Nombre, new { @class = "form-control", @required = "required" })
+                    @Html.ValidationMessageFor(x => x.Nombre)
+                </div>
+
+                <div class="col-sm-9 form-group">
+                    <label for="foto">Foto:</label>
+                    <input type="file" id="foto" value="@ViewBag.Img.foto" class="form-control-file" name="foto" />
+                </div>
+                
+                <div class="col-sm-9 form-group">    
+                    
+                    @if (ViewBag.ObjUsuario != null)
+                    {
+                        <input type="hidden" value="@ViewBag.ObjUsuario.UsuarioId" name="UsuarioId" />
+                    }
+                </div>
+                
+                <div class="col-sm-6 form-group">
+                    <button type="submit" class="btn btn-success btn-lg">Guardar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<hr class="primary" />

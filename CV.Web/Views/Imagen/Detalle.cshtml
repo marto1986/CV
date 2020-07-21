@@ -1,0 +1,28 @@
+﻿@model ImagenDTO
+
+<div class="container wow fadeInUp">
+    <div class="row">
+
+        <div class="col-lg-12 col-sm-12 text-capitalize">
+            <div class="col-sm-12">
+                <a href="@Url.Action("Index", "Imagen")"><p class="btn btn-lg btn-primary text-uppercase"><i class="fa fa-chevron-circle-left"></i> Volver</p></a>
+                <a href="@Url.Action("Actualizar", "Imagen", new { id = Model.ImagenId})"><p class="btn btn-outline-dark btn-lg text-uppercase"><i class="fa fa-edit"></i> Editar</p></a>
+            </div>
+
+            @if (ViewBag.ObjUsuario != null)
+            {
+                <input type="hidden" value="@ViewBag.ObjUsuario.UsuarioId" name="UsuarioId" />
+            }
+            @Html.HiddenFor(x => x.ImagenId)
+
+            <div class="card col-lg-12 col-sm-12">
+                <div class="card-header text-center">
+                    <img class="figure-img" src="~/Content/Imagenes/Upload/@Model.Nombre" alt="@Model.Nombre" title="@Model.Nombre" />
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item"><i class="fa fa-info-circle fa-2x"></i> Nombre de la imagen: @Model.Nombre</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

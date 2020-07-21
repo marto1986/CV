@@ -1,0 +1,153 @@
+﻿<div class="wrapper">
+    <div class="sidebar-wrapper">
+        <div class="profile-container">
+        @if(ViewBag.Imagen != null)
+        {
+            <img class="profile" src="~/Content/Imagenes/Upload/@ViewBag.Imagen.Nombre" alt="@ViewBag.Imagen.Nombre" />
+        }
+            @if (ViewBag.DatosPersonales != null)
+            {
+                <h1 class="name">@ViewBag.DatosPersonales.Nombres @ViewBag.DatosPersonales.Apellido</h1>
+                <h3 class="tagline">Full Stack Developer</h3>
+            }
+        </div><!--//profile-container-->
+
+        <div class="contact-container container-block">
+            <ul class="list-unstyled contact-list">
+                @if (ViewBag.DatosPersonales != null)
+                {
+                    <li class="email"><i class="fa fa-envelope"></i> Email: @ViewBag.DatosPersonales.Email</li>
+                    <li class="phone"><i class="fa fa-phone"></i> Teléfono: @ViewBag.DatosPersonales.Telefono</li>
+                    <li><i class="fa fa-calendar-times-o"></i> Fecha de Nacimiento: @ViewBag.DatosPersonales.FechaNacimiento.ToShortDateString()</li>
+                    <li><i class="fa fa-home"></i> Domicilio: @ViewBag.DatosPersonales.Domicilio: @ViewBag.DatosPersonales.NroDomicilio</li>
+                    <li><i class="fa fa-street-view"></i> Código Postal: @ViewBag.DatosPersonales.CodigoPostal</li>
+                    <li><i class="fa fa-user-circle"></i> Nacimiento en : @ViewBag.DatosPersonales.LugarNacimiento</li>
+                    <li><i class="fa fa-address-card"></i> Nacionalidad: @ViewBag.DatosPersonales.Nacionalidad</li>
+                    <li class="linkedin"><i class="fa fa-linkedin"></i><a href="#" target="_blank"> linkedin.com/in/alandoe</a></li>
+                    <li class="github"><i class="fa fa-gitlab"></i><a href="#" target="_blank"> github.com/username</a></li>
+                    <li class="twitter"><i class="fa fa-twitter"></i><a href="https://twitter.com/3rdwave_themes" target="_blank"> twittername</a></li>
+                }
+            </ul>
+        </div><!--//contact-container-->
+        <div class="education-container container-block">
+            <h2 class="container-block-title">Educación</h2>
+            <div class="item">
+            @if (ViewBag.requestEducacion != null)
+            {
+                foreach (EducacionDTO edu in ViewBag.requestEducacion)
+                {
+                    <h4 class="degree">@edu.Titulo</h4>
+                    <h5 class="meta">@edu.EstablecimientoEducativo</h5>
+                    <div class="time">@edu.FechaDesde.ToShortDateString() - @edu.FechaHasta.ToShortDateString()</div>
+                }
+            }
+            </div><!--//item-->
+            
+        </div><!--//education-container-->
+
+        <div class="languages-container container-block">
+            <h2 class="container-block-title">Idiomas</h2>
+            @if (ViewBag.requestEducacion != null)
+            {
+                foreach (IdiomaDTO idioma in ViewBag.Idioma)
+                { 
+                    <ul class="list-unstyled interests-list">
+                        <li>@idioma.Descripcion <span class="lang-desc">@idioma.NivelEscrito (Escrito)</span> <span class="lang-desc">@idioma.NivelOral (Oral)</span></li>
+                    </ul>
+                }
+            }
+        </div>
+
+    </div><!--//sidebar-wrapper-->
+
+    <div class="main-wrapper">
+
+        <section class="section summary-section">
+            <h2 class="section-title"><span class="icon-holder"><i class="fa fa-user"></i></span>Objetivo</h2>
+            <div class="summary">
+            @if (ViewBag.Objetivo != null)
+            {
+                <p>@ViewBag.Objetivo.Descripcion</p>
+            }
+            </div><!--//summary-->
+        </section><!--//section-->
+
+        <section class="section experiences-section">
+            <h2 class="section-title"><span class="icon-holder"><i class="fa fa-briefcase"></i></span>Experiencia Laboral</h2>
+            @if (ViewBag.ExperienciaLaboral != null)
+            {
+                foreach (ExperienciaLaboralDTO expLaboral in ViewBag.ExperienciaLaboral)
+                {
+                <div class="item">
+                   <div class="meta">
+                            <div class="upper-row">
+                                <h3 class="job-title">@expLaboral.Puesto</h3>
+                            </div><!--//upper-row-->
+                            <div class="company">Desde @expLaboral.FechaDesde.ToShortDateString() Hasta @expLaboral.FechaHasta.ToShortDateString()</div>
+                        </div><!--//meta-->
+                        <div class="details">
+                            <p>@expLaboral.Descripcion</p>
+                        </div><!--//details-->
+                   
+                </div><!--//item-->
+                }
+            }
+        </section><!--//section-->
+
+        <section class="section projects-section">
+            <h2 class="section-title"><span class="icon-holder"><i class="fas fa-archive"></i></span>Projects</h2>
+            <div class="intro">
+                <p>You can list your side projects or open source libraries in this section. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum et ligula in nunc bibendum fringilla a eu lectus.</p>
+            </div><!--//intro-->
+            <div class="item">
+                <span class="project-title"><a href="https://themes.3rdwavemedia.com/bootstrap-templates/startup/coderpro-bootstrap-4-startup-template-for-software-projects/" target="_blank">CoderPro</a></span> - <span class="project-tagline">A responsive website template designed to help developers launch their software projects. </span>
+
+            </div><!--//item-->
+            <div class="item">
+                <span class="project-title"><a href="https://themes.3rdwavemedia.com/bootstrap-templates/startup/launch-bootstrap-4-template-for-saas-businesses/" target="_blank">Launch</a></span> - <span class="project-tagline">A responsive website template designed to help startups promote their products or services.</span>
+            </div><!--//item-->
+            <div class="item">
+                <span class="project-title"><a href="https://themes.3rdwavemedia.com/bootstrap-templates/resume/devcard-bootstrap-4-vcard-portfolio-template-for-software-developers/" target="_blank">DevCard</a></span> - <span class="project-tagline">A portfolio website template designed for software developers.</span>
+            </div><!--//item-->
+            <div class="item">
+                <span class="project-title"><a href="https://themes.3rdwavemedia.com/bootstrap-templates/startup/bootstrap-template-for-mobile-apps-nova-pro/" target="_blank">Nova Pro</a></span> - <span class="project-tagline">A responsive Bootstrap theme designed to help app developers promote their mobile apps</span>
+            </div><!--//item-->
+            <div class="item">
+                <span class="project-title"><a href="http://themes.3rdwavemedia.com/website-templates/responsive-bootstrap-theme-web-development-agencies-devstudio/" target="_blank">DevStudio</a></span> -
+                <span class="project-tagline">A responsive website template designed to help web developers/designers market their services. </span>
+            </div><!--//item-->
+        </section><!--//section-->
+
+        <section class="skills-section section">
+            <h2 class="section-title"><span class="icon-holder"><i class="fa fa-rocket"></i></span>Habilidades &amp; Conocimientos</h2>
+            <div class="skillset">
+                @if (ViewBag.Conocimiento != null)
+                {
+                    foreach (ConocimientoDTO conocimiento in ViewBag.Conocimiento)
+                    {
+                        <div class="item">
+                            <h3 class="level-title">@conocimiento.Descripcion</h3>
+                            <div class="progress level-bar">
+                                @if (conocimiento.Nivel == "Alto")
+                                {
+                                    <div class="progress-bar theme-progress-bar" role="progressbar" style="width:100%" aria-valuenow="99" aria-valuemin="0" aria-valuemax="100"></div>
+                                }
+                                @if (conocimiento.Nivel == "Intermedio")
+                                {
+                                    <div class="progress-bar theme-progress-bar" role="progressbar" style="width:50%" aria-valuenow="99" aria-valuemin="0" aria-valuemax="100"></div>
+                                }
+                                @if (conocimiento.Nivel == "Bajo")
+                                {
+                                    <div class="progress-bar theme-progress-bar" role="progressbar" style="width:25%" aria-valuenow="99" aria-valuemin="0" aria-valuemax="100"></div>
+                                }
+                            </div>
+                        </div>
+                    }
+                }
+
+            </div>
+        </section><!--//skills-section-->
+
+    </div><!--//main-body-->
+</div>
+

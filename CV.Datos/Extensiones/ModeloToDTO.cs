@@ -48,6 +48,7 @@ namespace CV.Datos.Extensiones
                 ImagenId = model.ImagenId,
                 Nombre = model.Nombre,
                 UsuarioId = model.UsuarioId
+                
             };
         }
 
