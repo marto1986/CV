@@ -25,6 +25,7 @@ namespace CV.Web.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Registrarse(UsuarioDTO usuario)
         {
             #region Verificar que el usuario no exista
@@ -79,6 +80,7 @@ namespace CV.Web.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult IniciarSesion(string usuarioNombre, string usuarioPassword)
         {
             #region Encriptar la contraseña

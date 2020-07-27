@@ -12,7 +12,7 @@
 
             <form method="post" action="@Url.Action("Actualizar", "ExperienciaLaboral")">
                 @Html.ValidationSummary(true)
-
+                @Html.AntiForgeryToken()
                 @Html.HiddenFor(x => x.ExperienciaLaboralId)
                 <div class="col-sm-9 form-group">
                     <label for="Puesto">Puesto: </label>

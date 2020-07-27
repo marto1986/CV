@@ -20,7 +20,8 @@ namespace CV.Entidades
 
         [DataType(DataType.Password)]
         [Required(ErrorMessage = "el {0} es obligatorio")]
-        [StringLength(15, ErrorMessage = "Longitud entre 6 y 15 caracteres.", MinimumLength = 6)]
+        [StringLength(15, MinimumLength = 6)]
+        [RegularExpression(@"^(?:.*[a-z]){7,}$", ErrorMessage = "La contraseña debe tener al menos 6 caracteres")]
         public string UsuarioPassword { get; set; }
 
         public IEnumerable<ImagenDTO> imagenes { get; set; }

@@ -12,7 +12,7 @@ namespace CV.Web.Controllers
 {
     public class ObjetivoController : Controller
     {
-        // GET: Objetivo
+        
         [HttpGet]
         public ActionResult Index()
         {
@@ -60,6 +60,7 @@ namespace CV.Web.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Nuevo(ObjetivoDTO objetivo)
         {
             HttpClient clienteHttp = new HttpClient();
@@ -112,6 +113,7 @@ namespace CV.Web.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Actualizar(ObjetivoDTO objetivo)
         {
             HttpClient clienteHttp = new HttpClient();

@@ -21,5 +21,7 @@ namespace CV.Entidades
         
         public string Nombre { get; set; }
 
+        public IEnumerable<ImagenDTO> imagenes { get; set; }
+
     }
 }

@@ -16,7 +16,7 @@
 
             <form method="post" action="@Url.Action("Actualizar", "Imagen")" enctype="multipart/form-data">
                 @Html.ValidationSummary(true)
-
+                @Html.AntiForgeryToken()
                 @Html.HiddenFor(x => x.ImagenId)
                 
                 <div class="col-sm-9 form-group">

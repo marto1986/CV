@@ -189,7 +189,7 @@ p {
   font-weight: 500;
   color: #2d7788;
   position: relative;
-  margin-top: 0;
+  margin-top: 0 !important;
   margin-bottom: 20px;
 }
 
@@ -211,12 +211,12 @@ p {
   text-align: center;
   font-size: 16px;
   position: relative;
-  margin-top: 20px;
+  margin-top: 0px!important;
 }
 
 .main-wrapper .section-title .icon-holder .svg-inline--fa {
   font-size: 16px;
-  margin-top: 6px;
+  margin-top: 0px;
 }
 
 .main-wrapper .section {

@@ -12,6 +12,7 @@
 
             <form method="post" action="@Url.Action("Actualizar", "DatosPersonales")">
                 @Html.ValidationSummary(true)
+                @Html.AntiForgeryToken()
                 
                 @Html.HiddenFor(x => x.DatospersonalesId)
                 <div class="col-sm-9 form-group">
@@ -64,6 +65,21 @@
                 <div class="col-sm-9 form-group">
                     <label for="tel">Teléfono:</label>
                     @Html.TextBoxFor(x => x.Telefono, new { @class = "form-control", @required = "required", @type = "number" })
+                </div>
+                <div class="col-sm-9 form-group">
+                    <label for="Profesion">Profesión:</label>
+                    @Html.TextBoxFor(x => x.Profesion, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(x => x.Profesion)
+                </div>
+                <div class="col-sm-9 form-group">
+                    <label for="Git">Git Usuario:</label>
+                    @Html.TextBoxFor(x => x.Git, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(x => x.Git)
+                </div>
+                <div class="col-sm-9 form-group">
+                    <label for="Linkedin">Linkedin:</label>
+                    @Html.TextBoxFor(x => x.Linkedin, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(x => x.Linkedin)
                 </div>
                 <div class="col-sm-6 form-group">
                     <button type="submit" class="btn btn-success btn-lg">Editar</button>

@@ -30,6 +30,9 @@
           <Property Name="Email" Type="varchar" MaxLength="50" />
           <Property Name="Telefono" Type="int" />
           <Property Name="UsuarioId" Type="int" Nullable="false" />
+          <Property Name="Profesion" Type="varchar" MaxLength="50" />
+          <Property Name="Git" Type="varchar" MaxLength="50" />
+          <Property Name="Linkedin" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Educacion">
           <Key>
@@ -150,18 +153,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Imagen_Usuario">
-          <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
-          <End Role="Imagen" Type="Self.Imagen" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Usuario">
-              <PropertyRef Name="UsuarioId" />
-            </Principal>
-            <Dependent Role="Imagen">
-              <PropertyRef Name="UsuarioId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Objetivo_Usuario">
           <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
           <End Role="Objetivo" Type="Self.Objetivo" Multiplicity="*" />
@@ -203,10 +194,6 @@
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="Idioma" EntitySet="Idioma" />
           </AssociationSet>
-          <AssociationSet Name="FK_Imagen_Usuario" Association="Self.FK_Imagen_Usuario">
-            <End Role="Usuario" EntitySet="Usuario" />
-            <End Role="Imagen" EntitySet="Imagen" />
-          </AssociationSet>
           <AssociationSet Name="FK_Objetivo_Usuario" Association="Self.FK_Objetivo_Usuario">
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="Objetivo" EntitySet="Objetivo" />
@@ -245,10 +232,6 @@
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="Idioma" EntitySet="Idioma" />
           </AssociationSet>
-          <AssociationSet Name="FK_Imagen_Usuario" Association="CVModelo.FK_Imagen_Usuario">
-            <End Role="Usuario" EntitySet="Usuario" />
-            <End Role="Imagen" EntitySet="Imagen" />
-          </AssociationSet>
           <AssociationSet Name="FK_Objetivo_Usuario" Association="CVModelo.FK_Objetivo_Usuario">
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="Objetivo" EntitySet="Objetivo" />
@@ -280,6 +263,9 @@
           <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Telefono" Type="Int32" />
           <Property Name="UsuarioId" Type="Int32" Nullable="false" />
+          <Property Name="Profesion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Git" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Linkedin" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Usuario" Relationship="CVModelo.FK_DatosPersonales_Usuario" FromRole="DatosPersonales" ToRole="Usuario" />
         </EntityType>
         <EntityType Name="Educacion">
@@ -327,7 +313,6 @@
           <Property Name="ImagenId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="UsuarioId" Type="Int32" Nullable="false" />
           <Property Name="Nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Usuario" Relationship="CVModelo.FK_Imagen_Usuario" FromRole="Imagen" ToRole="Usuario" />
         </EntityType>
         <EntityType Name="Objetivo">
           <Key>
@@ -350,7 +335,6 @@
           <NavigationProperty Name="Educacion" Relationship="CVModelo.FK_Educacion_Usuario" FromRole="Usuario" ToRole="Educacion" />
           <NavigationProperty Name="ExperienciaLaboral" Relationship="CVModelo.FK_ExperienciaLaboral_Usuario" FromRole="Usuario" ToRole="ExperienciaLaboral" />
           <NavigationProperty Name="Idioma" Relationship="CVModelo.FK_Idioma_Usuario" FromRole="Usuario" ToRole="Idioma" />
-          <NavigationProperty Name="Imagen" Relationship="CVModelo.FK_Imagen_Usuario" FromRole="Usuario" ToRole="Imagen" />
           <NavigationProperty Name="Objetivo" Relationship="CVModelo.FK_Objetivo_Usuario" FromRole="Usuario" ToRole="Objetivo" />
         </EntityType>
         <Association Name="FK_Conocimiento_Usuario">
@@ -413,18 +397,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Imagen_Usuario">
-          <End Type="CVModelo.Usuario" Role="Usuario" Multiplicity="1" />
-          <End Type="CVModelo.Imagen" Role="Imagen" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Usuario">
-              <PropertyRef Name="UsuarioId" />
-            </Principal>
-            <Dependent Role="Imagen">
-              <PropertyRef Name="UsuarioId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Objetivo_Usuario">
           <End Type="CVModelo.Usuario" Role="Usuario" Multiplicity="1" />
           <End Type="CVModelo.Objetivo" Role="Objetivo" Multiplicity="*" />
@@ -456,6 +428,9 @@
           <EntitySetMapping Name="DatosPersonales">
             <EntityTypeMapping TypeName="CVModelo.DatosPersonales">
               <MappingFragment StoreEntitySet="DatosPersonales">
+                <ScalarProperty Name="Linkedin" ColumnName="Linkedin" />
+                <ScalarProperty Name="Git" ColumnName="Git" />
+                <ScalarProperty Name="Profesion" ColumnName="Profesion" />
                 <ScalarProperty Name="UsuarioId" ColumnName="UsuarioId" />
                 <ScalarProperty Name="Telefono" ColumnName="Telefono" />
                 <ScalarProperty Name="Email" ColumnName="Email" />

@@ -12,6 +12,7 @@
 
             <form method="post" action="@Url.Action("Actualizar", "Educacion")">
                 @Html.ValidationSummary(true)
+                @Html.AntiForgeryToken()
                 @if (ViewBag.ObjUsuario != null)
                 {
                     <input type="hidden" value="@ViewBag.ObjUsuario.UsuarioId" name="UsuarioId" />

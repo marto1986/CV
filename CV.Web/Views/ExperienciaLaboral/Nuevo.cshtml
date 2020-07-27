@@ -14,7 +14,7 @@
 
             <form method="post" action="@Url.Action("Nuevo", "ExperienciaLaboral")">
                 @Html.ValidationSummary(true)
-
+                @Html.AntiForgeryToken()
                 <div class="col-sm-9 form-group">
                     <label for="Puesto">Puesto:</label>
                     @Html.TextBoxFor(x => x.Puesto, new { @class = "form-control", @required = "required" })

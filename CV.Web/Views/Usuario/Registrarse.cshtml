@@ -2,27 +2,31 @@
 @{
     ViewBag.Title = "Registrarse";
 }
-<br /><br /><br />
-<div class="container">
-    <h2>Registrarse</h2>
-    <form action="@Url.Action("Registrarse","Usuario")" method="post">
-        <div class="form-group">
-            <label>Usuario:</label>
-            @Html.TextBoxFor(x => x.UsuarioNombre, new { @class = "form-control" })
+<div class="global-container">
+    <div class="card login-form">
+        <div class="card-body">
+            <h3 class="card-title text-center text-uppercase">Registrarse</h3>
+            <div class="card-text">
+                <form action="@Url.Action("Registrarse","Usuario")" method="post">
+                    @Html.ValidationSummary(true)
+                    @Html.AntiForgeryToken()
+                    <div class="form-group">
+                        <label>Usuario:</label>
+                        @Html.TextBoxFor(x => x.UsuarioNombre, new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        @Html.ValidationMessage("UsuarioNombre")
+                    </div>
+                    <div class="form-group">
+                        <label>Contraseña:</label>
+                        @Html.PasswordFor(x => x.UsuarioPassword, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(x => x.UsuarioPassword,"", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" class="btn btn-success" value="Registrarse" />
+                    </div>
+                </form>
             </div>
-        <div class="form-group">
-            @Html.ValidationMessage("UsuarioNombre")
         </div>
-        <div class="form-group">
-            <label>Contraseña:</label>
-            @Html.PasswordFor(x => x.UsuarioPassword, new { @class = "form-control" })
-            @if (Model != null)
-            {
-                @Html.ValidationMessage(@Model.UsuarioPassword, null, new { @class = "text-danger" })
-            }
-        </div>
-        <div class="form-group">
-            <input type="submit" class="btn btn-success" value="Ingresar" />
-        </div>
-</form>
+    </div>
 </div>

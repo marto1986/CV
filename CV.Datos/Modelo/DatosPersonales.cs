@@ -26,6 +26,9 @@ namespace CV.Datos.Modelo
         public string Email { get; set; }
         public Nullable<int> Telefono { get; set; }
         public int UsuarioId { get; set; }
+        public string Profesion { get; set; }
+        public string Git { get; set; }
+        public string Linkedin { get; set; }
     
         public virtual Usuario Usuario { get; set; }
     }

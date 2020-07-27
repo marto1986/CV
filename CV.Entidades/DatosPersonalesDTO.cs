@@ -51,6 +51,15 @@ namespace CV.Entidades
 
         [Required]
         public int UsuarioId { get; set; }
-        
+
+        [StringLength(50, ErrorMessage = "Solo 50 caracteres")]
+        public string Profesion { get; set; }
+
+        [StringLength(50, ErrorMessage = "Solo 50 caracteres")]
+        public string Git { get; set; }
+
+        [StringLength(50, ErrorMessage = "Solo 50 caracteres")]
+        public string Linkedin { get; set; }
+
     }
 }

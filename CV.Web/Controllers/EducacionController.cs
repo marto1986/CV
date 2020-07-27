@@ -12,7 +12,7 @@ namespace CV.Web.Controllers
 {
     public class EducacionController : Controller
     {
-        // GET: Educacion
+        
         [HttpGet]
         public ActionResult Index()
         {
@@ -50,6 +50,7 @@ namespace CV.Web.Controllers
         }
 
         [HttpGet]
+        [ValidateAntiForgeryToken]
         public ActionResult Nuevo()
         {
             if (Session["Usuario"] == null)
@@ -118,6 +119,7 @@ namespace CV.Web.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Actualizar(EducacionDTO educacion)
         {
             HttpClient clienteHttp = new HttpClient();

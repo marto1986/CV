@@ -8,6 +8,8 @@
             <h3 class="card-title text-center text-uppercase">Bienvenido</h3>
             <div class="card-text">
                 <form action="@Url.Action("IniciarSesion", "Usuario")" method="post">
+                    @Html.ValidationSummary(true)
+                    @Html.AntiForgeryToken()
                     <div class="form-group">
                         <label>Usuario:</label>
                         <input type="text" name="UsuarioNombre" class="form-control form-control-lg form-control-sm" />

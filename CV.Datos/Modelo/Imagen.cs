@@ -17,7 +17,5 @@ namespace CV.Datos.Modelo
         public int ImagenId { get; set; }
         public int UsuarioId { get; set; }
         public string Nombre { get; set; }
-    
-        public virtual Usuario Usuario { get; set; }
     }
 }

@@ -12,6 +12,7 @@ namespace CV.Web.Controllers
 {
     public class PDFController : Controller
     {
+        
         [HttpGet]
         public ActionResult Index()
         {

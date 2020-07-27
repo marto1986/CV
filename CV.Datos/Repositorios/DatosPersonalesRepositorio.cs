@@ -66,6 +66,9 @@ namespace CV.Datos.Repositorios
             actualizar.CodigoPostal = datos.CodigoPostal;
             actualizar.Email = datos.Email;
             actualizar.Telefono = datos.Telefono;
+            actualizar.Profesion = datos.Profesion;
+            actualizar.Git = datos.Git;
+            actualizar.Linkedin = datos.Linkedin;
 
             return BD.SaveChanges() > 0;
         }

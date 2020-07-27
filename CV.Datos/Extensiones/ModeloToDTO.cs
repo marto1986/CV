@@ -37,6 +37,9 @@ namespace CV.Datos.Extensiones
                 CodigoPostal = model.CodigoPostal,
                 Email = model.Email,
                 Telefono = model.Telefono,
+                Profesion = model.Profesion,
+                Git = model.Git,
+                Linkedin = model.Linkedin
                 
             };
         }

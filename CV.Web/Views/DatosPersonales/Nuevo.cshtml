@@ -14,11 +14,12 @@
 
             <form method="post" action="@Url.Action("Nuevo", "DatosPersonales")">
                 @Html.ValidationSummary(true)
+                @Html.AntiForgeryToken()
                 
                 <div class="col-sm-9 form-group">
                     <label for="nombres">Nombres:</label>
                     @Html.TextBoxFor(x => x.Nombres, new { @class = "form-control", @required = "required" })
-                    @Html.ValidationMessageFor(x => x.Nombres)
+                    @Html.ValidationMessageFor(x => x.Nombres, "", new { @class = "text-danger" })
 
 
                     @if (ViewBag.ObjUsuario != null)
@@ -29,13 +30,13 @@
                 <div class="col-sm-9 form-group">
                     <label for="apellido">Apellido:</label>
                     @Html.TextBoxFor(x => x.Apellido, new { @class = "form-control", @required = "required" })
-                    @Html.ValidationMessageFor(x => x.Apellido)
+                    @Html.ValidationMessageFor(x => x.Apellido, "", new { @class = "text-danger" })
                 </div>
                
                 <div class="col-sm-6 form-group">
                     <label for="fechaNac">Fecha de Nacimiento:</label>
                     @Html.TextBoxFor(x => x.FechaNacimiento, new { @class = "form-control", @required = "required", @type = "date" })
-                    @Html.ValidationMessageFor(x => x.FechaNacimiento)
+                    @Html.ValidationMessageFor(x => x.FechaNacimiento, "", new { @class = "text-danger" })
                 </div>
                 <div class="col-sm-9 form-group">
                     <label for="nacionalidad">Nacionalidad:</label>
@@ -60,11 +61,26 @@
                 <div class="col-sm-9 form-group">
                     <label for="email">Email:</label>
                     @Html.TextBoxFor(x => x.Email, new { @class = "form-control", @required = "required", @type = "email" })
-                    @Html.ValidationMessageFor(x => x.Nombres)
+                    @Html.ValidationMessageFor(x => x.Email, "", new { @class = "text-danger" })
                 </div>
                 <div class="col-sm-9 form-group">
                     <label for="tel">Teléfono:</label>
                     @Html.TextBoxFor(x => x.Telefono, new { @class = "form-control", @required = "required", @type = "number" })
+                </div>
+                <div class="col-sm-9 form-group">
+                    <label for="Profesion">Profesión:</label>
+                    @Html.TextBoxFor(x => x.Profesion, new { @class = "form-control"})
+                    @Html.ValidationMessageFor(x => x.Profesion, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-sm-9 form-group">
+                    <label for="Git">Git Usuario:</label>
+                    @Html.TextBoxFor(x => x.Git, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(x => x.Git, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-sm-9 form-group">
+                    <label for="Linkedin">Linkedin:</label>
+                    @Html.TextBoxFor(x => x.Linkedin, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(x => x.Linkedin, "", new { @class = "text-danger" })
                 </div>
                 <div class="col-sm-6 form-group">
                     <button type="submit" class="btn btn-success btn-lg">Guardar</button>

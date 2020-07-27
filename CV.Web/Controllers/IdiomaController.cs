@@ -12,7 +12,7 @@ namespace CV.Web.Controllers
 {
     public class IdiomaController : Controller
     {
-        // GET: Idioma
+        
         [HttpGet]
         public ActionResult Index()
         {
@@ -66,6 +66,7 @@ namespace CV.Web.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Nuevo(IdiomaDTO idioma)
         {
             HttpClient clienteHttp = new HttpClient();
@@ -118,6 +119,7 @@ namespace CV.Web.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Actualizar(IdiomaDTO idioma)
         {
             HttpClient clienteHttp = new HttpClient();

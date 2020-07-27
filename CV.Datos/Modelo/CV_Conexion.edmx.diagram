@@ -5,20 +5,19 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="eb02f27157e4490c830dd6582c62ba83" Name="Diagram1">
-        <EntityTypeShape EntityType="CVModelo.Conocimiento" Width="1.5" PointX="3" PointY="1.875" />
-        <EntityTypeShape EntityType="CVModelo.DatosPersonales" Width="1.5" PointX="3" PointY="13.125" />
-        <EntityTypeShape EntityType="CVModelo.Educacion" Width="1.5" PointX="3" PointY="20.375" />
-        <EntityTypeShape EntityType="CVModelo.ExperienciaLaboral" Width="1.5" PointX="3" PointY="4.625" />
-        <EntityTypeShape EntityType="CVModelo.Idioma" Width="1.5" PointX="3" PointY="17.5" />
-        <EntityTypeShape EntityType="CVModelo.Imagen" Width="1.5" PointX="3" PointY="10.625" />
-        <EntityTypeShape EntityType="CVModelo.Objetivo" Width="1.5" PointX="3" PointY="8.125" />
-        <EntityTypeShape EntityType="CVModelo.Usuario" Width="1.5" PointX="0.75" PointY="10.875" />
+        <EntityTypeShape EntityType="CVModelo.Conocimiento" Width="1.5" PointX="3" PointY="18.875" />
+        <EntityTypeShape EntityType="CVModelo.DatosPersonales" Width="1.5" PointX="3" PointY="1.75" />
+        <EntityTypeShape EntityType="CVModelo.Educacion" Width="1.5" PointX="3" PointY="9.125" />
+        <EntityTypeShape EntityType="CVModelo.ExperienciaLaboral" Width="1.5" PointX="3" PointY="12.5" />
+        <EntityTypeShape EntityType="CVModelo.Idioma" Width="1.5" PointX="3" PointY="16" />
+        <EntityTypeShape EntityType="CVModelo.Imagen" Width="1.5" PointX="5.75" PointY="0.75" />
+        <EntityTypeShape EntityType="CVModelo.Objetivo" Width="1.5" PointX="3" PointY="6.625" />
+        <EntityTypeShape EntityType="CVModelo.Usuario" Width="1.5" PointX="0.75" PointY="10" />
         <AssociationConnector Association="CVModelo.FK_Conocimiento_Usuario" />
         <AssociationConnector Association="CVModelo.FK_DatosPersonales_Usuario" />
         <AssociationConnector Association="CVModelo.FK_Educacion_Usuario" />
         <AssociationConnector Association="CVModelo.FK_ExperienciaLaboral_Usuario" />
         <AssociationConnector Association="CVModelo.FK_Idioma_Usuario" />
-        <AssociationConnector Association="CVModelo.FK_Imagen_Usuario" />
         <AssociationConnector Association="CVModelo.FK_Objetivo_Usuario" />
       </Diagram>
     </edmx:Diagrams>

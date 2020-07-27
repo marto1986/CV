@@ -24,8 +24,9 @@ namespace CV.Datos.Modelo
             this.Idioma = new HashSet<Idioma>();
             this.Imagen = new HashSet<Imagen>();
             this.Objetivo = new HashSet<Objetivo>();
+
         }
-    
+
         public int UsuarioId { get; set; }
         public string UsuarioNombre { get; set; }
         public string UsuarioPassword { get; set; }
@@ -42,6 +43,7 @@ namespace CV.Datos.Modelo
         public virtual ICollection<Idioma> Idioma { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Imagen> Imagen { get; set; }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Objetivo> Objetivo { get; set; }
     }

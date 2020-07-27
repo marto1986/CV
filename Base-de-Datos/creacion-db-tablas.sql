@@ -1,6 +1,6 @@
 USE [master]
 GO
-/****** Object:  Database [CV]    Script Date: 15/7/2020 12:24:38 ******/
+/****** Object:  Database [CV]    Script Date: 22/7/2020 11:09:58 ******/
 CREATE DATABASE [CV]
  CONTAINMENT = NONE
  ON  PRIMARY 
@@ -89,7 +89,7 @@ ALTER DATABASE SCOPED CONFIGURATION SET QUERY_OPTIMIZER_HOTFIXES = OFF;
 GO
 USE [CV]
 GO
-/****** Object:  Table [dbo].[Conocimiento]    Script Date: 15/7/2020 12:24:40 ******/
+/****** Object:  Table [dbo].[Conocimiento]    Script Date: 22/7/2020 11:09:59 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -105,7 +105,7 @@ CREATE TABLE [dbo].[Conocimiento](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[DatosPersonales]    Script Date: 15/7/2020 12:24:41 ******/
+/****** Object:  Table [dbo].[DatosPersonales]    Script Date: 22/7/2020 11:09:59 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -123,13 +123,16 @@ CREATE TABLE [dbo].[DatosPersonales](
 	[Email] [varchar](50) NULL,
 	[Telefono] [int] NULL,
 	[UsuarioId] [int] NOT NULL,
+	[Profesion] [varchar](50) NULL,
+	[Git] [varchar](50) NULL,
+	[Linkedin] [varchar](50) NULL,
  CONSTRAINT [PK_DatosPersonales] PRIMARY KEY CLUSTERED 
 (
 	[DatospersonalesId] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Educacion]    Script Date: 15/7/2020 12:24:41 ******/
+/****** Object:  Table [dbo].[Educacion]    Script Date: 22/7/2020 11:09:59 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -148,7 +151,7 @@ CREATE TABLE [dbo].[Educacion](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[ExperienciaLaboral]    Script Date: 15/7/2020 12:24:41 ******/
+/****** Object:  Table [dbo].[ExperienciaLaboral]    Script Date: 22/7/2020 11:09:59 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -168,7 +171,7 @@ CREATE TABLE [dbo].[ExperienciaLaboral](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Idioma]    Script Date: 15/7/2020 12:24:41 ******/
+/****** Object:  Table [dbo].[Idioma]    Script Date: 22/7/2020 11:09:59 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -185,7 +188,7 @@ CREATE TABLE [dbo].[Idioma](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Imagen]    Script Date: 15/7/2020 12:24:41 ******/
+/****** Object:  Table [dbo].[Imagen]    Script Date: 22/7/2020 11:09:59 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -200,7 +203,7 @@ CREATE TABLE [dbo].[Imagen](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Objetivo]    Script Date: 15/7/2020 12:24:41 ******/
+/****** Object:  Table [dbo].[Objetivo]    Script Date: 22/7/2020 11:09:59 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -215,7 +218,7 @@ CREATE TABLE [dbo].[Objetivo](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Usuario]    Script Date: 15/7/2020 12:24:41 ******/
+/****** Object:  Table [dbo].[Usuario]    Script Date: 22/7/2020 11:09:59 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -230,9 +233,15 @@ CREATE TABLE [dbo].[Usuario](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
+SET IDENTITY_INSERT [dbo].[Conocimiento] ON 
+GO
+INSERT [dbo].[Conocimiento] ([ConocimientoId], [UsuarioId], [Descripcion], [Nivel]) VALUES (1, 5008, N'Paquete Office', N'Alto')
+GO
+SET IDENTITY_INSERT [dbo].[Conocimiento] OFF
+GO
 SET IDENTITY_INSERT [dbo].[DatosPersonales] ON 
 GO
-INSERT [dbo].[DatosPersonales] ([DatospersonalesId], [Nombres], [Apellido], [FechaNacimiento], [Nacionalidad], [LugarNacimiento], [Domicilio], [NroDomicilio], [CodigoPostal], [Email], [Telefono], [UsuarioId]) VALUES (2012, N'Martín', N'Matias', CAST(N'2020-06-28' AS Date), N'Argentino', N'Caba', N'Ayala', 100, N'1752', N'martinmatias@outlook.com', 1162317237, 5008)
+INSERT [dbo].[DatosPersonales] ([DatospersonalesId], [Nombres], [Apellido], [FechaNacimiento], [Nacionalidad], [LugarNacimiento], [Domicilio], [NroDomicilio], [CodigoPostal], [Email], [Telefono], [UsuarioId], [Profesion], [Git], [Linkedin]) VALUES (2012, N'Martín', N'Matias', CAST(N'2020-06-28' AS Date), N'Argentino', N'Caba', N'Ayala', 100, N'1752', N'martinmatias@outlook.com', 1162317237, 5008, NULL, NULL, NULL)
 GO
 SET IDENTITY_INSERT [dbo].[DatosPersonales] OFF
 GO
@@ -255,6 +264,18 @@ GO
 INSERT [dbo].[Idioma] ([IdiomaId], [UsuarioId], [NivelEscrito], [NivelOral], [Descripcion]) VALUES (1, 5008, N'Intermedio', N'Bajo', N'Inglés')
 GO
 SET IDENTITY_INSERT [dbo].[Idioma] OFF
+GO
+SET IDENTITY_INSERT [dbo].[Imagen] ON 
+GO
+INSERT [dbo].[Imagen] ([ImagenId], [UsuarioId], [Nombre]) VALUES (3, 5008, N'profile.png')
+GO
+SET IDENTITY_INSERT [dbo].[Imagen] OFF
+GO
+SET IDENTITY_INSERT [dbo].[Objetivo] ON 
+GO
+INSERT [dbo].[Objetivo] ([ObjetivoId], [UsuarioId], [Descripcion]) VALUES (1, 5008, N'Desarrollarme como prefesional')
+GO
+SET IDENTITY_INSERT [dbo].[Objetivo] OFF
 GO
 SET IDENTITY_INSERT [dbo].[Usuario] ON 
 GO
@@ -286,11 +307,6 @@ ALTER TABLE [dbo].[Idioma]  WITH CHECK ADD  CONSTRAINT [FK_Idioma_Usuario] FOREI
 REFERENCES [dbo].[Usuario] ([UsuarioId])
 GO
 ALTER TABLE [dbo].[Idioma] CHECK CONSTRAINT [FK_Idioma_Usuario]
-GO
-ALTER TABLE [dbo].[Imagen]  WITH CHECK ADD  CONSTRAINT [FK_Imagen_Usuario] FOREIGN KEY([UsuarioId])
-REFERENCES [dbo].[Usuario] ([UsuarioId])
-GO
-ALTER TABLE [dbo].[Imagen] CHECK CONSTRAINT [FK_Imagen_Usuario]
 GO
 ALTER TABLE [dbo].[Objetivo]  WITH CHECK ADD  CONSTRAINT [FK_Objetivo_Usuario] FOREIGN KEY([UsuarioId])
 REFERENCES [dbo].[Usuario] ([UsuarioId])

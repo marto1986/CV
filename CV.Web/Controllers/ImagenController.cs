@@ -8,6 +8,10 @@ using System.Web;
 using System.Web.Mvc;
 using System.Net.Http.Formatting;
 using CV.Web.Models.ViewModels;
+using System.Drawing;
+using System.Drawing.Imaging;
+using System.Drawing.Drawing2D;
+using System.IO;
 
 namespace CV.Web.Controllers
 {
@@ -15,7 +19,7 @@ namespace CV.Web.Controllers
     {
         ImageViewModel img = new ImageViewModel();
 
-        // GET: Imagen
+        
         [HttpGet]
         public ActionResult Index()
         {
@@ -82,33 +86,41 @@ namespace CV.Web.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Nuevo(ImagenDTO imagen, ImageViewModel img)
         {
-            
-            string ImageName = System.IO.Path.GetFileName(img.foto.FileName);
-            imagen.Nombre = ImageName;
+            var random = new Random().Next(0, 100);
+            string extension = Path.GetExtension(img.foto.FileName);
+            bool extensionOk = ValidarExtension(extension);
 
-            HttpClient clienteHttp = new HttpClient();
-            clienteHttp.BaseAddress = new Uri("http://localhost:5476/");
-
-            var request = clienteHttp.PostAsync("api/Imagen", imagen, new JsonMediaTypeFormatter()).Result;
-
-            if (request.IsSuccessStatusCode)
+            if (extensionOk == true)
             {
-                
-                string physicalPath = Server.MapPath("~/Content/Imagenes/Upload/" + ImageName);
+                Redimensionar(img.foto.InputStream);
+                string ImageName = System.IO.Path.GetFileName(img.foto.FileName);
+                imagen.Nombre = ImageName;
 
-                img.foto.SaveAs(physicalPath);
+                HttpClient clienteHttp = new HttpClient();
+                clienteHttp.BaseAddress = new Uri("http://localhost:5476/");
 
-                var resultString = request.Content.ReadAsStringAsync().Result;
-                var correcto = JsonConvert.DeserializeObject<bool>(resultString);
+                var request = clienteHttp.PostAsync("api/Imagen", imagen, new JsonMediaTypeFormatter()).Result;
 
-                if (correcto)
+                if (request.IsSuccessStatusCode)
                 {
-                    return RedirectToAction("index");
-                }
 
-                return View(imagen);
+                    string physicalPath = Server.MapPath("~/Content/Imagenes/Upload/" + ImageName);
+
+                    img.foto.SaveAs(physicalPath);
+
+                    var resultString = request.Content.ReadAsStringAsync().Result;
+                    var correcto = JsonConvert.DeserializeObject<bool>(resultString);
+
+                    if (correcto)
+                    {
+                        return RedirectToAction("index");
+                    }
+
+                    return View(imagen);
+                }
             }
 
             return View();
@@ -156,48 +168,57 @@ namespace CV.Web.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Actualizar(ImagenDTO imagen, ImageViewModel img)
         {
-            string ImageName = System.IO.Path.GetFileName(img.foto.FileName);
-            imagen.Nombre = ImageName;
+            var random = new Random().Next(0, 100);
+            string extension = Path.GetExtension(img.foto.FileName);
+            bool extensionOk = ValidarExtension(extension);
+
+            if (extensionOk == true)
+            {
+                Image imagenRedimensionada = Redimensionar(img.foto.InputStream);
+                string ImageName = System.IO.Path.GetFileName(img.foto.FileName);
+                ImageName = random + ImageName;
+                imagen.Nombre = ImageName;
 
             HttpClient clienteHttp = new HttpClient();
             clienteHttp.BaseAddress = new Uri("http://localhost:5476/");
 
             var request = clienteHttp.PutAsync("api/Imagen/", imagen, new JsonMediaTypeFormatter()).Result;
 
-            if (request.IsSuccessStatusCode)
-            {
-                if(Convert.ToBoolean(System.IO.File.Exists(img.foto.FileName)) == true)
+                if (request.IsSuccessStatusCode)
                 {
-                    #region Elimina la imagen del servidor
-                    var peticion = clienteHttp.GetAsync("api/Imagen").Result;
+                    
+                        #region Elimina la imagen del servidor
+                        var peticion = clienteHttp.DeleteAsync("api/Imagen/" + imagen.ImagenId).Result;
 
-                    if (peticion.IsSuccessStatusCode)
-                    {
-                        var resultadoString = request.Content.ReadAsStringAsync().Result;
-                        var listado = JsonConvert.DeserializeObject<List<ImagenDTO>>(resultadoString);
-
-                        if (ViewBag.ObjUsuario != null)
+                        if (peticion.IsSuccessStatusCode)
                         {
-                            var resultado = listado.FirstOrDefault(x => x.UsuarioId == ViewBag.ObjUsuario.UsuarioId);
-                            System.IO.File.Delete(resultado.Nombre);
+                            var resultadoStringEliminar = request.Content.ReadAsStringAsync().Result;
+                            var listado = JsonConvert.DeserializeObject<List<ImagenDTO>>(resultadoStringEliminar);
+
+                            if (ViewBag.ObjUsuario != null)
+                            {
+                                var resultado = listado.FirstOrDefault(x => x.UsuarioId == ViewBag.ObjUsuario.UsuarioId);
+                                System.IO.File.Delete(resultado.Nombre);
+                            }
                         }
-                    }
+                        #endregion
+                    
+
+                    #region Carga la nueva imagen
+                        string physicalPath = Server.MapPath("~/Content/Imagenes/Upload/" + ImageName);
+                        img.foto.SaveAs(physicalPath);
                     #endregion
-                }
 
-                #region Carga la nueva imagen
-                string physicalPath = Server.MapPath("~/Content/Imagenes/Upload/" + ImageName);
-                img.foto.SaveAs(physicalPath);
-                #endregion
+                    var resultString = request.Content.ReadAsStringAsync().Result;
+                    var correcto = JsonConvert.DeserializeObject<bool>(resultString);
 
-                var resultString = request.Content.ReadAsStringAsync().Result;
-                var correcto = JsonConvert.DeserializeObject<bool>(resultString);
-
-                if (correcto)
-                {
-                    return RedirectToAction("index");
+                    if (correcto)
+                    {
+                        return RedirectToAction("index");
+                    }
                 }
 
                 return View(imagen);
@@ -216,12 +237,10 @@ namespace CV.Web.Controllers
 
             if (request.IsSuccessStatusCode)
             {
-                if (System.IO.File.Exists(img.foto.FileName) == true)
-                {
-                    #region Elimina la imagen del servidor
-                    var peticion = clienteHttp.GetAsync("api/Imagen").Result;
 
-                    if (peticion.IsSuccessStatusCode)
+                #region Elimina la imagen del servidor
+
+                if (request.IsSuccessStatusCode)
                     {
                         var resultadoString = request.Content.ReadAsStringAsync().Result;
                         var listado = JsonConvert.DeserializeObject<List<ImagenDTO>>(resultadoString);
@@ -231,11 +250,9 @@ namespace CV.Web.Controllers
                             var resultado = listado.FirstOrDefault(x => x.UsuarioId == ViewBag.ObjUsuario.UsuarioId);
                             System.IO.File.Delete(resultado.Nombre);
                         }
-                    }
+                   }
                     #endregion
-                }
-
-
+                
                 var resultString = request.Content.ReadAsStringAsync().Result;
                 var correcto = JsonConvert.DeserializeObject<bool>(resultString);
 
@@ -286,6 +303,79 @@ namespace CV.Web.Controllers
             }
 
             return View();
+        }
+
+        /// <summary>
+        /// Método para verificar la extensión del archivo
+        /// </summary>
+        /// <param name="extension"></param>
+        /// <returns></returns>
+        private bool ValidarExtension(string extension)
+        {
+            extension = extension.ToLower();
+            switch (extension)
+            {
+                case ".jpg":
+                    return true;
+                case ".png":
+                    return true;
+                case ".gif":
+                    return true;
+                case ".jpeg":
+                    return true;
+                default:
+                    return false;
+            }
+        }
+
+        /// <summary>
+        /// Método privado para redimencionar la imagen a 200px
+        /// </summary>
+        /// <param name="imgPhoto"></param>
+        /// <returns></returns>
+        private static Image Redimensionar(Stream stream)
+        {
+            // Se crea un objeto Image, que contiene las propiedades de la imagen
+            Image img = Image.FromStream(stream);
+
+            // Tamaño máximo de la imagen (altura o anchura)
+            const int max = 200;
+
+            int h = img.Height;
+            int w = img.Width;
+            int newH, newW;
+
+            if (h > w && h > max)
+            {
+                // Si la imagen es vertical y la altura es mayor que max,
+                // se redefinen las dimensiones.
+                newH = max;
+                newW = (w * max) / h;
+            }
+            else if (w > h && w > max)
+            {
+                // Si la imagen es horizontal y la anchura es mayor que max,
+                // se redefinen las dimensiones.
+                newW = max;
+                newH = (h * max) / w;
+            }
+            else
+            {
+                newH = h;
+                newW = w;
+            }
+            if (h != newH && w != newW)
+            {
+                // Si las dimensiones cambiaron, se modifica la imagen
+                Bitmap newImg = new Bitmap(img, newW, newH);
+                Graphics g = Graphics.FromImage(newImg);
+                g.InterpolationMode =
+                  System.Drawing.Drawing2D.InterpolationMode.HighQualityBilinear;
+                g.DrawImage(img, 0, 0, newImg.Width, newImg.Height);
+                return newImg;
+            }
+            else
+                return img;
         }
     }
 }

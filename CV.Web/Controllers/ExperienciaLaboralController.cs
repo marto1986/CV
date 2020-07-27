@@ -12,7 +12,7 @@ namespace CV.Web.Controllers
 {
     public class ExperienciaLaboralController : Controller
     {
-        // GET: ExperienciaLaboral
+        
         [HttpGet]
         public ActionResult Index()
         {
@@ -66,6 +66,7 @@ namespace CV.Web.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Nuevo(ExperienciaLaboralDTO experiencia)
         {
             HttpClient clienteHttp = new HttpClient();
@@ -118,6 +119,7 @@ namespace CV.Web.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Actualizar(ExperienciaLaboralDTO experiencia)
         {
             HttpClient clienteHttp = new HttpClient();

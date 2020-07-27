@@ -1,14 +1,14 @@
 ﻿<div class="wrapper">
     <div class="sidebar-wrapper">
         <div class="profile-container">
-        @if(ViewBag.Imagen != null)
-        {
-            <img class="profile" src="~/Content/Imagenes/Upload/@ViewBag.Imagen.Nombre" alt="@ViewBag.Imagen.Nombre" />
-        }
+            @if(ViewBag.Imagen != null)
+            {
+                <img class="profile img-thumbnail" src="~/Content/Imagenes/Upload/@ViewBag.Imagen.Nombre" alt="@ViewBag.Imagen.Nombre" />
+            }
             @if (ViewBag.DatosPersonales != null)
             {
                 <h1 class="name">@ViewBag.DatosPersonales.Nombres @ViewBag.DatosPersonales.Apellido</h1>
-                <h3 class="tagline">Full Stack Developer</h3>
+                <h3 class="tagline">@ViewBag.DatosPersonales.Profesion</h3>
             }
         </div><!--//profile-container-->
 
@@ -23,9 +23,8 @@
                     <li><i class="fa fa-street-view"></i> Código Postal: @ViewBag.DatosPersonales.CodigoPostal</li>
                     <li><i class="fa fa-user-circle"></i> Nacimiento en : @ViewBag.DatosPersonales.LugarNacimiento</li>
                     <li><i class="fa fa-address-card"></i> Nacionalidad: @ViewBag.DatosPersonales.Nacionalidad</li>
-                    <li class="linkedin"><i class="fa fa-linkedin"></i><a href="#" target="_blank"> linkedin.com/in/alandoe</a></li>
-                    <li class="github"><i class="fa fa-gitlab"></i><a href="#" target="_blank"> github.com/username</a></li>
-                    <li class="twitter"><i class="fa fa-twitter"></i><a href="https://twitter.com/3rdwave_themes" target="_blank"> twittername</a></li>
+                    <li class="linkedin"><i class="fa fa-linkedin"></i><a href="@ViewBag.DatosPersonales.Linkedin" target="_blank"> @ViewBag.DatosPersonales.Linkedin</a></li>
+                    <li class="github"><i class="fa fa-github"></i><a href="@ViewBag.DatosPersonales.Git" target="_blank"> @ViewBag.DatosPersonales.Git</a></li>
                 }
             </ul>
         </div><!--//contact-container-->
@@ -44,19 +43,6 @@
             </div><!--//item-->
             
         </div><!--//education-container-->
-
-        <div class="languages-container container-block">
-            <h2 class="container-block-title">Idiomas</h2>
-            @if (ViewBag.requestEducacion != null)
-            {
-                foreach (IdiomaDTO idioma in ViewBag.Idioma)
-                { 
-                    <ul class="list-unstyled interests-list">
-                        <li>@idioma.Descripcion <span class="lang-desc">@idioma.NivelEscrito (Escrito)</span> <span class="lang-desc">@idioma.NivelOral (Oral)</span></li>
-                    </ul>
-                }
-            }
-        </div>
 
     </div><!--//sidebar-wrapper-->
 
@@ -94,29 +80,47 @@
             }
         </section><!--//section-->
 
-        <section class="section projects-section">
-            <h2 class="section-title"><span class="icon-holder"><i class="fas fa-archive"></i></span>Projects</h2>
-            <div class="intro">
-                <p>You can list your side projects or open source libraries in this section. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum et ligula in nunc bibendum fringilla a eu lectus.</p>
-            </div><!--//intro-->
-            <div class="item">
-                <span class="project-title"><a href="https://themes.3rdwavemedia.com/bootstrap-templates/startup/coderpro-bootstrap-4-startup-template-for-software-projects/" target="_blank">CoderPro</a></span> - <span class="project-tagline">A responsive website template designed to help developers launch their software projects. </span>
+        <section class="skills-section section">
+            <h2 class="section-title"><span class="icon-holder"><i class="fa fa-rocket"></i></span>Idiomas</h2>
+            <div class="skillset">
+                @if (ViewBag.Idioma != null)
+                {
+                    foreach (IdiomaDTO idioma in ViewBag.Idioma)
+                    {
+                        <div class="item">
+                            <h3 class="level-title">@idioma.Descripcion</h3>
+                            <div class="progress level-bar">
+                                @if (idioma.NivelEscrito == "Alto")
+                                {
+                                    <div class="progress-bar theme-progress-bar" role="progressbar" style="width:100%" aria-valuenow="99" aria-valuemin="0" aria-valuemax="100"></div>
+                                }
+                                @if (idioma.NivelEscrito == "Intermedio")
+                                {
+                                    <div class="progress-bar theme-progress-bar" role="progressbar" style="width:50%" aria-valuenow="99" aria-valuemin="0" aria-valuemax="100"></div>
+                                }
+                                @if (idioma.NivelEscrito == "Bajo")
+                                {
+                                    <div class="progress-bar theme-progress-bar" role="progressbar" style="width:25%" aria-valuenow="99" aria-valuemin="0" aria-valuemax="100"></div>
+                                }
+                                @if (idioma.NivelOral == "Alto")
+                                {
+                                    <div class="progress-bar theme-progress-bar" role="progressbar" style="width:100%" aria-valuenow="99" aria-valuemin="0" aria-valuemax="100"></div>
+                                }
+                                @if (idioma.NivelOral == "Intermedio")
+                                {
+                                    <div class="progress-bar theme-progress-bar" role="progressbar" style="width:50%" aria-valuenow="99" aria-valuemin="0" aria-valuemax="100"></div>
+                                }
+                                @if (idioma.NivelOral == "Bajo")
+                                {
+                                    <div class="progress-bar theme-progress-bar" role="progressbar" style="width:25%" aria-valuenow="99" aria-valuemin="0" aria-valuemax="100"></div>
+                                }
+                            </div>
+                        </div>
+                    }
+                }
 
-            </div><!--//item-->
-            <div class="item">
-                <span class="project-title"><a href="https://themes.3rdwavemedia.com/bootstrap-templates/startup/launch-bootstrap-4-template-for-saas-businesses/" target="_blank">Launch</a></span> - <span class="project-tagline">A responsive website template designed to help startups promote their products or services.</span>
-            </div><!--//item-->
-            <div class="item">
-                <span class="project-title"><a href="https://themes.3rdwavemedia.com/bootstrap-templates/resume/devcard-bootstrap-4-vcard-portfolio-template-for-software-developers/" target="_blank">DevCard</a></span> - <span class="project-tagline">A portfolio website template designed for software developers.</span>
-            </div><!--//item-->
-            <div class="item">
-                <span class="project-title"><a href="https://themes.3rdwavemedia.com/bootstrap-templates/startup/bootstrap-template-for-mobile-apps-nova-pro/" target="_blank">Nova Pro</a></span> - <span class="project-tagline">A responsive Bootstrap theme designed to help app developers promote their mobile apps</span>
-            </div><!--//item-->
-            <div class="item">
-                <span class="project-title"><a href="http://themes.3rdwavemedia.com/website-templates/responsive-bootstrap-theme-web-development-agencies-devstudio/" target="_blank">DevStudio</a></span> -
-                <span class="project-tagline">A responsive website template designed to help web developers/designers market their services. </span>
-            </div><!--//item-->
-        </section><!--//section-->
+            </div>
+        </section><!--//skills-section-->
 
         <section class="skills-section section">
             <h2 class="section-title"><span class="icon-holder"><i class="fa fa-rocket"></i></span>Habilidades &amp; Conocimientos</h2>
