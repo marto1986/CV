@@ -11,7 +11,7 @@
           </Key>
           <Property Name="ConocimientoId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="UsuarioId" Type="int" Nullable="false" />
-          <Property Name="Descripcion" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="200" Nullable="false" />
           <Property Name="Nivel" Type="varchar" MaxLength="20" Nullable="false" />
         </EntityType>
         <EntityType Name="DatosPersonales">
@@ -19,20 +19,20 @@
             <PropertyRef Name="DatospersonalesId" />
           </Key>
           <Property Name="DatospersonalesId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Nombres" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="Apellido" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Nombres" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Apellido" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="FechaNacimiento" Type="date" Nullable="false" />
-          <Property Name="Nacionalidad" Type="varchar" MaxLength="20" Nullable="false" />
-          <Property Name="LugarNacimiento" Type="varchar" MaxLength="30" Nullable="false" />
-          <Property Name="Domicilio" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Nacionalidad" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="LugarNacimiento" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="Domicilio" Type="varchar" MaxLength="200" Nullable="false" />
           <Property Name="NroDomicilio" Type="int" />
           <Property Name="CodigoPostal" Type="varchar" MaxLength="10" />
-          <Property Name="Email" Type="varchar" MaxLength="50" />
+          <Property Name="Email" Type="varchar" MaxLength="100" />
           <Property Name="Telefono" Type="int" />
           <Property Name="UsuarioId" Type="int" Nullable="false" />
-          <Property Name="Profesion" Type="varchar" MaxLength="50" />
-          <Property Name="Git" Type="varchar" MaxLength="50" />
-          <Property Name="Linkedin" Type="varchar" MaxLength="50" />
+          <Property Name="Profesion" Type="varchar" MaxLength="100" />
+          <Property Name="Git" Type="varchar" MaxLength="100" />
+          <Property Name="Linkedin" Type="varchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="Educacion">
           <Key>
@@ -40,11 +40,13 @@
           </Key>
           <Property Name="EducacionId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="UsuarioId" Type="int" Nullable="false" />
-          <Property Name="Titulo" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="EstablecimientoEducativo" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Titulo" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="EstablecimientoEducativo" Type="varchar" MaxLength="200" Nullable="false" />
           <Property Name="FechaDesde" Type="date" Nullable="false" />
           <Property Name="FechaHasta" Type="date" Nullable="false" />
           <Property Name="Estado" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Comentario" Type="varchar" MaxLength="200" />
+          <Property Name="link" Type="varchar" MaxLength="200" />
         </EntityType>
         <EntityType Name="ExperienciaLaboral">
           <Key>
@@ -52,12 +54,13 @@
           </Key>
           <Property Name="ExperienciaLaboralId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="UsuarioId" Type="int" Nullable="false" />
-          <Property Name="Puesto" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="Descripcion" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Puesto" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="200" Nullable="false" />
           <Property Name="FechaDesde" Type="date" Nullable="false" />
-          <Property Name="FechaHasta" Type="date" Nullable="false" />
+          <Property Name="FechaHasta" Type="date" />
           <Property Name="ReferenciaNombre" Type="varchar" MaxLength="50" />
           <Property Name="ReferenciaTelefono" Type="int" />
+          <Property Name="Actualidad" Type="bit" />
         </EntityType>
         <EntityType Name="Idioma">
           <Key>
@@ -67,7 +70,7 @@
           <Property Name="UsuarioId" Type="int" Nullable="false" />
           <Property Name="NivelEscrito" Type="varchar" MaxLength="30" Nullable="false" />
           <Property Name="NivelOral" Type="varchar" MaxLength="30" Nullable="false" />
-          <Property Name="Descripcion" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="200" Nullable="false" />
         </EntityType>
         <EntityType Name="Imagen">
           <Key>
@@ -75,7 +78,7 @@
           </Key>
           <Property Name="ImagenId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="UsuarioId" Type="int" Nullable="false" />
-          <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="200" Nullable="false" />
         </EntityType>
         <EntityType Name="Objetivo">
           <Key>
@@ -83,7 +86,7 @@
           </Key>
           <Property Name="ObjetivoId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="UsuarioId" Type="int" Nullable="false" />
-          <Property Name="Descripcion" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="200" Nullable="false" />
         </EntityType>
         <EntityType Name="Usuario">
           <Key>
@@ -153,6 +156,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Imagen_Usuario">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+          <End Role="Imagen" Type="Self.Imagen" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="UsuarioId" />
+            </Principal>
+            <Dependent Role="Imagen">
+              <PropertyRef Name="UsuarioId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Objetivo_Usuario">
           <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
           <End Role="Objetivo" Type="Self.Objetivo" Multiplicity="*" />
@@ -194,6 +209,10 @@
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="Idioma" EntitySet="Idioma" />
           </AssociationSet>
+          <AssociationSet Name="FK_Imagen_Usuario" Association="Self.FK_Imagen_Usuario">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Imagen" EntitySet="Imagen" />
+          </AssociationSet>
           <AssociationSet Name="FK_Objetivo_Usuario" Association="Self.FK_Objetivo_Usuario">
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="Objetivo" EntitySet="Objetivo" />
@@ -232,6 +251,10 @@
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="Idioma" EntitySet="Idioma" />
           </AssociationSet>
+          <AssociationSet Name="FK_Imagen_Usuario" Association="CVModelo.FK_Imagen_Usuario">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Imagen" EntitySet="Imagen" />
+          </AssociationSet>
           <AssociationSet Name="FK_Objetivo_Usuario" Association="CVModelo.FK_Objetivo_Usuario">
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="Objetivo" EntitySet="Objetivo" />
@@ -243,7 +266,7 @@
           </Key>
           <Property Name="ConocimientoId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="UsuarioId" Type="Int32" Nullable="false" />
-          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="Nivel" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Usuario" Relationship="CVModelo.FK_Conocimiento_Usuario" FromRole="Conocimiento" ToRole="Usuario" />
         </EntityType>
@@ -252,20 +275,20 @@
             <PropertyRef Name="DatospersonalesId" />
           </Key>
           <Property Name="DatospersonalesId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Nombres" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Apellido" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Nombres" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Apellido" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="FechaNacimiento" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="Nacionalidad" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="LugarNacimiento" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
-          <Property Name="Domicilio" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Nacionalidad" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="LugarNacimiento" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Domicilio" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="NroDomicilio" Type="Int32" />
           <Property Name="CodigoPostal" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="Telefono" Type="Int32" />
           <Property Name="UsuarioId" Type="Int32" Nullable="false" />
-          <Property Name="Profesion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Git" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Linkedin" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Profesion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Git" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Linkedin" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Usuario" Relationship="CVModelo.FK_DatosPersonales_Usuario" FromRole="DatosPersonales" ToRole="Usuario" />
         </EntityType>
         <EntityType Name="Educacion">
@@ -274,11 +297,13 @@
           </Key>
           <Property Name="EducacionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="UsuarioId" Type="Int32" Nullable="false" />
-          <Property Name="Titulo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="EstablecimientoEducativo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Titulo" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="EstablecimientoEducativo" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="FechaDesde" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="FechaHasta" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="Estado" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Comentario" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="link" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Usuario" Relationship="CVModelo.FK_Educacion_Usuario" FromRole="Educacion" ToRole="Usuario" />
         </EntityType>
         <EntityType Name="ExperienciaLaboral">
@@ -287,12 +312,13 @@
           </Key>
           <Property Name="ExperienciaLaboralId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="UsuarioId" Type="Int32" Nullable="false" />
-          <Property Name="Puesto" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Puesto" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="FechaDesde" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="FechaHasta" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="FechaHasta" Type="DateTime" Precision="0" />
           <Property Name="ReferenciaNombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="ReferenciaTelefono" Type="Int32" />
+          <Property Name="Actualidad" Type="Boolean" />
           <NavigationProperty Name="Usuario" Relationship="CVModelo.FK_ExperienciaLaboral_Usuario" FromRole="ExperienciaLaboral" ToRole="Usuario" />
         </EntityType>
         <EntityType Name="Idioma">
@@ -303,7 +329,7 @@
           <Property Name="UsuarioId" Type="Int32" Nullable="false" />
           <Property Name="NivelEscrito" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
           <Property Name="NivelOral" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
-          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Usuario" Relationship="CVModelo.FK_Idioma_Usuario" FromRole="Idioma" ToRole="Usuario" />
         </EntityType>
         <EntityType Name="Imagen">
@@ -312,7 +338,8 @@
           </Key>
           <Property Name="ImagenId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="UsuarioId" Type="Int32" Nullable="false" />
-          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Usuario" Relationship="CVModelo.FK_Imagen_Usuario" FromRole="Imagen" ToRole="Usuario" />
         </EntityType>
         <EntityType Name="Objetivo">
           <Key>
@@ -320,7 +347,7 @@
           </Key>
           <Property Name="ObjetivoId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="UsuarioId" Type="Int32" Nullable="false" />
-          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Usuario" Relationship="CVModelo.FK_Objetivo_Usuario" FromRole="Objetivo" ToRole="Usuario" />
         </EntityType>
         <EntityType Name="Usuario">
@@ -335,6 +362,7 @@
           <NavigationProperty Name="Educacion" Relationship="CVModelo.FK_Educacion_Usuario" FromRole="Usuario" ToRole="Educacion" />
           <NavigationProperty Name="ExperienciaLaboral" Relationship="CVModelo.FK_ExperienciaLaboral_Usuario" FromRole="Usuario" ToRole="ExperienciaLaboral" />
           <NavigationProperty Name="Idioma" Relationship="CVModelo.FK_Idioma_Usuario" FromRole="Usuario" ToRole="Idioma" />
+          <NavigationProperty Name="Imagen" Relationship="CVModelo.FK_Imagen_Usuario" FromRole="Usuario" ToRole="Imagen" />
           <NavigationProperty Name="Objetivo" Relationship="CVModelo.FK_Objetivo_Usuario" FromRole="Usuario" ToRole="Objetivo" />
         </EntityType>
         <Association Name="FK_Conocimiento_Usuario">
@@ -397,6 +425,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Imagen_Usuario">
+          <End Type="CVModelo.Usuario" Role="Usuario" Multiplicity="1" />
+          <End Type="CVModelo.Imagen" Role="Imagen" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="UsuarioId" />
+            </Principal>
+            <Dependent Role="Imagen">
+              <PropertyRef Name="UsuarioId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Objetivo_Usuario">
           <End Type="CVModelo.Usuario" Role="Usuario" Multiplicity="1" />
           <End Type="CVModelo.Objetivo" Role="Objetivo" Multiplicity="*" />
@@ -449,6 +489,8 @@
           <EntitySetMapping Name="Educacion">
             <EntityTypeMapping TypeName="CVModelo.Educacion">
               <MappingFragment StoreEntitySet="Educacion">
+                <ScalarProperty Name="link" ColumnName="link" />
+                <ScalarProperty Name="Comentario" ColumnName="Comentario" />
                 <ScalarProperty Name="Estado" ColumnName="Estado" />
                 <ScalarProperty Name="FechaHasta" ColumnName="FechaHasta" />
                 <ScalarProperty Name="FechaDesde" ColumnName="FechaDesde" />
@@ -462,6 +504,7 @@
           <EntitySetMapping Name="ExperienciaLaboral">
             <EntityTypeMapping TypeName="CVModelo.ExperienciaLaboral">
               <MappingFragment StoreEntitySet="ExperienciaLaboral">
+                <ScalarProperty Name="Actualidad" ColumnName="Actualidad" />
                 <ScalarProperty Name="ReferenciaTelefono" ColumnName="ReferenciaTelefono" />
                 <ScalarProperty Name="ReferenciaNombre" ColumnName="ReferenciaNombre" />
                 <ScalarProperty Name="FechaHasta" ColumnName="FechaHasta" />

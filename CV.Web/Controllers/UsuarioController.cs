@@ -106,8 +106,9 @@ namespace CV.Web.Controllers
                     return RedirectToAction("Index", "DatosPersonales");
                 }
             }
-
-            return View();
+            var mensajeError = "Usuario y/o password incorrectos";
+            ViewBag.Mensaje = mensajeError;
+            return RedirectToAction("Index", "Usuario");
         }
 
         [HttpGet]

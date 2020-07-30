@@ -8,7 +8,7 @@
                 <a href="@Url.Action("Index", "Objetivo")"><p class="btn btn-lg btn-primary text-uppercase"><i class="fa fa-chevron-circle-left"></i> Volver</p></a>
             </div>
 
-            <h2>Editar Objetivo</h2>
+            <h2>Editar Perfil Profesional</h2>
 
             <form method="post" action="@Url.Action("Actualizar", "Objetivo")">
                 @Html.ValidationSummary(true)
@@ -20,7 +20,7 @@
                 @Html.HiddenFor(x => x.ObjetivoId)
                 <div class="col-sm-9 form-group">
                     <label for="Descripcion">Descripción: </label>
-                    @Html.TextBoxFor(x => x.Descripcion, new { @class = "form-control", @required = "required", @cols = 40, @rows = 10 })
+                    @Html.TextAreaFor(x => x.Descripcion, new { @class = "form-control", @required = "required", @cols = 40, @rows = 10 })
                     @Html.ValidationMessageFor(x => x.Descripcion)
 
                 </div>

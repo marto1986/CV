@@ -19,9 +19,10 @@ namespace CV.Datos.Modelo
         public string Puesto { get; set; }
         public string Descripcion { get; set; }
         public System.DateTime FechaDesde { get; set; }
-        public System.DateTime FechaHasta { get; set; }
+        public Nullable<System.DateTime> FechaHasta { get; set; }
         public string ReferenciaNombre { get; set; }
         public Nullable<int> ReferenciaTelefono { get; set; }
+        public Nullable<bool> Actualidad { get; set; }
     
         public virtual Usuario Usuario { get; set; }
     }

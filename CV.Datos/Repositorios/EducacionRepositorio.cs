@@ -61,6 +61,8 @@ namespace CV.Datos.Repositorios
             actualizar.FechaDesde = datos.FechaDesde;
             actualizar.FechaHasta = datos.FechaHasta;
             actualizar.Estado = datos.Estado;
+            actualizar.Comentario = datos.Comentario;
+            actualizar.link = datos.link;
 
             return BD.SaveChanges() > 0;
         }

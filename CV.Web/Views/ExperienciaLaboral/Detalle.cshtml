@@ -22,7 +22,14 @@
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item"><i class="fa fa-building fa-2x"></i> Descripción: @Model.Descripcion</li>
                     <li class="list-group-item"><i class="fa fa-calendar-o fa-2x"></i> Fecha Desde: @Model.FechaDesde.ToShortDateString()</li>
-                    <li class="list-group-item"><i class="fa fa-calendar-o fa-2x"></i> Fecha Hasta: @Model.FechaHasta.ToShortDateString()</li>
+                    @if (Model.FechaHasta.HasValue || Model.FechaHasta != null)
+                    {
+                        <li class="list-group-item"><i class="fa fa-calendar-o fa-2x"></i> Fecha Hasta: @Model.FechaHasta</li>
+                    }
+                    @if (Model.Actualidad == true)
+                    {
+                        <li class="list-group-item"><i class="fa fa-calendar-o fa-2x"></i> Hasta la actualidad</li>
+                    }
                     <li class="list-group-item"><i class="fa fa-user-circle fa-2x"></i> Referencia: @Model.ReferenciaNombre</li>
                     <li class="list-group-item"><i class="fa fa-phone fa-2x"></i> Referencia Teléfono: @Model.ReferenciaTelefono</li></ul>
             </div>

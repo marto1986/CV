@@ -62,6 +62,7 @@ namespace CV.Datos.Repositorios
             actualizar.FechaHasta = datos.FechaHasta;
             actualizar.ReferenciaNombre = datos.ReferenciaNombre;
             actualizar.ReferenciaTelefono = datos.ReferenciaTelefono;
+            actualizar.Actualidad = datos.Actualidad;
 
             return BD.SaveChanges() > 0;
         }

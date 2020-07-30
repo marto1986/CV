@@ -7,12 +7,14 @@ using System.Net.Http;
 using System.Web;
 using System.Web.Mvc;
 using System.Net.Http.Formatting;
+using log4net;
 
 namespace CV.Web.Controllers
 {
     public class ExperienciaLaboralController : Controller
     {
-        
+        private static readonly ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
         [HttpGet]
         public ActionResult Index()
         {
@@ -37,7 +39,7 @@ namespace CV.Web.Controllers
                 var listado = JsonConvert.DeserializeObject<List<ExperienciaLaboralDTO>>(resultString);
                 if (ViewBag.ObjUsuario != null)
                 {
-                    var resultado = listado.Where(x => x.UsuarioId == ViewBag.ObjUsuario.UsuarioId);
+                    var resultado = listado.Where(x => x.UsuarioId == ViewBag.ObjUsuario.UsuarioId).OrderByDescending(x => x.ExperienciaLaboralId);
                     return View(resultado);
                 }
                 else

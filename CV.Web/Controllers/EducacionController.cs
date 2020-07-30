@@ -7,12 +7,15 @@ using System.Net.Http;
 using System.Web;
 using System.Web.Mvc;
 using System.Net.Http.Formatting;
+using log4net;
 
 namespace CV.Web.Controllers
 {
     public class EducacionController : Controller
     {
-        
+
+        private static readonly ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
         [HttpGet]
         public ActionResult Index()
         {
@@ -37,7 +40,7 @@ namespace CV.Web.Controllers
                 var listado = JsonConvert.DeserializeObject<List<EducacionDTO>>(resultString);
                 if (ViewBag.ObjUsuario != null)
                 {
-                    var resultado = listado.Where(x => x.UsuarioId == ViewBag.ObjUsuario.UsuarioId);
+                    var resultado = listado.Where(x => x.UsuarioId == ViewBag.ObjUsuario.UsuarioId).OrderByDescending(x => x.EducacionId);
                     return View(resultado);
                 }
                 else
@@ -50,17 +53,26 @@ namespace CV.Web.Controllers
         }
 
         [HttpGet]
-        [ValidateAntiForgeryToken]
+        
         public ActionResult Nuevo()
         {
-            if (Session["Usuario"] == null)
+            try
             {
-                Session["Usuario"] = null;
+                if (Session["Usuario"] == null)
+                {
+                    Session["Usuario"] = null;
+                }
+                else
+                {
+                    var objUsuario = Session["Usuario"];
+                    ViewBag.ObjUsuario = objUsuario;
+                }
+
+                    return View();
             }
-            else
+            catch(Exception ex)
             {
-                var objUsuario = Session["Usuario"];
-                ViewBag.ObjUsuario = objUsuario;
+                log.ErrorFormat("Error: {0}{1}", ex.StackTrace, ex.Message);
             }
 
             return View();

@@ -37,7 +37,7 @@ namespace CV.Web.Controllers
                 var listado = JsonConvert.DeserializeObject<List<ConocimientoDTO>>(resultString);
                 if (ViewBag.ObjUsuario != null)
                 {
-                    var resultado = listado.Where(x => x.UsuarioId == ViewBag.ObjUsuario.UsuarioId);
+                    var resultado = listado.Where(x => x.UsuarioId == ViewBag.ObjUsuario.UsuarioId).OrderByDescending(x => x.ConocimientoId);
                     return View(resultado);
                 }
                 else

@@ -14,10 +14,12 @@
                     <i class="fa fa-graduation-cap fa-2x"></i> Título: @Model.Titulo
                 </div>
                 <ul class="list-group list-group-flush">
-                    <li class="list-group-item"><i class="fa fa-university fa-2x"></i> Establecimiento Educativo: @Model.EstablecimientoEducativo</li>
-                    <li class="list-group-item"><i class="fa fa-info-circle fa-2x"></i> Estado: @Model.Estado</li>
-                    <li class="list-group-item"><i class="fa fa-calendar-o fa-2x"></i> Fecha de Inicio: @Model.FechaDesde</li>
-                    <li class="list-group-item"><i class="fa fa-calendar-check-o fa-2x"></i> Lugar de Fin: @Model.FechaHasta</li>
+                    <li class="list-group-item"><i class="fa fa-university fa-2x text-primary"></i> Establecimiento Educativo: @Model.EstablecimientoEducativo</li>
+                    <li class="list-group-item"><i class="fa fa-info-circle fa-2x text-primary"></i> Estado: @Model.Estado</li>
+                    <li class="list-group-item"><i class="fa fa-calendar-o fa-2x text-primary"></i> Fecha de Inicio: @Model.FechaDesde.ToShortDateString()</li>
+                    <li class="list-group-item"><i class="fa fa-calendar-check-o fa-2x text-primary"></i> Lugar de Fin: @Model.FechaHasta.ToShortDateString()</li>
+                    <li class="list-group-item"><i class="fa fa-comment-o fa-2x text-primary"></i> Comentario: @Model.Comentario</li>
+                    <li class="list-group-item"><i class="fa fa-external-link fa-2x text-primary"></i> URL: @Model.Link</li>
                 </ul>
             </div>
         </div>

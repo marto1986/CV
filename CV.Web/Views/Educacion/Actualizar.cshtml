@@ -46,7 +46,16 @@
                     <label for="Estado">Estado:</label>
                     @Html.DropDownListFor(x => x.Estado, new SelectList(new string[] { "--- Selecionar Estado ---", "En Curso", "Incompleto", "Completo" }), new { @class = "form-control" })
                 </div>
-
+                <div class="col-sm-9 form-group">
+                    <label for="Comentario">Comentario:</label>
+                    @Html.TextAreaFor(x => x.Comentario, new { @class = "form-control", @required = "required", rows = "6", cols = "10" })
+                    @Html.ValidationMessageFor(x => x.Comentario)
+                </div>
+                <div class="col-sm-9 form-group">
+                    <label for="Link">URL:</label>
+                    @Html.TextBoxFor(x => x.Link, new { @class = "form-control", @required = "required" })
+                    @Html.ValidationMessageFor(x => x.Link)
+                </div>
                 <div class="col-sm-6 form-group">
                     <button type="submit" class="btn btn-success btn-lg">Editar</button>
                 </div>

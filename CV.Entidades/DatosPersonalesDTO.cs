@@ -15,11 +15,11 @@ namespace CV.Entidades
         public int DatospersonalesId { get; set; }
 
         [Required(ErrorMessage = "el {0} es obligatorio")]
-        [StringLength(50, ErrorMessage = "Solo 50 caracteres")]
+        [StringLength(100, ErrorMessage = "Solo 100 caracteres")]
         public string Nombres { get; set; }
 
         [Required(ErrorMessage = "el {0} es obligatorio")]
-        [StringLength(50, ErrorMessage = "Solo 50 caracteres")]
+        [StringLength(100, ErrorMessage = "Solo 100 caracteres")]
         public string Apellido { get; set; }
 
         [DisplayFormat(DataFormatString = "{0:dd-MM-yyyyy}", ApplyFormatInEditMode = true)]
@@ -30,6 +30,7 @@ namespace CV.Entidades
         public string Nacionalidad { get; set; }
 
         [Required(ErrorMessage = "el {0} es obligatorio")]
+        [StringLength(200, ErrorMessage = "Solo 200 caracteres")]
         public string LugarNacimiento { get; set; }
 
         [Required(ErrorMessage = "el {0} es obligatorio")]
@@ -44,6 +45,7 @@ namespace CV.Entidades
         [EmailAddress]
         [DataType(DataType.EmailAddress)]
         [RegularExpression(@"[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}", ErrorMessage = "Correo Electrónico inválido")]
+        [StringLength(100, ErrorMessage = "Solo 100 caracteres")]
         public string Email { get; set; }
 
         [DataType(DataType.PhoneNumber)]
@@ -52,13 +54,13 @@ namespace CV.Entidades
         [Required]
         public int UsuarioId { get; set; }
 
-        [StringLength(50, ErrorMessage = "Solo 50 caracteres")]
+        [StringLength(100, ErrorMessage = "Solo 100 caracteres")]
         public string Profesion { get; set; }
 
-        [StringLength(50, ErrorMessage = "Solo 50 caracteres")]
+        [StringLength(100, ErrorMessage = "Solo 100 caracteres")]
         public string Git { get; set; }
 
-        [StringLength(50, ErrorMessage = "Solo 50 caracteres")]
+        [StringLength(100, ErrorMessage = "Solo 100 caracteres")]
         public string Linkedin { get; set; }
 
     }

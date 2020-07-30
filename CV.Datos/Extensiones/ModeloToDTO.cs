@@ -67,7 +67,10 @@ namespace CV.Datos.Extensiones
                 EstablecimientoEducativo = model.EstablecimientoEducativo,
                 FechaDesde = model.FechaDesde,
                 FechaHasta = model.FechaHasta,
-                Estado = model.Estado
+                Estado = model.Estado,
+                Comentario = model.Comentario,
+                Link = model.link
+                
             };
         }
 
@@ -82,7 +85,8 @@ namespace CV.Datos.Extensiones
                 FechaDesde = model.FechaDesde,
                 FechaHasta = model.FechaHasta,
                 ReferenciaNombre = model.ReferenciaNombre,
-                ReferenciaTelefono = model.ReferenciaTelefono
+                ReferenciaTelefono = model.ReferenciaTelefono,
+                Actualidad = model.Actualidad
             };
         }
 

@@ -21,6 +21,8 @@ namespace CV.Datos.Modelo
         public System.DateTime FechaDesde { get; set; }
         public System.DateTime FechaHasta { get; set; }
         public string Estado { get; set; }
+        public string Comentario { get; set; }
+        public string link { get; set; }
     
         public virtual Usuario Usuario { get; set; }
     }

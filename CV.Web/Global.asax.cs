@@ -27,7 +27,7 @@ namespace CV.Web
 
             string accion = "";
 
-            switch(httpException.GetHttpCode())
+            switch (httpException.GetHttpCode())
             {
                 case 404:
                     accion = "Error404";

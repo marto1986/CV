@@ -36,9 +36,13 @@
                     @Html.TextBoxFor(x => x.FechaDesde, "{0:yyyy-MM-dd}", new { @class = "form-control", @required = "required", @type = "date" })
                     @Html.ValidationMessageFor(x => x.FechaDesde)
                 </div>
-                <div class="col-sm-9 form-group">
+                <div class="col-sm-6 form-group">
                     <label for="nacionalidad">Fecha Hasta:</label>
-                    @Html.TextBoxFor(x => x.FechaHasta, new { @class = "form-control", @required = "required", @type = "date" })
+                    @Html.TextBoxFor(x => x.FechaHasta, new { @class = "form-control", @type = "date" })
+                </div>
+                <div class="col-sm-6 form-group">
+                    @Html.RadioButtonFor(x => x.Actualidad, true, new { @class = "form-check-input" })
+                    <label for="Actualidad" class="form-check-label">Actualidad</label>
                 </div>
                 <div class="col-sm-9 form-group">
                     <label for="ReferenciaNombre">Referencia Laboral:</label>

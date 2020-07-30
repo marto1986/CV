@@ -18,11 +18,11 @@ namespace CV.Entidades
         public int UsuarioId { get; set; }
 
         [Required(ErrorMessage = "el {0} es obligatorio")]
-        [StringLength(50, ErrorMessage = "Solo 50 caracteres")]
+        [StringLength(100, ErrorMessage = "Solo 100 caracteres")]
         public string Titulo { get; set; }
 
         [Required(ErrorMessage = "el {0} es obligatorio")]
-        [StringLength(50, ErrorMessage = "Solo 50 caracteres")]
+        [StringLength(200, ErrorMessage = "Solo 200 caracteres")]
         public string EstablecimientoEducativo { get; set; }
 
         [Required(ErrorMessage = "el {0} es obligatorio")]
@@ -34,7 +34,13 @@ namespace CV.Entidades
         public System.DateTime FechaHasta { get; set; }
 
         [Required(ErrorMessage = "el {0} es obligatorio")]
-        [StringLength(50, ErrorMessage = "Solo 50 caracteres")]
+        [StringLength(10, ErrorMessage = "Solo 10 caracteres")]
         public string Estado { get; set; }
+
+        [StringLength(200, ErrorMessage = "Solo 200 caracteres")]
+        public string Comentario { get; set; }
+
+        [StringLength(200, ErrorMessage = "Solo 200 caracteres")]
+        public string Link { get; set; }
     }
 }

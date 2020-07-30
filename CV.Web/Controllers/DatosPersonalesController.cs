@@ -52,7 +52,6 @@ namespace CV.Web.Controllers
                     }
                 }
 
-                log.InfoFormat("inicio ok");
                 return View();
             }
             catch(Exception ex)
@@ -65,14 +64,23 @@ namespace CV.Web.Controllers
         [HttpGet]
         public ActionResult Nuevo()
         {
-            if (Session["Usuario"] == null)
+            try
             {
-                Session["Usuario"] = null;
+                if (Session["Usuario"] == null)
+                {
+                    Session["Usuario"] = null;
+                }
+                else
+                {
+                    var objUsuario = Session["Usuario"];
+                    ViewBag.ObjUsuario = objUsuario;
+                }
+
+                return View();
             }
-            else
+            catch (Exception ex)
             {
-                var objUsuario = Session["Usuario"];
-                ViewBag.ObjUsuario = objUsuario;
+                log.ErrorFormat("Error: {0}{1}", ex.StackTrace, ex.Message);
             }
 
             return View();

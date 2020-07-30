@@ -17,25 +17,26 @@ namespace CV.Entidades
         public int UsuarioId { get; set; }
 
         [Required(ErrorMessage = "el {0} es obligatorio")]
-        [StringLength(50, ErrorMessage = "Solo 50 caracteres")]
+        [StringLength(100, ErrorMessage = "Solo 100 caracteres")]
         public string Puesto { get; set; }
 
         [Required(ErrorMessage = "el {0} es obligatorio")]
-        [StringLength(50, ErrorMessage = "Solo 50 caracteres")]
+        [StringLength(200, ErrorMessage = "Solo 200 caracteres")]
         public string Descripcion { get; set; }
 
         [Required(ErrorMessage = "el {0} es obligatorio")]
         [DataType(DataType.Date)]
         public System.DateTime FechaDesde { get; set; }
 
-        [Required(ErrorMessage = "el {0} es obligatorio")]
         [DataType(DataType.Date)]
-        public System.DateTime FechaHasta { get; set; }
+        public Nullable<System.DateTime> FechaHasta { get; set; }
 
         [StringLength(50, ErrorMessage = "Solo 50 caracteres")]
         public string ReferenciaNombre { get; set; }
 
         [DataType(DataType.PhoneNumber)]
         public Nullable<int> ReferenciaTelefono { get; set; }
+
+        public Nullable<bool> Actualidad { get; set; }
     }
 }
