@@ -7,43 +7,52 @@ using System.Net.Http;
 using System.Web;
 using System.Web.Mvc;
 using System.Net.Http.Formatting;
+using log4net;
 
 namespace CV.Web.Controllers
 {
     public class IdiomaController : Controller
     {
-        
+        private static readonly ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
         [HttpGet]
         public ActionResult Index()
         {
-            if (Session["Usuario"] == null)
+            try
             {
-                Session["Usuario"] = null;
-            }
-            else
-            {
-                var objUsuario = Session["Usuario"];
-                ViewBag.ObjUsuario = objUsuario;
-            }
-
-            HttpClient clienteHttp = new HttpClient();
-            clienteHttp.BaseAddress = new Uri("http://localhost:5476/");
-
-            var request = clienteHttp.GetAsync("api/Idioma").Result;
-
-            if (request.IsSuccessStatusCode)
-            {
-                var resultString = request.Content.ReadAsStringAsync().Result;
-                var listado = JsonConvert.DeserializeObject<List<IdiomaDTO>>(resultString);
-                if (ViewBag.ObjUsuario != null)
+                if (Session["Usuario"] == null)
                 {
-                    var resultado = listado.Where(x => x.UsuarioId == ViewBag.ObjUsuario.UsuarioId).OrderByDescending(x => x.IdiomaId);
-                    return View(resultado);
+                    Session["Usuario"] = null;
                 }
                 else
                 {
-                    return View(listado);
+                    var objUsuario = Session["Usuario"];
+                    ViewBag.ObjUsuario = objUsuario;
                 }
+
+                HttpClient clienteHttp = new HttpClient();
+                clienteHttp.BaseAddress = new Uri("http://localhost:5476/");
+
+                var request = clienteHttp.GetAsync("api/Idioma").Result;
+
+                if (request.IsSuccessStatusCode)
+                {
+                    var resultString = request.Content.ReadAsStringAsync().Result;
+                    var listado = JsonConvert.DeserializeObject<List<IdiomaDTO>>(resultString);
+                    if (ViewBag.ObjUsuario != null)
+                    {
+                        var resultado = listado.Where(x => x.UsuarioId == ViewBag.ObjUsuario.UsuarioId).OrderByDescending(x => x.IdiomaId);
+                        return View(resultado);
+                    }
+                    else
+                    {
+                        return View(listado);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                log.ErrorFormat("Error: {0}{1}", ex.StackTrace, ex.Message);
             }
 
             return View();
@@ -52,14 +61,23 @@ namespace CV.Web.Controllers
         [HttpGet]
         public ActionResult Nuevo()
         {
-            if (Session["Usuario"] == null)
+            try
             {
-                Session["Usuario"] = null;
+                if (Session["Usuario"] == null)
+                {
+                    Session["Usuario"] = null;
+                }
+                else
+                {
+                    var objUsuario = Session["Usuario"];
+                    ViewBag.ObjUsuario = objUsuario;
+                }
+
+                return View();
             }
-            else
+            catch (Exception ex)
             {
-                var objUsuario = Session["Usuario"];
-                ViewBag.ObjUsuario = objUsuario;
+                log.ErrorFormat("Error: {0}{1}", ex.StackTrace, ex.Message);
             }
 
             return View();
@@ -74,16 +92,23 @@ namespace CV.Web.Controllers
 
             var request = clienteHttp.PostAsync("api/Idioma", idioma, new JsonMediaTypeFormatter()).Result;
 
-            if (request.IsSuccessStatusCode)
+            try
             {
-                var resultString = request.Content.ReadAsStringAsync().Result;
-                var correcto = JsonConvert.DeserializeObject<bool>(resultString);
-
-                if (correcto)
+                if (request.IsSuccessStatusCode)
                 {
-                    return RedirectToAction("index");
+                    var resultString = request.Content.ReadAsStringAsync().Result;
+                    var correcto = JsonConvert.DeserializeObject<bool>(resultString);
+
+                    if (correcto)
+                    {
+                        return RedirectToAction("index");
+                    }
+                    return View(idioma);
                 }
-                return View(idioma);
+            }
+            catch (Exception ex)
+            {
+                log.ErrorFormat("Error: {0}{1}", ex.StackTrace, ex.Message);
             }
 
             return View(idioma);
@@ -92,27 +117,34 @@ namespace CV.Web.Controllers
         [HttpGet]
         public ActionResult Actualizar(int id)
         {
-            if (Session["Usuario"] == null)
+            try
             {
-                Session["Usuario"] = null;
+                if (Session["Usuario"] == null)
+                {
+                    Session["Usuario"] = null;
+                }
+                else
+                {
+                    var objUsuario = Session["Usuario"];
+                    ViewBag.ObjUsuario = objUsuario;
+                }
+
+                HttpClient clienteHttp = new HttpClient();
+                clienteHttp.BaseAddress = new Uri("http://localhost:5476/");
+
+                var request = clienteHttp.GetAsync("api/Idioma/" + id).Result;
+
+                if (request.IsSuccessStatusCode)
+                {
+                    var resultString = request.Content.ReadAsStringAsync().Result;
+                    var informacion = JsonConvert.DeserializeObject<IdiomaDTO>(resultString);
+
+                    return View(informacion);
+                }
             }
-            else
+            catch (Exception ex)
             {
-                var objUsuario = Session["Usuario"];
-                ViewBag.ObjUsuario = objUsuario;
-            }
-
-            HttpClient clienteHttp = new HttpClient();
-            clienteHttp.BaseAddress = new Uri("http://localhost:5476/");
-
-            var request = clienteHttp.GetAsync("api/Idioma/" + id).Result;
-
-            if (request.IsSuccessStatusCode)
-            {
-                var resultString = request.Content.ReadAsStringAsync().Result;
-                var informacion = JsonConvert.DeserializeObject<IdiomaDTO>(resultString);
-
-                return View(informacion);
+                log.ErrorFormat("Error: {0}{1}", ex.StackTrace, ex.Message);
             }
 
             return View();
@@ -127,15 +159,22 @@ namespace CV.Web.Controllers
 
             var request = clienteHttp.PutAsync("api/Idioma/", idioma, new JsonMediaTypeFormatter()).Result;
 
-            if (request.IsSuccessStatusCode)
+            try
             {
-                var resultString = request.Content.ReadAsStringAsync().Result;
-                var correcto = JsonConvert.DeserializeObject<bool>(resultString);
-
-                if (correcto)
+                if (request.IsSuccessStatusCode)
                 {
-                    return RedirectToAction("index");
+                    var resultString = request.Content.ReadAsStringAsync().Result;
+                    var correcto = JsonConvert.DeserializeObject<bool>(resultString);
+
+                    if (correcto)
+                    {
+                        return RedirectToAction("index");
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                log.ErrorFormat("Error: {0}{1}", ex.StackTrace, ex.Message);
             }
 
             return View();
@@ -149,15 +188,22 @@ namespace CV.Web.Controllers
 
             var request = clienteHttp.DeleteAsync("api/Idioma/" + id).Result;
 
-            if (request.IsSuccessStatusCode)
+            try
             {
-                var resultString = request.Content.ReadAsStringAsync().Result;
-                var correcto = JsonConvert.DeserializeObject<bool>(resultString);
-
-                if (correcto)
+                if (request.IsSuccessStatusCode)
                 {
-                    return RedirectToAction("index");
+                    var resultString = request.Content.ReadAsStringAsync().Result;
+                    var correcto = JsonConvert.DeserializeObject<bool>(resultString);
+
+                    if (correcto)
+                    {
+                        return RedirectToAction("index");
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                log.ErrorFormat("Error: {0}{1}", ex.StackTrace, ex.Message);
             }
 
             return View();
@@ -171,12 +217,19 @@ namespace CV.Web.Controllers
 
             var request = clienteHttp.GetAsync("api/Idioma/" + id).Result;
 
-            if (request.IsSuccessStatusCode)
+            try
             {
-                var resultString = request.Content.ReadAsStringAsync().Result;
-                var informacion = JsonConvert.DeserializeObject<IdiomaDTO>(resultString);
+                if (request.IsSuccessStatusCode)
+                {
+                    var resultString = request.Content.ReadAsStringAsync().Result;
+                    var informacion = JsonConvert.DeserializeObject<IdiomaDTO>(resultString);
 
-                return View(informacion);
+                    return View(informacion);
+                }
+            }
+            catch (Exception ex)
+            {
+                log.ErrorFormat("Error: {0}{1}", ex.StackTrace, ex.Message);
             }
 
             return View();

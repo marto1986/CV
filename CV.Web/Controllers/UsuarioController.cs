@@ -7,12 +7,15 @@ using System.Net.Http;
 using System.Web;
 using System.Web.Mvc;
 using System.Net.Http.Formatting;
+using log4net;
 
 namespace CV.Web.Controllers
 {
     public class UsuarioController : Controller
     {
-        // GET: Usuario
+        private static readonly ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
+        [HttpGet]
         public ActionResult Index()
         {
             return View();
@@ -28,7 +31,9 @@ namespace CV.Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Registrarse(UsuarioDTO usuario)
         {
-            #region Verificar que el usuario no exista
+            try
+            {
+                #region Verificar que el usuario no exista
                 var Existe = UsuarioExiste(usuario.UsuarioNombre);
 
                 if (Existe)
@@ -36,44 +41,49 @@ namespace CV.Web.Controllers
                     ModelState.AddModelError("UsuarioNombre", "El Usuario ya existe.");
                     return View();
                 }
-            #endregion
+                #endregion
 
-            #region Encriptar la contraseña
+                #region Encriptar la contraseña
 
-            usuario.UsuarioPassword = Crypto.Hash(usuario.UsuarioPassword);
+                usuario.UsuarioPassword = Crypto.Hash(usuario.UsuarioPassword);
 
-            #endregion
+                #endregion
 
-            HttpClient clienteHttp = new HttpClient();
-            clienteHttp.BaseAddress = new Uri("http://localhost:5476/");
+                HttpClient clienteHttp = new HttpClient();
+                clienteHttp.BaseAddress = new Uri("http://localhost:5476/");
 
-            var request = clienteHttp.PostAsync("api/Usuario", usuario, new JsonMediaTypeFormatter()).Result;
+                var request = clienteHttp.PostAsync("api/Usuario", usuario, new JsonMediaTypeFormatter()).Result;
 
-            if (request.IsSuccessStatusCode)
-            {
-                var resultString = request.Content.ReadAsStringAsync().Result;
-                var correcto = JsonConvert.DeserializeObject<bool>(resultString);
-                
-                if (correcto)
+                if (request.IsSuccessStatusCode)
                 {
-                    var solicitud = clienteHttp.GetAsync("api/Usuario").Result;
+                    var resultString = request.Content.ReadAsStringAsync().Result;
+                    var correcto = JsonConvert.DeserializeObject<bool>(resultString);
 
-                    if (solicitud.IsSuccessStatusCode)
+                    if (correcto)
                     {
-                        var result = solicitud.Content.ReadAsStringAsync().Result;
-                        var objUser = JsonConvert.DeserializeObject<List<UsuarioDTO>>(result);
-                        var user = objUser.Where(x => x.UsuarioNombre == usuario.UsuarioNombre.Trim() && x.UsuarioPassword == usuario.UsuarioPassword.Trim());
+                        var solicitud = clienteHttp.GetAsync("api/Usuario").Result;
 
-                        if (user.Count() > 0)
+                        if (solicitud.IsSuccessStatusCode)
                         {
-                            Session["Usuario"] = user.First();
-                            return RedirectToAction("Index", "DatosPersonales");
+                            var result = solicitud.Content.ReadAsStringAsync().Result;
+                            var objUser = JsonConvert.DeserializeObject<List<UsuarioDTO>>(result);
+                            var user = objUser.Where(x => x.UsuarioNombre == usuario.UsuarioNombre.Trim() && x.UsuarioPassword == usuario.UsuarioPassword.Trim());
+
+                            if (user.Count() > 0)
+                            {
+                                Session["Usuario"] = user.First();
+                                return RedirectToAction("Index", "DatosPersonales");
+                            }
                         }
+
                     }
 
+                    return View(usuario);
                 }
-
-                return View(usuario);
+            }
+            catch (Exception ex)
+            {
+                log.ErrorFormat("Error: {0}{1}", ex.StackTrace, ex.Message);
             }
 
             return View();
@@ -83,32 +93,41 @@ namespace CV.Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult IniciarSesion(string usuarioNombre, string usuarioPassword)
         {
-            #region Encriptar la contraseña
+            try
+            {
+                #region Encriptar la contraseña
 
                 usuarioPassword = Crypto.Hash(usuarioPassword);
 
-            #endregion
+                #endregion
 
-            HttpClient clienteHttp = new HttpClient();
-            clienteHttp.BaseAddress = new Uri("http://localhost:5476/");
+                HttpClient clienteHttp = new HttpClient();
+                clienteHttp.BaseAddress = new Uri("http://localhost:5476/");
 
-            var request = clienteHttp.GetAsync("api/Usuario").Result;
+                var request = clienteHttp.GetAsync("api/Usuario").Result;
 
-            if (request.IsSuccessStatusCode)
-            {
-                var resultString = request.Content.ReadAsStringAsync().Result;
-                var objUser = JsonConvert.DeserializeObject<List<UsuarioDTO>>(resultString);
-                var user = objUser.Where(x => x.UsuarioNombre == usuarioNombre.Trim() && x.UsuarioPassword == usuarioPassword.Trim());
-                
-                if (user.Count() > 0)
+                if (request.IsSuccessStatusCode)
                 {
-                    Session["Usuario"] = user.First();
-                    return RedirectToAction("Index", "DatosPersonales");
+                    var resultString = request.Content.ReadAsStringAsync().Result;
+                    var objUser = JsonConvert.DeserializeObject<List<UsuarioDTO>>(resultString);
+                    var user = objUser.Where(x => x.UsuarioNombre == usuarioNombre.Trim() && x.UsuarioPassword == usuarioPassword.Trim());
+
+                    if (user.Count() > 0)
+                    {
+                        Session["Usuario"] = user.First();
+                        return RedirectToAction("Index", "DatosPersonales");
+                    }
                 }
+                var mensajeError = "Usuario y/o password incorrectos";
+                ViewBag.Mensaje = mensajeError;
+                return RedirectToAction("Index", "Usuario");
             }
-            var mensajeError = "Usuario y/o password incorrectos";
-            ViewBag.Mensaje = mensajeError;
-            return RedirectToAction("Index", "Usuario");
+            catch (Exception ex)
+            {
+                log.ErrorFormat("Error: {0}{1}", ex.StackTrace, ex.Message);
+            }
+
+            return View();
         }
 
         [HttpGet]

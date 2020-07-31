@@ -12,6 +12,7 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.Drawing.Drawing2D;
 using System.IO;
+using log4net;
 
 namespace CV.Web.Controllers
 {
@@ -19,40 +20,48 @@ namespace CV.Web.Controllers
     {
         ImageViewModel img = new ImageViewModel();
 
-        
+        private static readonly ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
         [HttpGet]
         public ActionResult Index()
         {
-            #region Obtengo el ID del usuario
-            if (Session["Usuario"] == null)
+            try
             {
-                Session["Usuario"] = null;
-            }
-            else
-            {
-                var objUsuario = Session["Usuario"];
-                ViewBag.ObjUsuario = objUsuario;
-            }
-            #endregion
-
-            HttpClient clienteHttp = new HttpClient();
-            clienteHttp.BaseAddress = new Uri("http://localhost:5476/");
-
-            var request = clienteHttp.GetAsync("api/Imagen").Result;
-
-            if (request.IsSuccessStatusCode)
-            {
-                var resultString = request.Content.ReadAsStringAsync().Result;
-                var listado = JsonConvert.DeserializeObject<List<ImagenDTO>>(resultString);
-                if (ViewBag.ObjUsuario != null)
+                #region Obtengo el ID del usuario
+                if (Session["Usuario"] == null)
                 {
-                    var resultado = listado.FirstOrDefault(x => x.UsuarioId == ViewBag.ObjUsuario.UsuarioId);
-                    return View(resultado);
+                    Session["Usuario"] = null;
                 }
                 else
                 {
-                    return View(listado);
+                    var objUsuario = Session["Usuario"];
+                    ViewBag.ObjUsuario = objUsuario;
                 }
+                #endregion
+
+                HttpClient clienteHttp = new HttpClient();
+                clienteHttp.BaseAddress = new Uri("http://localhost:5476/");
+
+                var request = clienteHttp.GetAsync("api/Imagen").Result;
+
+                if (request.IsSuccessStatusCode)
+                {
+                    var resultString = request.Content.ReadAsStringAsync().Result;
+                    var listado = JsonConvert.DeserializeObject<List<ImagenDTO>>(resultString);
+                    if (ViewBag.ObjUsuario != null)
+                    {
+                        var resultado = listado.FirstOrDefault(x => x.UsuarioId == ViewBag.ObjUsuario.UsuarioId);
+                        return View(resultado);
+                    }
+                    else
+                    {
+                        return View(listado);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                log.ErrorFormat("Error: {0}{1}", ex.StackTrace, ex.Message);
             }
 
             return View();
@@ -61,27 +70,33 @@ namespace CV.Web.Controllers
         [HttpGet]
         public ActionResult Nuevo()
         {
-            #region Obtengo el ID del usuario
-            if (Session["Usuario"] == null)
+            try
             {
-                Session["Usuario"] = null;
+                #region Obtengo el ID del usuario
+                if (Session["Usuario"] == null)
+                {
+                    Session["Usuario"] = null;
+                }
+                else
+                {
+                    var objUsuario = Session["Usuario"];
+                    ViewBag.ObjUsuario = objUsuario;
+                }
+                #endregion
+
+                #region ViewModel para subir la imagen al servidor
+                var model = new ImageViewModel
+                {
+                    foto = img.foto
+                };
+
+                ViewBag.Img = model;
+                #endregion
             }
-            else
+            catch (Exception ex)
             {
-                var objUsuario = Session["Usuario"];
-                ViewBag.ObjUsuario = objUsuario;
+                log.ErrorFormat("Error: {0}{1}", ex.StackTrace, ex.Message);
             }
-            #endregion
-
-            #region ViewModel para subir la imagen al servidor
-            var model = new ImageViewModel
-            {
-                foto = img.foto
-            };
-
-            ViewBag.Img = model;
-            #endregion
-
             return View();
         }
 
@@ -89,38 +104,45 @@ namespace CV.Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Nuevo(ImagenDTO imagen, ImageViewModel img)
         {
-            var random = new Random().Next(0, 100);
-            string extension = Path.GetExtension(img.foto.FileName);
-            bool extensionOk = ValidarExtension(extension);
-
-            if (extensionOk == true)
+            try
             {
-                Redimensionar(img.foto.InputStream);
-                string ImageName = System.IO.Path.GetFileName(img.foto.FileName);
-                imagen.Nombre = ImageName;
+                var random = new Random().Next(0, 100);
+                string extension = Path.GetExtension(img.foto.FileName);
+                bool extensionOk = ValidarExtension(extension);
 
-                HttpClient clienteHttp = new HttpClient();
-                clienteHttp.BaseAddress = new Uri("http://localhost:5476/");
-
-                var request = clienteHttp.PostAsync("api/Imagen", imagen, new JsonMediaTypeFormatter()).Result;
-
-                if (request.IsSuccessStatusCode)
+                if (extensionOk == true)
                 {
+                    Redimensionar(img.foto.InputStream);
+                    string ImageName = System.IO.Path.GetFileName(img.foto.FileName);
+                    imagen.Nombre = random + ImageName;
 
-                    string physicalPath = Server.MapPath("~/Content/Imagenes/Upload/" + ImageName);
+                    HttpClient clienteHttp = new HttpClient();
+                    clienteHttp.BaseAddress = new Uri("http://localhost:5476/");
 
-                    img.foto.SaveAs(physicalPath);
+                    var request = clienteHttp.PostAsync("api/Imagen", imagen, new JsonMediaTypeFormatter()).Result;
 
-                    var resultString = request.Content.ReadAsStringAsync().Result;
-                    var correcto = JsonConvert.DeserializeObject<bool>(resultString);
-
-                    if (correcto)
+                    if (request.IsSuccessStatusCode)
                     {
-                        return RedirectToAction("index");
-                    }
 
-                    return View(imagen);
+                        string physicalPath = Server.MapPath("~/Content/Imagenes/Upload/" + ImageName);
+
+                        img.foto.SaveAs(physicalPath);
+
+                        var resultString = request.Content.ReadAsStringAsync().Result;
+                        var correcto = JsonConvert.DeserializeObject<bool>(resultString);
+
+                        if (correcto)
+                        {
+                            return RedirectToAction("index");
+                        }
+
+                        return View(imagen);
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                log.ErrorFormat("Error: {0}{1}", ex.StackTrace, ex.Message);
             }
 
             return View();
@@ -129,39 +151,46 @@ namespace CV.Web.Controllers
         [HttpGet]
         public ActionResult Actualizar(int id)
         {
-            #region Obtengo el ID del usuario
-            if (Session["Usuario"] == null)
+            try
             {
-                Session["Usuario"] = null;
+                #region Obtengo el ID del usuario
+                if (Session["Usuario"] == null)
+                {
+                    Session["Usuario"] = null;
+                }
+                else
+                {
+                    var objUsuario = Session["Usuario"];
+                    ViewBag.ObjUsuario = objUsuario;
+                }
+                #endregion
+
+
+                #region ViewModel para subir la imagen al servidor
+                var model = new ImageViewModel
+                {
+                    foto = img.foto
+                };
+
+                ViewBag.Img = model;
+                #endregion
+
+                HttpClient clienteHttp = new HttpClient();
+                clienteHttp.BaseAddress = new Uri("http://localhost:5476/");
+
+                var request = clienteHttp.GetAsync("api/Imagen/" + id).Result;
+
+                if (request.IsSuccessStatusCode)
+                {
+                    var resultString = request.Content.ReadAsStringAsync().Result;
+                    var informacion = JsonConvert.DeserializeObject<ImagenDTO>(resultString);
+
+                    return View(informacion);
+                }
             }
-            else
+            catch (Exception ex)
             {
-                var objUsuario = Session["Usuario"];
-                ViewBag.ObjUsuario = objUsuario;
-            }
-            #endregion
-
-
-            #region ViewModel para subir la imagen al servidor
-            var model = new ImageViewModel
-            {
-                foto = img.foto
-            };
-
-            ViewBag.Img = model;
-            #endregion
-
-            HttpClient clienteHttp = new HttpClient();
-            clienteHttp.BaseAddress = new Uri("http://localhost:5476/");
-
-            var request = clienteHttp.GetAsync("api/Imagen/" + id).Result;
-
-            if (request.IsSuccessStatusCode)
-            {
-                var resultString = request.Content.ReadAsStringAsync().Result;
-                var informacion = JsonConvert.DeserializeObject<ImagenDTO>(resultString);
-
-                return View(informacion);
+                log.ErrorFormat("Error: {0}{1}", ex.StackTrace, ex.Message);
             }
 
             return View();
@@ -171,25 +200,27 @@ namespace CV.Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Actualizar(ImagenDTO imagen, ImageViewModel img)
         {
-            var random = new Random().Next(0, 100);
-            string extension = Path.GetExtension(img.foto.FileName);
-            bool extensionOk = ValidarExtension(extension);
-
-            if (extensionOk == true)
+            try
             {
-                Image imagenRedimensionada = Redimensionar(img.foto.InputStream);
-                string ImageName = System.IO.Path.GetFileName(img.foto.FileName);
-                ImageName = random + ImageName;
-                imagen.Nombre = ImageName;
+                var random = new Random().Next(0, 100);
+                string extension = Path.GetExtension(img.foto.FileName);
+                bool extensionOk = ValidarExtension(extension);
 
-            HttpClient clienteHttp = new HttpClient();
-            clienteHttp.BaseAddress = new Uri("http://localhost:5476/");
-
-            var request = clienteHttp.PutAsync("api/Imagen/", imagen, new JsonMediaTypeFormatter()).Result;
-
-                if (request.IsSuccessStatusCode)
+                if (extensionOk == true)
                 {
-                    
+                    Image imagenRedimensionada = Redimensionar(img.foto.InputStream);
+                    string ImageName = System.IO.Path.GetFileName(img.foto.FileName);
+                    ImageName = random + ImageName;
+                    imagen.Nombre = ImageName;
+
+                    HttpClient clienteHttp = new HttpClient();
+                    clienteHttp.BaseAddress = new Uri("http://localhost:5476/");
+
+                    var request = clienteHttp.PutAsync("api/Imagen/", imagen, new JsonMediaTypeFormatter()).Result;
+
+                    if (request.IsSuccessStatusCode)
+                    {
+
                         #region Elimina la imagen del servidor
                         var peticion = clienteHttp.DeleteAsync("api/Imagen/" + imagen.ImagenId).Result;
 
@@ -205,23 +236,28 @@ namespace CV.Web.Controllers
                             }
                         }
                         #endregion
-                    
 
-                    #region Carga la nueva imagen
+
+                        #region Carga la nueva imagen
                         string physicalPath = Server.MapPath("~/Content/Imagenes/Upload/" + ImageName);
                         img.foto.SaveAs(physicalPath);
-                    #endregion
+                        #endregion
 
-                    var resultString = request.Content.ReadAsStringAsync().Result;
-                    var correcto = JsonConvert.DeserializeObject<bool>(resultString);
+                        var resultString = request.Content.ReadAsStringAsync().Result;
+                        var correcto = JsonConvert.DeserializeObject<bool>(resultString);
 
-                    if (correcto)
-                    {
-                        return RedirectToAction("index");
+                        if (correcto)
+                        {
+                            return RedirectToAction("index");
+                        }
                     }
-                }
 
-                return View(imagen);
+                    return View(imagen);
+                }
+            }
+            catch (Exception ex)
+            {
+                log.ErrorFormat("Error: {0}{1}", ex.StackTrace, ex.Message);
             }
 
             return View();
@@ -235,12 +271,14 @@ namespace CV.Web.Controllers
 
             var request = clienteHttp.DeleteAsync("api/Imagen/" + id).Result;
 
-            if (request.IsSuccessStatusCode)
+            try
             {
-
-                #region Elimina la imagen del servidor
-
                 if (request.IsSuccessStatusCode)
+                {
+
+                    #region Elimina la imagen del servidor
+
+                    if (request.IsSuccessStatusCode)
                     {
                         var resultadoString = request.Content.ReadAsStringAsync().Result;
                         var listado = JsonConvert.DeserializeObject<List<ImagenDTO>>(resultadoString);
@@ -250,16 +288,21 @@ namespace CV.Web.Controllers
                             var resultado = listado.FirstOrDefault(x => x.UsuarioId == ViewBag.ObjUsuario.UsuarioId);
                             System.IO.File.Delete(resultado.Nombre);
                         }
-                   }
+                    }
                     #endregion
-                
-                var resultString = request.Content.ReadAsStringAsync().Result;
-                var correcto = JsonConvert.DeserializeObject<bool>(resultString);
 
-                if (correcto)
-                {
-                    return RedirectToAction("index");
+                    var resultString = request.Content.ReadAsStringAsync().Result;
+                    var correcto = JsonConvert.DeserializeObject<bool>(resultString);
+
+                    if (correcto)
+                    {
+                        return RedirectToAction("index");
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                log.ErrorFormat("Error: {0}{1}", ex.StackTrace, ex.Message);
             }
 
             return View();
@@ -292,14 +335,21 @@ namespace CV.Web.Controllers
             HttpClient clienteHttp = new HttpClient();
             clienteHttp.BaseAddress = new Uri("http://localhost:5476/");
 
-            var request = clienteHttp.GetAsync("api/Imagen/" + id).Result;
-
-            if (request.IsSuccessStatusCode)
+            try
             {
-                var resultString = request.Content.ReadAsStringAsync().Result;
-                var informacion = JsonConvert.DeserializeObject<ImagenDTO>(resultString);
+                var request = clienteHttp.GetAsync("api/Imagen/" + id).Result;
 
-                return View(informacion);
+                if (request.IsSuccessStatusCode)
+                {
+                    var resultString = request.Content.ReadAsStringAsync().Result;
+                    var informacion = JsonConvert.DeserializeObject<ImagenDTO>(resultString);
+
+                    return View(informacion);
+                }
+            }
+            catch (Exception ex)
+            {
+                log.ErrorFormat("Error: {0}{1}", ex.StackTrace, ex.Message);
             }
 
             return View();
